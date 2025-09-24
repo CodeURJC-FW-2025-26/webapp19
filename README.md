@@ -21,7 +21,7 @@ We consider our main concept to be stored in the database as a *Clothing item*. 
 |------------|--------------------------------|
 | Name       | Basic white t-shirt            |
 | Description| Short sleeve, unisex           |
-| Type       | T-shirt, Sweatshirt, etc.      |
+| Type       | T-shirt, Sweatshirt, Jeans, Sneakers, Socks, Hats     |
 | Size       | XS, S, M, L, XL, XXL           |
 | Fabric     | Cotton                         |
 | Color      | Black                          |
@@ -65,6 +65,6 @@ Each clothing item will have at least one associated image, which can be uploade
 ### Search, Filtering, and Categorization
 - **Search**: text box that searches items by name or description.  
 - **Filtering**: by size, color, price, or material.  
-- **Categorization**: by type of garment (t-shirt, sweatshirt, pants, sneakers...).  
+- **Categorization**: by type of garment (T-shirt, Sweatshirt, Jeans, Sneakers, Socks, Hats).  
 
 
