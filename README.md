@@ -1,57 +1,70 @@
-# GRUPO 19 · Fundamentos de la Web
-## Proyecto: Tienda Online de Ropa
+# GROUP 19 · Fundamentos de la web
+## Project: Online Clothing Store
 
-Este repositorio contiene el desarrollo de una aplicación web que simula una tienda online de ropa.  
-La aplicación permite gestionar prendas de ropa (con imágenes asociadas) y reseñas de usuarios, además de ofrecer buscador, filtrado y categorización por tipo de prenda.
+This repository contains the development of a web application that simulates an online clothing store.  
+The application allows managing clothing items (with associated images) and user reviews, as well as providing search, filtering, and categorization by type of garment.
 
-## Nombre
+## Name
 FashionHub
 
-
-## Equipo de desarrollo
+## Development Team
 - **Sergio González Gútiez** · s.gonzalezg.2023@alumnos.urjc.es · [GitHub](https://github.com/sergiomadrz)  
-- **Alejandro Martín Carrera** · mailto:a.martinca.2021@alumnos.urjc.es · [GitHub](https://github.com/alejandromartincarrera)  
+- **Alejandro Martín Carrera** · a.martinca.2021@alumnos.urjc.es · [GitHub](https://github.com/alejandromartincarrera)  
 - **Adrián Esteban Martín** · a.estebanm.2021@alumnos.urjc.es · [GitHub](https://github.com/aadri-2003)  
 
+## Functionality
 
-## Funcionalidad
+### Main entity: **Clothing item**
+We consider our main concept to be stored in the database as a *Clothing item*. This entity will have the following attributes:
 
-###  Entidad principal: **Prenda de ropa**
-Consideramos que nuestro concepto principal que guarde la base de datos sea una *Prenda de ropa*. Esta entidad tendrá los siguientes atributos:
+| Attribute   | Example                        |
+|------------|--------------------------------|
+| Name       | Basic white t-shirt            |
+| Description| Short sleeve, unisex           |
+| Type       | T-shirt, Sweatshirt, etc.      |
+| Size       | XS, S, M, L, XL, XXL           |
+| Fabric     | Cotton                         |
+| Color      | Black                          |
+| Price      | €19.99                         |
+| Images     |                                |
 
-| Atributo    | Ejemplo                  |
-|-------------|--------------------------|
-| Nombre      | Camiseta básica blanca   |
-| Descripción | Manga corta, unisex      |
-| Tipo        | Camiseta, Sudadera, etc. |
-| Talla       | XS, S, M, L, XL, XXL     |
-| Tejido      | Algodón                  |
-| Color       | Negro                    |
-| Precio      | 19.99 €                  |
-| Imágenes    |             |
+### Secondary entity: **Review**
+Each review is associated with a specific clothing item, and a clothing item can have multiple reviews. The attributes we will consider are:  
 
+| Attribute | Example                             |
+|-----------|-------------------------------------|
+| Author    | @juan23                             |
+| Text      | "The t-shirt has good quality"      |
+| Rating    | 4/5 stars                           |
+| Date      | 2025-03-02                          |
+| Image???? |                                     |
 
-### Entidad secundaria: **Reseña**
-Cada reseña está asociada a una prenda concreta y una prenda puede tener varias reseñas. Los atributos que consideraremos son:  
+### Images
+Each clothing item will have at least one associated image, which can be uploaded from the browser.  
 
-| Atributo   | Ejemplo                         |
-|------------|---------------------------------|
-| Autor      | @juan23                         |
-| Texto      | "La camiseta tiene buena calidad" |
-| Puntuación | 4/5 estrellas                   |
-| Fecha      | 2025-03-02                      |
-| Imagen????     |                                 |
+#### White T-shirt
 
+<img src="images/camiseta1_1.jpg" width="200px" />
+<img src="images/camiseta1_2.jpg" width="200px" />
 
-### Imágenes
-Cada prenda tendrá al menos una imagen asociada, que se podrá subir desde el navegador.  
-Ejemplo de imagen incluida en el repositorio:  
+#### Black T-shirt
 
-![Ejemplo de camiseta](./images/camiseta_ejemplo.jpg)
+<img src="images/camiseta2_1.jpg" width="200px" />
+<img src="images/camiseta2_2.jpg" width="200px" />
 
+#### Jeans
 
-### Buscador, filtrado y categorización
-- **Buscador**: cuadro de texto que busca prendas por nombre o descripción.  
-- **Filtrado**: por talla, color, precio o material.  
-- **Categorización**: por tipo de prenda (camiseta, sudadera, pantalón, zapatillas...).  
+<img src="images/vaquero1_1.jpg" width="200px" />
+<img src="images/vaquero1_2.jpg" width="200px" />
+
+#### Sweatshirt
+
+<img src="images/sudadera1_1.jpg" width="200px" />
+<img src="images/sudadera1_2.jpg" width="200px" />
+
+### Search, Filtering, and Categorization
+- **Search**: text box that searches items by name or description.  
+- **Filtering**: by size, color, price, or material.  
+- **Categorization**: by type of garment (t-shirt, sweatshirt, pants, sneakers...).  
+
 
