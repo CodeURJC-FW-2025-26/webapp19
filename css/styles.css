@@ -10,6 +10,45 @@ body {
     background-color: #f8f9fa; 
 }
 
+.btn-standard {
+    color: #fff; 
+    background-color: #624B32; 
+    border: solid 1px #624B32; 
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-standard:hover,
+.btn-standard:focus, 
+.btn-standard:active{
+    background-color: #423321;
+    border-color: #423321;
+    box-shadow: none;
+    color: #fff; 
+}
+
+.btn-navBar {
+    color: #423321; 
+    background-color: none; 
+    border: none; 
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-navBar:hover,
+.btn-navBar:focus, 
+.btn-navBar:active{
+    background-color: #423321;
+    border-color: #423321;
+    box-shadow: none;
+    color: #fff; 
+}
+
+.navbar .nav-link {
+    font-size: 1.5rem; 
+    font-weight: 600;
+    margin-left: 20%;  
+}
+
+
 .btn-primary {
     display: inline-block;
     font-weight: 400;
@@ -17,8 +56,8 @@ body {
     text-align: center;
     vertical-align: middle;
     user-select: none;
-    background-color: #00bce6; 
-    border: 1px solid #00bce6; 
+    background-color: rgb(77, 60, 39); 
+    border: 1px solid rgb(77, 60, 39); 
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -27,8 +66,8 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0021a7;
-    border-color: #0021a7;
+    background-color: rgb(77, 60, 39);
+    border-color: rgb(77, 60, 39);
 }
 
 
@@ -39,8 +78,8 @@ body {
     text-align: center;
     vertical-align: middle;
     user-select: none;
-    background-color: #35f862; 
-    border: 1px solid #35f862; 
+    background-color: rgb(77, 60, 39); 
+    border: 1px solid rgb(77, 60, 39); 
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;

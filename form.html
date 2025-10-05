@@ -13,13 +13,41 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
+<header class="site-header text-white text-center py-5">
+    <h1>Welcome to <strong>FashionHub</strong></h1>
+    <p class="lead">This is our online store.</p>
+</header>
+
 <nav class="navbar navbar-expand-lg site-navbar" aria-label="Main navigation">
-  <div class="container-fluid">
-    <a href="index.html">
+  <div class="container-fluid align-items-center">
+    <a class="navbar-brand" href="index.html">      <!-- Imagen del logo -->
       <img src="/images/logo_imagen.png" alt="FashionHub Logo" width="200">
     </a>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="clothingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clothing
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="clothingDropdown">
+            <li><a class="dropdown-item" href="#">T-Shirts</a></li>
+            <li><a class="dropdown-item" href="#">Jeans</a></li>
+            <li><a class="dropdown-item" href="#">Trousers</a></li>
+            <li><a class="dropdown-item" href="#">Socks</a></li>
+            <li><a class="dropdown-item" href="#">Caps</a></li>
+            <li><a class="dropdown-item" href="#">Sneakers</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</nav>
+</nav>    
     
     
 
