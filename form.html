@@ -50,7 +50,10 @@
 </nav>
 
 
-<div class="container my-5">
+<div class="container">
+  <div class="row my-4">
+    <h2 class="text-center">Save a new item</h2>
+  </div>
   <form>
     <div class="row">
       <div class="col-md-5 col-sm-5 d-flex align-items-center">
@@ -64,7 +67,7 @@
         </div>
         <div class="mb-3">
           <label for="itemDescription" class="form-label"> Description of item of clothing</label>
-          <input type="text" class="form-control" id="itemDescription">
+          <textarea class="form-control" id="itemDescription" rows="2"></textarea>
         </div>
         <div class="mb-3">
           <label for="selectSize">Select size of item</label>
@@ -103,7 +106,7 @@
 
       </div>
     </div>
-    <div class="row">
+    <div class="row my-4">
       <button type="submit" class="btn btn-primary">Save item</button>
     </div>
 
