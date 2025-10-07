@@ -15,6 +15,7 @@ body {
     background-color: #624B32; 
     border: solid 1px #624B32; 
     transition: all 0.15s ease-in-out;
+    text-decoration: none; /* remove underline for anchor styled as button */
 }
 
 .btn-standard:hover,
@@ -24,6 +25,7 @@ body {
     border-color: #423321;
     box-shadow: none;
     color: #fff; 
+    outline: none;
 }
 
 .btn-navBar {
@@ -96,4 +98,8 @@ body {
     background-color: rgb(77, 60, 39)
 }
 
-
+#branding {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff; 
+}
