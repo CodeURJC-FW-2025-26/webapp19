@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;      /**Unificar color y tipo de letra para toda la página**/
+    font-family: 'Montserrat', sans-serif;      /**Unify colour and font for the entire page**/
     background-color: rgb(246, 225, 198);   
 }
 
@@ -15,7 +15,7 @@ body {
     background-color: #624B32; 
     border: solid 1px #624B32; 
     transition: all 0.15s ease-in-out;
-    text-decoration: none; /* remove underline for anchor styled as button */
+    text-decoration: none; /* Remove underline for anchor styled as button */
 }
 
 .btn-standard:hover,
