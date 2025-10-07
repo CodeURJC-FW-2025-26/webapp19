@@ -107,6 +107,14 @@ body {
     --product-text-color: #333;
 }
 
+.form-select:invalid {
+    color: #6c757d; /* bootstrap's $gray-600 */
+}
+
+.form-select option[value] {
+    color: #212529;
+}
+
 #products-section .card-title {
     color: var(--product-title-color);
     font-size: var(--product-title-size);
