@@ -98,6 +98,38 @@ body {
     background-color: rgb(77, 60, 39)
 }
 
+#products-section {
+    --product-title-color: #423321;
+    --product-title-size: 1.1rem;
+    --product-title-weight: 700;
+    --product-price-color: #624B32;
+    --product-price-size: 1rem;
+    --product-text-color: #333;
+}
+
+#products-section .card-title {
+    color: var(--product-title-color);
+    font-size: var(--product-title-size);
+    font-weight: var(--product-title-weight);
+}
+
+#products-section .card-text {
+    color: var(--product-price-color);
+    font-size: var(--product-price-size);
+}
+
+#products-section .card-body p,
+#products-section .card-body .card-text-secondary {
+    color: var(--product-text-color);
+}
+
+#products-section h2 {
+    color: var(--product-title-color);
+    font-size: 3rem;
+    font-weight: var(--product-title-weight);
+    margin-bottom: 1rem;
+}
+
 #branding {
     font-size: 2rem;
     font-weight: 700;
