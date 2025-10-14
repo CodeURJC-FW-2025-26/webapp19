@@ -76,6 +76,7 @@ Each clothing item will have at least one associated image, which can be uploade
 
 ### 👩‍🎨 Individual Contributions  
 - **Laura Pineda Ballesteros**: Search functionality, fixing positioning issues, styling adjustments.
+- **Alejandro Martín Carrera**: Form page, fixing images bug.
 
 ----
 
