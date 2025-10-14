@@ -143,3 +143,11 @@ body {
     font-weight: 700;
     color: #fff; 
 }
+
+.fa-solid {
+    color: gold;
+}
+
+.fa-regular {
+    color: lightgray; 
+}
