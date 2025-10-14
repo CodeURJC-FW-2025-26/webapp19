@@ -110,7 +110,14 @@ body {
 }
 
 .site-header {
-    background-color: rgb(77, 60, 39)
+    background-color: rgb(77, 60, 39);
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+}
+
+.site-header .lead{
+    font-size: 0.95rem;
+    margin-bottom: 0;
 }
 
 #products-section {
