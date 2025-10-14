@@ -5,11 +5,6 @@ This repository contains the development of a web application that simulates an 
 The application allows managing clothing items (with associated images) and user reviews, as well as providing search, filtering, and categorization by type of garment.
 
 
-
-## 🏷️ Name  
-**✨ FashionHub ✨**
-
-
 ## 👨‍💻 Development Team  
 - **Sergio González Gútiez** · s.gonzalezg.2023@alumnos.urjc.es · [GitHub](https://github.com/sergiomadrz)  
 - **Alejandro Martín Carrera** · a.martinca.2021@alumnos.urjc.es · [GitHub](https://github.com/alejandromartincarrera)  
@@ -20,7 +15,7 @@ The application allows managing clothing items (with associated images) and user
 
 ## ⚙️ Functionality  
 
-### 👕 Main entity: **Clothing item**  
+### 👕**Clothing items**  
 We consider our main concept to be stored in the database as a *Clothing item*. This entity will have the following attributes:
 
 | Attribute   | Example                        |
@@ -36,7 +31,7 @@ We consider our main concept to be stored in the database as a *Clothing item*. 
 
 
 
-### ⭐ Secondary entity: **Review**  
+### ⭐ **Reviews**  
 Each review is associated with a specific clothing item, and a clothing item can have multiple reviews. The attributes we will consider are:  
 
 | Attribute | Example                             |
@@ -73,10 +68,8 @@ Each clothing item will have at least one associated image, which can be uploade
 <img src="images/sudadera1_2.jpg" width="200px" />
 
 
-
 ### 🔍 Search, Filtering, and Categorization  
 - **Search**: text box that searches items by name or description.  
-- **Filtering**: by size, color, price, or material.  
 - **Categorization**: by type of garment (T-shirt, Sweatshirt, Jeans, Sneakers, Socks, Hats).  
 
 
@@ -86,4 +79,4 @@ Each clothing item will have at least one associated image, which can be uploade
 
 ----
 
-💻 *Developed by Group 19 · Fundamentos de la web*
+💻 *Developed by Group 19 · FashionHub*
