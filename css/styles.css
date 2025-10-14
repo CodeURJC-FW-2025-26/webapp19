@@ -1,5 +1,5 @@
 body {
-    font-family: 'Montserrat', sans-serif;      /**Unify colour and font for the entire page**/
+    font-family: 'Montserrat', sans-serif;      
     background-color: rgb(246, 225, 198);   
 }
 
@@ -15,7 +15,7 @@ body {
     background-color: #624B32; 
     border: solid 1px #624B32; 
     transition: all 0.15s ease-in-out;
-    text-decoration: none; /* Remove underline for anchor styled as button */
+    text-decoration: none; 
 }
 
 .btn-standard:hover,
@@ -50,6 +50,21 @@ body {
     margin-left: 20%;  
 }
 
+.site-navbar .btn-outline-light {
+    background-color: #624B32; 
+    border-color: #624B32;
+    color: #fff;
+    box-shadow: none;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.site-navbar .btn-outline-light:hover,
+.site-navbar .btn-outline-light:focus {
+    background-color: #423321; 
+    border-color: #423321;
+    color: #fff;
+    outline: none;
+}
 
 .btn-primary {
     display: inline-block;
@@ -108,7 +123,7 @@ body {
 }
 
 .form-select:invalid {
-    color: #6c757d; /* bootstrap's $gray-600 */
+    color: #6c757d; 
 }
 
 .form-select option[value] {

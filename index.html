@@ -21,13 +21,17 @@
 
 <nav class="navbar navbar-expand-lg site-navbar" aria-label="Main navigation">
   <div class="container-fluid align-items-center">
-    <a class="navbar-brand" href="index.html">      <!-- Logo image -->
+    <a class="navbar-brand" href="index.html">
       <img src="images/logo_imagen.png" alt="FashionHub Logo" width="200">
     </a>
 
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto"> 
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
@@ -47,6 +51,23 @@
         </li>
       </ul>
     </div>
+
+    <form class="d-flex align-items-center" role="search" action="detail.html" method="get" autocomplete="off">
+      <input list="products-list" id="product-chooser" name="product-search" class="form-control me-2"
+             type="search" placeholder="Search products" aria-label="Search products">
+      <button class="btn btn-outline-light" type="submit">Search</button>
+      <datalist id="products-list">
+        <option value="Black Shocks">
+        <option value="White Shocks">
+        <option value="White T-Shirt">
+        <option value="Black T-Shirt">
+        <option value="Trousers">
+        <option value="Cap">
+        <option value="Sweatshirt">
+        <option value="Jeans">
+        <option value="Sneakers">
+      </datalist>
+    </form>
   </div>
 </nav>
 
