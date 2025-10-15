@@ -70,6 +70,25 @@ Our website has a page for adding items. To do so, users must fill in the form o
 
 ## 👩‍🎨 Individual Contributions  
 - **Laura Pineda Ballesteros**: Search functionality, fixing positioning issues, styling adjustments.
+
+#### My 5 most significant commits
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [Search bar functionality](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/d4573498de0db82c9faa535bd4a48fa8b4d2fe8f) |
+| #2             | [Same style for every product](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/82126a1e7b69837876044ec8c1a1990c5651f64f)
+| #3             | [Default options](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/2b408dcd2a881042cd1dc48cd5601ea91641552b)|
+| #4             | [Search bar skeleton](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/77efbb3721ec23dbadeb68fdc5fbdb5297a31288)|
+| #5             | [Form modifications](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/0ff33b78b734a43ad406188e3edc1758e8c4a51c) |
+
+#### The 5 files I have modified the most
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | 
+| #1             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/index.html)                                                                                                                                                                               |
+| #2             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/style.css)                                                                                                                                                                                   |
+| #3             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/detail.html)                                                                                                                                                                                   |
+| #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)                                                                                                                                                                                   |
+| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md)                                                                                                                                                                                |
+
 #### Adrián Esteban Martín: 
 Index page, fixing minor grammatical errors.
 
