@@ -40,37 +40,31 @@ Each review is associated with a specific clothing item, and a clothing item can
 | Text      | "The t-shirt has good quality"      |
 | Rating    | 4/5 stars                           |
 | Date      | 2025-03-02                          |
-| Image     |                                     |
 
 
 
-### 🖼️ Images  
-Each clothing item will have at least one associated image, which can be uploaded from the browser.  
-
-####  White T-shirt
-
-<img src="images/camiseta1_1.jpg" width="200px" />
-<img src="images/camiseta1_2.jpg" width="200px" />
-
-####  Black T-shirt
-
-<img src="images/camiseta2_1.jpg" width="200px" />
-<img src="images/camiseta2_2.jpg" width="200px" />
-
-####  Jeans
-
-<img src="images/vaquero1_1.jpg" width="200px" />
-<img src="images/vaquero1_2.jpg" width="200px" />
-
-####  Sweatshirt
-
-<img src="images/sudadera1_1.jpg" width="200px" />
-<img src="images/sudadera1_2.jpg" width="200px" />
-
-
-### 🔍 Search, Filtering, and Categorization  
+## 🔍 Search, Filtering, and Categorization  
 - **Search**: text box that searches items by name or description.  
-- **Categorization**: by type of garment (T-shirt, Sweatshirt, Jeans, Sneakers, Socks, Hats).  
+- **Categorization**: by type of garment (T-shirt, Sweatshirt, Jeans, Sneakers, Socks, Hats).
+
+
+
+## 🖼️ Screens    
+
+### Home Screen:
+On this screen, we display all our products, the search engines, and the button to add a new item of clothing.
+
+<img width="1588" height="2201" alt="index html" src="https://github.com/user-attachments/assets/b22751a5-6c65-417d-b33b-5032234b37c0" />
+
+### Detail Screen:
+On this page, we display information about a product, with the option to edit it. We also show reviews that people have written about our products and allow them to add new reviews.
+
+<img width="1588" height="2560" alt="detail html" src="https://github.com/user-attachments/assets/9497ce8e-2cd0-48f8-8f4d-ba52a32d5c09" />
+
+### Form Screen: 
+Our website has a page for adding items. To do so, users must fill in the form on the screen.
+
+<img width="1588" height="1404" alt="form html" src="https://github.com/user-attachments/assets/f5bec0fc-70a5-446d-8c30-b53dbb97c896" />
 
 
 
