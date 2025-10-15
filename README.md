@@ -68,7 +68,7 @@ Our website has a page for adding items. To do so, users must fill in the form o
 
 
 
-### 👩‍🎨 Individual Contributions  
+## 👩‍🎨 Individual Contributions  
 - **Laura Pineda Ballesteros**: Search functionality, fixing positioning issues, styling adjustments.
 - **Alejandro Martín Carrera**: Form page, fixing images bug.
 #### Adrián Esteban Martín: 
