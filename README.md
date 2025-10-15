@@ -92,7 +92,7 @@ Index page, fixing minor grammatical errors.
 | #2             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/css/styles.css)      |
 | #3             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/detail.html)             |
 | #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
-| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/edit/main/README.md) 
+| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
 ----
 
 💻 *Developed by Group 19 · FashionHub*
