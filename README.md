@@ -116,7 +116,7 @@ Detail page, unified button styles and colors, make the principal grid responsiv
 | #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
 | #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
 ----
-#### Alejandro Martín Carrera**:
+#### Alejandro Martín Carrera:
 Form page, fixing images bug.
 
 #### My 5 most significant commits
