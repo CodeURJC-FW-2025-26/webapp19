@@ -71,7 +71,28 @@ Our website has a page for adding items. To do so, users must fill in the form o
 ### 👩‍🎨 Individual Contributions  
 - **Laura Pineda Ballesteros**: Search functionality, fixing positioning issues, styling adjustments.
 - **Alejandro Martín Carrera**: Form page, fixing images bug.
+#### Adrián Esteban Martín: 
+Index page, fixing minor grammatical errors.
 
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [Start of index](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/3981005dd83df989aeef7cc0584a9ec2516aadb7)    |
+| #2             | [Add "new item" button](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/5ae0e54213f71d92478b3ba3de0e0de118240342)      |
+| #3             | [Translate comments](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/af349af48477913f89ec31daf720a9d8b9e115b8)             |
+| #4             | [Correct gramatical errors](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/e1eab6080dd14ca020f06a7bb24583a71f2b4fa0)               |
+| #5             | [Update README](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/326f4b1f039d72bc293109ebf588561d88d80fdb)                                                                         |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/index.html)    |
+| #2             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/css/styles.css)      |
+| #3             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/detail.html)             |
+| #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
+| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/edit/main/README.md) 
 ----
 
 💻 *Developed by Group 19 · FashionHub*
