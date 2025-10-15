@@ -94,5 +94,28 @@ Index page, fixing minor grammatical errors.
 | #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
 | #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
 ----
+#### Sergio González Gútiez: 
+Detail page, unified button styles and colors, make the principal grid responsive, improved navigation bar (including responsive menu).
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [Detail page finished](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/c8864629281cb1dd6fd722e14c8dccb0e78d2208) |
+| #2             | [Navigation bar, beginning of detail page, button updates.](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/18a1f6384bfda8439b14cad507b265c8e3486b1e) |
+| #3             | [Styling changes, file creation, and grid made responsive.](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/b0c98fc8501788b93edc331efce6e964baa65c5e) |
+| #4             | [Button with the nav bar for small screens](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/af487217683cfd611092dd07f6e50660d9ff6218) |
+| #5             | [Add user and date forms for a review in detail page](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/f1e8b018d92f83d2a9f0cdcbae9f7df8357b7999) |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/detail.html)   |
+| #2             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/index.html)       |
+| #3             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/css/styles.css)          |
+| #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
+| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
+----
 
 💻 *Developed by Group 19 · FashionHub*
