@@ -173,3 +173,15 @@ body {
 .fa-regular {
     color: lightgray; 
 }
+
+.active-page {
+    background-color: #5a3d2b !important; 
+    color: white !important;
+    border: 2px solid #ffffffaa; 
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+.pagination .page-link {
+    transition: all 0.2s ease;
+}
