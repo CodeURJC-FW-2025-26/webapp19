@@ -1,14 +1,56 @@
 [
-    {
-        "user": "Pepe",
-        "title": "Vendo moto",
-        "text": "Barata, barata",
-        "imageFilename": "post0.jpeg"
-    },
-    {
-        "user": "Juan",
-        "title": "Compro coche",
-        "text": "Pago bien",
-        "imageFilename": "post1.jpeg"
-    }
+  {
+    "id": 1,
+    "title": "Black Socks",
+    "price": 7,
+    "imageFilename": "calcetines1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "White Socks",
+    "price": 7,
+    "imageFilename": "calcetines2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "White T-Shirt",
+    "price": 13,
+    "imageFilename": "camiseta1_1.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Black T-Shirt",
+    "price": 13,
+    "imageFilename": "camiseta2_1.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Trousers",
+    "price": 15,
+    "imageFilename": "chandal1_1.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Cap",
+    "price": 10,
+    "imageFilename": "gorra1.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Sweatshirt",
+    "price": 20,
+    "imageFilename": "sudadera1_1.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Jeans",
+    "price": 18,
+    "imageFilename": "vaquero1_1.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Sneakers",
+    "price": 50,
+    "imageFilename": "zapatillas1_1.jpg"
+  }
 ]

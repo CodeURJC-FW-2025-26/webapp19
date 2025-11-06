@@ -80,106 +80,45 @@
               <a href="form.html" class="btn btn-standard">New item</a>
             </div>
             <div class="row">
-                <!-- Product 1 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">  <!--To make the page responsive-->
-                    <div class="card">
-                        <img src="images/calcetines1.jpg" class="card-img-top" alt="Product 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Black Socks</h5>
-                            <p class="card-text">7€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
+                {{#garments}}
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card">
+                            <img src="images/{{imageFilename}}" class="card-img-top" alt="{{title}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{title}}</h5>
+                                <p class="card-text">{{price}}€</p>
+                                <a href="/garment/{{_id}}" class="btn btn-standard">More info</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Product 2 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/calcetines2.jpg" class="card-img-top" alt="Product 2">
-                        <div class="card-body">
-                            <h5 class="card-title">White Socks</h5>
-                            <p class="card-text">7€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 3 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/camiseta1_1.jpg" class="card-img-top" alt="Product 3">
-                        <div class="card-body">
-                            <h5 class="card-title">White T-Shirt</h5>
-                            <p class="card-text">13€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 4 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/camiseta2_1.jpg" class="card-img-top" alt="Product 4">
-                        <div class="card-body">
-                            <h5 class="card-title">Black T-Shirt</h5>
-                            <p class="card-text">13€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 5 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/chandal1_1.jpg" class="card-img-top" alt="Product 5">
-                        <div class="card-body">
-                            <h5 class="card-title">Trousers</h5>
-                            <p class="card-text">15€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 6 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/gorra1.jpg" class="card-img-top" alt="Product 6">
-                        <div class="card-body">
-                            <h5 class="card-title">Cap</h5>
-                            <p class="card-text">10€</p>
-                            <a href="detail.html" class="btn btn-standard rounded">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 7 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/sudadera1_1.jpg" class="card-img-top" alt="Product 7">
-                        <div class="card-body">
-                            <h5 class="card-title">Sweatshirt</h5>
-                            <p class="card-text">20€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 8 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/vaquero1_1.jpg" class="card-img-top" alt="Product 8">
-                        <div class="card-body">
-                            <h5 class="card-title">Jeans</h5>
-                            <p class="card-text">18€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product 9 -->
-                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="images/zapatillas1_1.jpg" class="card-img-top" alt="Product 9">
-                        <div class="card-body">
-                            <h5 class="card-title">Sneakers</h5>
-                            <p class="card-text">50€</p>
-                            <a href="detail.html" class="btn btn-standard">More info</a>
-                        </div>
-                    </div>
-                </div>
+                {{/garments}}
             </div>
+
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+
+                    {{#hasPrev}}
+                    <li class="page-item">
+                        <a class="page-link btn btn-standard mx-1" href="{{prevUrl}}">Previous</a>
+                    </li>
+                    {{/hasPrev}}
+
+                    {{#pages}}
+                        <li class="page-item">
+                            <a class="page-link btn btn-standard mx-1 {{#isCurrent}}active-page{{/isCurrent}}" href="{{url}}">
+                                {{number}}
+                            </a>
+                        </li>
+                    {{/pages}}
+
+                    {{#hasNext}}
+                    <li class="page-item">
+                        <a class="page-link btn btn-standard mx-1" href="{{nextUrl}}">Next</a>
+                    </li>
+                    {{/hasNext}}
+
+                </ul>
+            </nav>
         </section>
     </main>
 

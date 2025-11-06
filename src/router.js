@@ -13,7 +13,33 @@ router.get('/', async (req, res) => {
 
     let garments = await clothing_shop.getgarments();
 
-    res.render('index', { garments });
+    const page = parseInt(req.query.page) || 1;  
+    const perPage = 6;
+
+    const totalPages = Math.ceil(garments.length / perPage);
+
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+
+    const garmentsPage = garments.slice(start, end);
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pages.push({
+            number: i,
+            url: '/?page=' + i,
+            isCurrent: i === page
+        });
+    }
+
+    res.render('index', {
+        garments: garmentsPage,
+        pages: pages,
+        hasPrev: page > 1,
+        hasNext: page < totalPages,
+        prevUrl: '/?page=' + (page - 1),
+        nextUrl: '/?page=' + (page + 1)
+    });
 });
 
 router.get(['/form.html', '/form'], (req, res) => {
