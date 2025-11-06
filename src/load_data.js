@@ -8,11 +8,11 @@ let dataFile = 'data.json';
 
 const dataString = await fs.readFile(DATA_FOLDER + '/' + dataFile, 'utf8');
 
-const posts = JSON.parse(dataString);
+const garments = JSON.parse(dataString);
 
-await clothing_shop.deletePosts();
-for(let post of posts){
-    await clothing_shop.addPost(post);
+await clothing_shop.deletegarments();
+for(let garment of garments){
+    await clothing_shop.addGarment(garment);
 }
 
 await fs.rm(UPLOADS_FOLDER, { recursive: true, force: true });

@@ -11,9 +11,9 @@ const upload = multer({ dest: clothing_shop.UPLOADS_FOLDER })
 
 router.get('/', async (req, res) => {
 
-    let posts = await clothing_shop.getPosts();
+    let garments = await clothing_shop.getgarments();
 
-    res.render('index', { posts });
+    res.render('index', { garments });
 });
 
 router.get(['/form.html', '/form'], (req, res) => {
@@ -24,44 +24,44 @@ router.get(['/detail.html', '/detail'], (req, res) => {
     res.render('detail');
 });
 
-router.post('/post/new', upload.single('image'), async (req, res) => {
+router.post('/garment/new', upload.single('image'), async (req, res) => {
 
-    let post = {
+    let garment = {
         user: req.body.user,
         title: req.body.title,
         text: req.body.text,
         imageFilename: req.file?.filename
     };
 
-    await clothing_shop.addPost(post);
+    await clothing_shop.addGarment(garment);
 
-    res.render('saved_post', { _id: post._id.toString() });
+    res.render('saved_garment', { _id: garment._id.toString() });
 
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/garment/:id', async (req, res) => {
 
-    let post = await clothing_shop.getPost(req.params.id);
+    let garment = await clothing_shop.getGarment(req.params.id);
 
-    res.render('show_post', { post });
+    res.render('show_garment', { garment });
 });
 
-router.get('/post/:id/delete', async (req, res) => {
+router.get('/garment/:id/delete', async (req, res) => {
 
-    let post = await clothing_shop.deletePost(req.params.id);
+    let garment = await clothing_shop.deleteGarment(req.params.id);
 
-    if (post && post.imageFilename) {
-        await fs.rm(clothing_shop.UPLOADS_FOLDER + '/' + post.imageFilename);
+    if (garment && garment.imageFilename) {
+        await fs.rm(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
     }
 
-    res.render('deleted_post');
+    res.render('deleted_garment');
 });
 
-router.get('/post/:id/image', async (req, res) => {
+router.get('/garment/:id/image', async (req, res) => {
 
-    let post = await clothing_shop.getPost(req.params.id);
+    let garment = await clothing_shop.getGarment(req.params.id);
 
-    res.download(clothing_shop.UPLOADS_FOLDER + '/' + post.imageFilename);
+    res.download(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
 
 });
 
