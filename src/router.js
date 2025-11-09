@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get(['/form.html', '/form'], (req, res) => {
+router.get('/form', (req, res) => {
     res.render('form');
 });
 
@@ -65,24 +65,46 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 
 router.post('/garment/new', upload.single('image'), async (req, res) => {
 
+    const { title, price } = req.body;
+
+    if (!title || !price) {
+        return res.redirect('/error?message=Campos%20vacíos:%20título%20y%20precio%20son%20obligatorios&redirect=/form');
+    }
+
+    if (isNaN(price) || Number(price) <= 0) {
+        return res.redirect('/error?message=Precio%20inválido&redirect=/form');
+    }
+
+    const allGarments = await clothing_shop.getgarments();
+    const exists = allGarments.some(g => g.title === title);
+
+    if (exists) {
+        return res.redirect('/error?message=Título%20duplicado&redirect=/form');
+    }
+
+    if (!req.file) {
+        return res.redirect('/error?message=Debes%20subir%20una%20imagen&redirect=/form');
+    }
+   
     let garment = {
-        user: req.body.user,
-        title: req.body.title,
-        text: req.body.text,
-        imageFilename: req.file?.filename
+        title,
+        price: Number(price),
+        imageFilename: req.file.filename
     };
 
     await clothing_shop.addGarment(garment);
 
     res.render('saved_garment', { _id: garment._id.toString() });
-
 });
 
 router.get('/garment/:id', async (req, res) => {
+  const garment = await clothing_shop.getGarment(req.params.id);
 
-    let garment = await clothing_shop.getGarment(req.params.id);
+  if (!garment) {
+    return res.redirect('/error?message=Producto%20no%20encontrado');
+  }
 
-    res.render('show_garment', { garment });
+  res.render('detail', { garment });
 });
 
 router.get('/garment/:id/delete', async (req, res) => {
@@ -102,5 +124,12 @@ router.get('/garment/:id/image', async (req, res) => {
 
     res.download(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
 
+});
+
+router.get('/error', (req, res) => {
+    const message = req.query.message || "Unknown error";
+    const redirectUrl = req.query.redirect || "/";
+
+    res.render('error', { message, redirectUrl });
 });
 
