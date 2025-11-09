@@ -3,54 +3,162 @@
     "id": 1,
     "title": "Black Socks",
     "price": 7,
-    "imageFilename": "calcetines1.jpg"
+    "imageFilename": "calcetines1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 2,
     "title": "White Socks",
     "price": 7,
-    "imageFilename": "calcetines2.jpg"
+    "imageFilename": "calcetines2.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 3,
     "title": "White T-Shirt",
     "price": 13,
-    "imageFilename": "camiseta1_1.jpg"
+    "imageFilename": "camiseta1_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 4,
     "title": "Black T-Shirt",
     "price": 13,
-    "imageFilename": "camiseta2_1.jpg"
+    "imageFilename": "camiseta2_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 5,
     "title": "Trousers",
     "price": 15,
-    "imageFilename": "chandal1_1.jpg"
+    "imageFilename": "chandal1_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 6,
     "title": "Cap",
     "price": 10,
-    "imageFilename": "gorra1.jpg"
+    "imageFilename": "gorra1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 7,
     "title": "Sweatshirt",
     "price": 20,
-    "imageFilename": "sudadera1_1.jpg"
+    "imageFilename": "sudadera1_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 8,
     "title": "Jeans",
     "price": 18,
-    "imageFilename": "vaquero1_1.jpg"
+    "imageFilename": "vaquero1_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   },
   {
     "id": 9,
     "title": "Sneakers",
     "price": 50,
-    "imageFilename": "zapatillas1_1.jpg"
+    "imageFilename": "zapatillas1_1.jpg",
+    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "size": "M",
+    "color": "White",
+    "fabric": "Cotton (100%)",
+    "customerReviews": [
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "date": "04-14-2025"
+      }
+    ]
   }
 ]

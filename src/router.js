@@ -46,8 +46,21 @@ router.get(['/form.html', '/form'], (req, res) => {
     res.render('form');
 });
 
-router.get(['/detail.html', '/detail'], (req, res) => {
-    res.render('detail');
+router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
+
+    const garment = await clothing_shop.getGarment(req.params.id);
+
+    //converting rating into boolean array for mustache use
+    const renderInfo = structuredClone(garment);
+    for (let i = 0; i<renderInfo.customerReviews.length; i++) {
+        let currentReview = renderInfo.customerReviews[i];
+        const rating = [];
+        for (let j = 0; j<5; j++) {
+            rating.push(j<currentReview.rating);
+        }
+        currentReview.rating = rating;
+    }
+    res.render('detail', renderInfo);
 });
 
 router.post('/garment/new', upload.single('image'), async (req, res) => {
