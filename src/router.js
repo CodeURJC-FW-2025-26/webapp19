@@ -160,3 +160,31 @@ router.get('/search', async (req, res) => {
     res.redirect(`/garment/${garment._id}`);
 });
 
+router.get('/search-category', async (req, res) => {
+    const category = req.query.category;
+    if (!category) return res.redirect('/');
+
+    const garments = await clothing_shop.getgarments();
+
+    
+    const filteredGarments = garments.filter(g => {
+        if (!g.title) return false;
+        const productTitle = g.title.trim().toLowerCase();
+        const searchCategory = category.trim().toLowerCase();
+        return productTitle.includes(searchCategory);
+    });
+
+    if (filteredGarments.length === 0) {
+        return res.redirect('/error?message=No%20products%20found');
+    }
+
+    res.render('index', {
+        garments: filteredGarments,
+        pages: [],       // No pagination
+        hasPrev: false,
+        hasNext: false,
+        prevUrl: '',
+        nextUrl: ''
+    });
+});
+
