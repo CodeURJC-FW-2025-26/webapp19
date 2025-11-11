@@ -8,6 +8,9 @@ body {
     height: 200px; 
     object-fit: contain;
     background-color: #fff; 
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
 }
 
 .btn-standard {
