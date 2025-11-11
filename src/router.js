@@ -183,3 +183,7 @@ router.get('/search-category', async (req, res) => {
     });
 });
 
+router.get(['/edit','/edit.html'], (req, res) => {
+    res.render('edit');
+})
+

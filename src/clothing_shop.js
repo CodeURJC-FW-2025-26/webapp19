@@ -32,6 +32,9 @@ export async function getgarments(){
 }
 
 export async function getGarment(id){
+    if (!ObjectId.isValid(id)){
+        return null; 
+    }
 
     return await garments.findOne({ _id: new ObjectId(id) });
 }

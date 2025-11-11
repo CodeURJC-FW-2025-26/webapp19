@@ -20,15 +20,16 @@
             <div class="mt-4">
             <a href="/" class="btn btn-standard" id="backButton">Back</a>
 
-                <button class="btn btn-standard" id="deleteButton">Delete</button>    
-                <button class="btn btn-standard" id="editButton">Edit</button>
+            <button class="btn btn-standard" id="deleteButton">Delete</button>
+            <a href="edit" class="btn btn-standard" id="editButton">Edit</a>   
+            
            </div>
         </div>
     </div>
     <div class="row mt-4">
       <h1>Customer reviews</h1>
-      <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4">
-        {{#customerReviews}}
+      {{#customerReviews}}
+      <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4">
         <h4>{{username}}</h4>
         <div class="rating">
           {{#rating}}
@@ -44,8 +45,8 @@
         <p>Date: {{date}}</p>
         <button class="btn btn-standard btn-sm" id="deleteButton">Delete</button>    
         <button class="btn btn-standard btn-sm" id="editButton">Edit</button>  
-        {{/customerReviews}}
       </div>
+      {{/customerReviews}}
     </div>
     <div class="row mt-4">
       <h1>Add a new review</h1>

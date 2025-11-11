@@ -4,15 +4,15 @@
     "title": "Black Socks",
     "price": 7,
     "imageFilename": "calcetines1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Essential short socks made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
     "size": "M",
-    "color": "White",
+    "color": "Black",
     "fabric": "Cotton (100%)",
     "customerReviews": [
       {
         "username": "@juan23",
-        "rating": 4,
-        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "rating": 5,
+        "review": "Super comfortable and fits perfectly. Love the color!",
         "date": "04-14-2025"
       }
     ]
@@ -22,7 +22,7 @@
     "title": "White Socks",
     "price": 7,
     "imageFilename": "calcetines2.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Essential short socks made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look",
     "size": "M",
     "color": "White",
     "fabric": "Cotton (100%)",
@@ -60,14 +60,14 @@
     "imageFilename": "camiseta2_1.jpg",
     "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
     "size": "M",
-    "color": "White",
+    "color": "Black",
     "fabric": "Cotton (100%)",
     "customerReviews": [
       {
-        "username": "@juan23",
-        "rating": 4,
-        "review": "The size is accurate with the web, good quality and kind fabric.",
-        "date": "04-14-2025"
+        "username": "@roki23",
+        "rating": 3,
+        "review": "The size good but I don't like the fabric that much.",
+        "date": "15-03-2025"
       }
     ]
   },
@@ -76,7 +76,7 @@
     "title": "Trousers",
     "price": 15,
     "imageFilename": "chandal1_1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Casual trousers made from soft cotton blend fabric. Comfortable fit for everyday wear with a sleek, versatile design.",
     "size": "M",
     "color": "White",
     "fabric": "Cotton (100%)",
@@ -84,7 +84,13 @@
       {
         "username": "@juan23",
         "rating": 4,
-        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "review": "Good fit, material could be thicker.",
+        "date": "04-14-2025"
+      },
+      {
+        "username": "@juan23",
+        "rating": 4,
+        "review": "Good fit, material could be thicker.",
         "date": "04-14-2025"
       }
     ]
@@ -94,9 +100,9 @@
     "title": "Cap",
     "price": 10,
     "imageFilename": "gorra1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Adjustable cotton cap. Perfect for sunny days or adding a sporty touch to your outfit.",
     "size": "M",
-    "color": "White",
+    "color": "Dark blue",
     "fabric": "Cotton (100%)",
     "customerReviews": [
       {
@@ -112,9 +118,9 @@
     "title": "Sweatshirt",
     "price": 20,
     "imageFilename": "sudadera1_1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Cozy cotton fleece sweatshirt. Stylish and comfortable, ideal for layering on chilly days.",
     "size": "M",
-    "color": "White",
+    "color": "Black",
     "fabric": "Cotton (100%)",
     "customerReviews": [
       {
@@ -130,15 +136,21 @@
     "title": "Jeans",
     "price": 18,
     "imageFilename": "vaquero1_1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
+    "description": "Classic denim jeans with a modern slim fit. Durable and comfortable for everyday casual wear.",
     "size": "M",
-    "color": "White",
+    "color": "Light Blue",
     "fabric": "Cotton (100%)",
     "customerReviews": [
       {
         "username": "@juan23",
         "rating": 4,
-        "review": "The size is accurate with the web, good quality and kind fabric.",
+        "review": "Super comfortable and fits perfectly. Love the color!",
+        "date": "04-14-2025"
+      },
+      {
+        "username": "@ryan21",
+        "rating": 4,
+        "review": "Good quality denim, true to size.",
         "date": "04-14-2025"
       }
     ]
@@ -148,10 +160,10 @@
     "title": "Sneakers",
     "price": 50,
     "imageFilename": "zapatillas1_1.jpg",
-    "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
-    "size": "M",
+    "description": "Trendy sneakers made for comfort and style. Breathable fabric and supportive sole, perfect for everyday use.",
+    "size": " ",
     "color": "White",
-    "fabric": "Cotton (100%)",
+    "fabric": " ",
     "customerReviews": [
       {
         "username": "@juan23",
