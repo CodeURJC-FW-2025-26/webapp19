@@ -64,8 +64,8 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 });
 
 router.post('/garment/new', upload.single('image'), async (req, res) => {
-
-    const { title, price } = req.body;
+    console.log(req.body);
+    const { title, price, description, size, color, fabric} = req.body;
 
     if (!title || !price) {
         return res.redirect('/error?message=Campos%20vacíos:%20título%20y%20precio%20son%20obligatorios&redirect=/form');
@@ -89,7 +89,12 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
     let garment = {
         title,
         price: Number(price),
-        imageFilename: req.file.filename
+        imageFilename: req.file?.filename,
+        description,
+        size,
+        color,
+        fabric,
+        customerReviews: []
     };
 
     await clothing_shop.addGarment(garment);
@@ -99,23 +104,13 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
 
 router.get('/garment/:id', async (req, res) => {
   const garment = await clothing_shop.getGarment(req.params.id);
+  console.log(garment);
 
   if (!garment) {
-    return res.redirect('/error?message=Product%20not%20found');
+    return res.redirect('/error?message=Producto%20no%20encontrado');
   }
 
-  const renderInfo = structuredClone(garment);
-
-  for (let i = 0; i < renderInfo.customerReviews.length; i++) {
-    const currentReview = renderInfo.customerReviews[i];
-    const rating = [];
-    for (let j = 0; j < 5; j++) {
-      rating.push(j < currentReview.rating);
-    }
-    currentReview.rating = rating;
-  }
-
-  res.render('detail', renderInfo);
+  res.render('detail', { garment });
 });
 
 router.get('/garment/:id/delete', async (req, res) => {

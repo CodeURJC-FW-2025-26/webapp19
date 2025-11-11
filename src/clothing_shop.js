@@ -9,7 +9,7 @@ const client = new MongoClient('mongodb://localhost:27017');
 const db = client.db('clothing_shop');
 const garments = db.collection('garments');
 
-export const UPLOADS_FOLDER = './uploads';
+export const UPLOADS_FOLDER = 'uploads/';
 
 export async function addGarment(garment) {
 
