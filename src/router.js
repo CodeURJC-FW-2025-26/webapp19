@@ -101,10 +101,21 @@ router.get('/garment/:id', async (req, res) => {
   const garment = await clothing_shop.getGarment(req.params.id);
 
   if (!garment) {
-    return res.redirect('/error?message=Producto%20no%20encontrado');
+    return res.redirect('/error?message=Product%20not%20found');
   }
 
-  res.render('detail', { garment });
+  const renderInfo = structuredClone(garment);
+
+  for (let i = 0; i < renderInfo.customerReviews.length; i++) {
+    const currentReview = renderInfo.customerReviews[i];
+    const rating = [];
+    for (let j = 0; j < 5; j++) {
+      rating.push(j < currentReview.rating);
+    }
+    currentReview.rating = rating;
+  }
+
+  res.render('detail', renderInfo);
 });
 
 router.get('/garment/:id/delete', async (req, res) => {
@@ -131,5 +142,21 @@ router.get('/error', (req, res) => {
     const redirectUrl = req.query.redirect || "/";
 
     res.render('error', { message, redirectUrl });
+});
+
+router.get('/search', async (req, res) => {
+    const query = req.query['product-search'];
+    if (!query) {
+        return res.redirect('/');
+    }
+
+    const garments = await clothing_shop.getgarments();
+    const garment = garments.find(g => g.title.toLowerCase() === query.toLowerCase());
+
+    if (!garment) {
+        return res.redirect('/error?message=Product%20not%20found');
+    }
+
+    res.redirect(`/garment/${garment._id}`);
 });
 
