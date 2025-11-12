@@ -4,6 +4,9 @@ import fs from 'node:fs/promises';
 
 import * as clothing_shop from './clothing_shop.js';
 
+const DESCRIPTION_MAX_LENGTH=100;
+const DESCRIPTION_MIN_LENGTH=2;
+
 const router = express.Router();
 export default router;
 
@@ -67,12 +70,20 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 router.post('/garment/new', upload.single('image'), async (req, res) => {
     const { title, price, description, size, color, fabric} = req.body;
 
-    if (!title || !price) {
-        return res.redirect('/error?message=Campos%20vacíos:%20título%20y%20precio%20son%20obligatorios&redirect=/form');
+    if (!title || !price || !description || !size || !color || !fabric) {
+        return res.redirect('/error?message=Campos%20vacíos&redirect=/form');
+    }
+
+    if (!("A"<= title[0] && title[0]<="Z")) {
+        return res.redirect('/error?message=Titulo%20mayuscula&redirect=/form');
     }
 
     if (isNaN(price) || Number(price) <= 0) {
-        return res.redirect('/error?message=Precio%20inválido&redirect=/form');
+        return res.redirect('/error?message=Precio%20invalido&redirect=/form');
+    }
+
+    if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
+        return res.redirect('/error?message=Description%20longitud&redirect=/form');
     }
 
     const allGarments = await clothing_shop.getgarments();
