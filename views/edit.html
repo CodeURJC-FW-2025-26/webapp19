@@ -1,14 +1,23 @@
 {{>header}}
 
-    <h1>Aquí iría el formulario para editar elemento</h1>
-
+  <main class="container my-5">
+    
+    <div class="row my-4">
+      <h2 class="text-center">Edit Item</h2>
+    </div>
+    
+    <form action="/garment/{{_id}}/update" method="POST" enctype="multipart/form-data">
+      
+    </form>
 
     <div class="row my-4">
       <div class="container mt-3 col-md-12 col-sm-12 col-xs-12">
         <button type="submit" class="btn btn-primary col-md-12 col-sm-12 col-xs-12">Save changes</button>
       </div>
     </div>
+  </main>
+    
 
-  </form>
+
 
 {{>footer}}

@@ -50,6 +50,8 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 
     const garment = await clothing_shop.getGarment(req.params.id);
 
+    garment._id = garment._id.toString();
+
     //converting rating into boolean array for mustache use
     const renderInfo = structuredClone(garment);
     for (let i = 0; i<renderInfo.customerReviews.length; i++) {
@@ -183,7 +185,15 @@ router.get('/search-category', async (req, res) => {
     });
 });
 
-router.get(['/edit','/edit.html'], (req, res) => {
-    res.render('edit');
+router.get('/edit/:id', async (req, res) => {
+    const garment = await clothing_shop.getGarment(req.params.id);
+    if (!garment) {
+        return res.redirect('/error?message=No%20products%20found');
+    }
+
+    garment.id = garment.id.toString();
+
+    res.render('edit', {garment});
 })
+
 
