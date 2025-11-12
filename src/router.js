@@ -183,3 +183,46 @@ router.get('/search-category', async (req, res) => {
     });
 });
 
+router.get('/edit/:id', async (req, res) => {
+    const garment = await clothing_shop.getGarment(req.params.id);
+    if (!garment) {
+        return res.redirect('/error?message=No%20products%20found');
+    }
+
+    garment.id = garment.id.toString();
+
+    garment.isXS = garment.size === 'XS';
+    garment.isS = garment.size === 'S';
+    garment.isM = garment.size === 'M';
+    garment.isL = garment.size === 'L';
+    garment.isXL = garment.size === 'XL';
+
+    garment.isWhite = garment.color === 'White';
+    garment.isBlue = garment.color === 'Blue';
+    garment.isBlack = garment.color === 'Black';
+    garment.isOrange = garment.color === 'Orange';
+    garment.isYellow = garment.color === 'Yellow';
+
+    garment.isCotton = garment.fabric === 'Cotton';
+    garment.isWool = garment.fabric === 'Wool';
+    garment.isLeather = garment.fabric === 'Leather';
+    garment.isSilk = garment.fabric === 'Silk';
+    garment.isSynthetic = garment.fabric === 'Synthetic';
+
+    res.render('edit', {garment});
+});
+
+router.get('/garments/:id/edit', upload(imageFilename), async (req, res) => {
+    
+    const = { title, description, size, color, fabric, price };
+
+    if (updateResult.matchedCount == 0) {
+        console.log(`No document found with id ${id}`);
+    } else {
+        if (updateResult.modifiedCount == 0) {
+            console.log(`No document modified`);
+        } else {
+            console.log(`Document updated`);
+        }
+    }
+})
