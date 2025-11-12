@@ -212,9 +212,9 @@ router.get('/edit/:id', async (req, res) => {
     res.render('edit', {garment});
 });
 
-router.get('/garments/:id/edit', upload(imageFilename), async (req, res) => {
+/*router.get('/garments/:id/edit', upload(imageFilename), async (req, res) => {
     
-    const = { title, description, size, color, fabric, price };
+    const garm= { title, description, size, color, fabric, price };
 
     if (updateResult.matchedCount == 0) {
         console.log(`No document found with id ${id}`);
@@ -225,4 +225,4 @@ router.get('/garments/:id/edit', upload(imageFilename), async (req, res) => {
             console.log(`Document updated`);
         }
     }
-})
+})  */
