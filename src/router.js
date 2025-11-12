@@ -66,7 +66,6 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 });
 
 router.post('/garment/new', upload.single('image'), async (req, res) => {
-    console.log(req.body);
     const { title, price, description, size, color, fabric} = req.body;
 
     if (!title || !price) {
