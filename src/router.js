@@ -193,7 +193,25 @@ router.get('/edit/:id', async (req, res) => {
 
     garment.id = garment.id.toString();
 
+    garment.isXS = garment.size === 'XS';
+    garment.isS = garment.size === 'S';
+    garment.isM = garment.size === 'M';
+    garment.isL = garment.size === 'L';
+    garment.isXL = garment.size === 'XL';
+
+    garment.isWhite = garment.color === 'White';
+    garment.isBlue = garment.color === 'Blue';
+    garment.isBlack = garment.color === 'Black';
+    garment.isOrange = garment.color === 'Orange';
+    garment.isYellow = garment.color === 'Yellow';
+
+    garment.isCotton = garment.fabric === 'Cotton';
+    garment.isWool = garment.fabric === 'Wool';
+    garment.isLeather = garment.fabric === 'Leather';
+    garment.isSilk = garment.fabric === 'Silk';
+    garment.isSynthetic = garment.fabric === 'Synthetic';
+
     res.render('edit', {garment});
-})
+});
 
 
