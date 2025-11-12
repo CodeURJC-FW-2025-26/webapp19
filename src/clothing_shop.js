@@ -36,3 +36,11 @@ export async function getGarment(id){
     return await garments.findOne({ _id: new ObjectId(id) });
 }
 
+export async function updateGarment(id, updatedFields){
+    
+    result = await garments.updateOne(
+        { _id : ObjectId(id) },
+        { $set: updatedFields }
+    )
+    return result; 
+}
