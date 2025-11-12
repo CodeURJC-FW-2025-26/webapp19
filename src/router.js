@@ -49,8 +49,7 @@ router.get('/form', (req, res) => {
 router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
 
     const garment = await clothing_shop.getGarment(req.params.id);
-
-    garment._id = garment._id.toString();
+    garment._id= garment._id.toString();
 
     //converting rating into boolean array for mustache use
     const renderInfo = structuredClone(garment);
@@ -100,7 +99,7 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
 
     await clothing_shop.addGarment(garment);
 
-    res.render('saved_garment', { _id: garment._id.toString() });
+    res.render('saved_garment', garment);
 });
 
 router.get('/garment/:id', async (req, res) => {
@@ -119,10 +118,10 @@ router.get('/garment/:id/delete', async (req, res) => {
     let garment = await clothing_shop.deleteGarment(req.params.id);
 
     if (garment && garment.imageFilename) {
-        await fs.rm(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
+        await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
     }
 
-    res.render('deleted_garment');
+    res.render('deleted_garment', garment);
 });
 
 router.get('/garment/:id/image', async (req, res) => {
@@ -183,34 +182,4 @@ router.get('/search-category', async (req, res) => {
         nextUrl: ''
     });
 });
-
-router.get('/edit/:id', async (req, res) => {
-    const garment = await clothing_shop.getGarment(req.params.id);
-    if (!garment) {
-        return res.redirect('/error?message=No%20products%20found');
-    }
-
-    garment.id = garment.id.toString();
-
-    garment.isXS = garment.size === 'XS';
-    garment.isS = garment.size === 'S';
-    garment.isM = garment.size === 'M';
-    garment.isL = garment.size === 'L';
-    garment.isXL = garment.size === 'XL';
-
-    garment.isWhite = garment.color === 'White';
-    garment.isBlue = garment.color === 'Blue';
-    garment.isBlack = garment.color === 'Black';
-    garment.isOrange = garment.color === 'Orange';
-    garment.isYellow = garment.color === 'Yellow';
-
-    garment.isCotton = garment.fabric === 'Cotton';
-    garment.isWool = garment.fabric === 'Wool';
-    garment.isLeather = garment.fabric === 'Leather';
-    garment.isSilk = garment.fabric === 'Silk';
-    garment.isSynthetic = garment.fabric === 'Synthetic';
-
-    res.render('edit', {garment});
-});
-
 

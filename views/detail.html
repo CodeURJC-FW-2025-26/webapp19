@@ -4,7 +4,7 @@
     <!--Product image-->
     <div class="row align-items-center">
         <div class="col-md-5 text-center mb-4">
-            <img src="/images/{{imageFilename}}" alt="{{title}}" class="img-fluid rounded shadow">
+            <img src="/garment/{{_id}}/image" alt="{{title}}" class="img-fluid rounded shadow">
         </div>
         <div class="col-md-7">
             <h2>{{title}}</h2>
@@ -20,7 +20,7 @@
             <div class="mt-4">
             <a href="/" class="btn btn-standard" id="backButton">Back</a>
 
-            <button class="btn btn-standard" id="deleteButton">Delete</button>
+            <a href="/garment/{{_id}}/delete" class="btn btn-standard" id="deleteButton">Delete</a>
             <a href="/edit/{{_id}}" class="btn btn-standard" id="editButton">Edit</a>   
             
            </div>
