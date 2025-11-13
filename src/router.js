@@ -57,7 +57,7 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
     //converting rating into boolean array for mustache use
     const renderInfo = structuredClone(garment);
     for (let i = 0; i<renderInfo.customerReviews.length; i++) {
-        let currentReview = renderInfo.customerReviews[i];
+        const currentReview = renderInfo.customerReviews[i];
         const rating = [];
         for (let j = 0; j<5; j++) {
             rating.push(j<currentReview.rating);
@@ -71,30 +71,30 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
     const { title, price, description, size, color, fabric} = req.body;
 
     if (!title || !price || !description || !size || !color || !fabric) {
-        return res.redirect('/error?message=Campos%20vacíos&redirect=/form');
+        return res.redirect('/error?message=Empty%20fields&redirect=/form');
     }
 
     if (!("A"<= title[0] && title[0]<="Z")) {
-        return res.redirect('/error?message=Titulo%20mayuscula&redirect=/form');
+        return res.redirect('/error?message=Title%20must%20start%20with%20a%20capital%20letter&redirect=/form');
     }
 
     if (isNaN(price) || Number(price) <= 0) {
-        return res.redirect('/error?message=Precio%20invalido&redirect=/form');
+        return res.redirect('/error?message=Invalid%20price&redirect=/form');
     }
 
     if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
-        return res.redirect('/error?message=Description%20longitud&redirect=/form');
+        return res.redirect('/error?message=Description%20length%20invalid&redirect=/form');
     }
 
     const allGarments = await clothing_shop.getgarments();
     const exists = allGarments.some(g => g.title === title);
 
     if (exists) {
-        return res.redirect('/error?message=Título%20duplicado&redirect=/form');
+        return res.redirect('/error?message=Duplicate%20title&redirect=/form');
     }
 
     if (!req.file) {
-        return res.redirect('/error?message=Debes%20subir%20una%20imagen&redirect=/form');
+        return res.redirect('/error?message=You%20must%20upload%20an%20image&redirect=/form');
     }
    
     let garment = {
@@ -118,7 +118,7 @@ router.get('/garment/:id', async (req, res) => {
   console.log(garment);
 
   if (!garment) {
-    return res.redirect('/error?message=Producto%20no%20encontrado');
+    return res.redirect('/error?message=Product%20not%20found');
   }
 
   res.render('detail', { garment });
@@ -163,7 +163,7 @@ router.get('/search', async (req, res) => {
         return res.redirect('/error?message=Product%20not%20found');
     }
 
-    res.redirect(`/garment/${garment._id}`);
+    res.redirect(`/detail/${garment._id}`);
 });
 
 router.get('/search-category', async (req, res) => {
