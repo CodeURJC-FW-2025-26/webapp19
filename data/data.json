@@ -25,7 +25,7 @@
     "description": "Essential short socks made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look",
     "size": "M",
     "color": "White",
-    "fabric": "Cotton (100%)",
+    "fabric": "Cotton",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -61,7 +61,7 @@
     "description": "Essential short-sleeve T-shirt made from 100% soft cotton. Clean design with a comfy fit — easy to pair with anything for a fresh, casual look.",
     "size": "M",
     "color": "Black",
-    "fabric": "Cotton (100%)",
+    "fabric": "Cotton",
     "customerReviews": [
       {
         "username": "@roki23",
@@ -78,8 +78,8 @@
     "imageFilename": "chandal1_1.jpg",
     "description": "Casual trousers made from soft cotton blend fabric. Comfortable fit for everyday wear with a sleek, versatile design.",
     "size": "M",
-    "color": "White",
-    "fabric": "Cotton (100%)",
+    "color": "Black",
+    "fabric": "Cotton",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -102,8 +102,8 @@
     "imageFilename": "gorra1.jpg",
     "description": "Adjustable cotton cap. Perfect for sunny days or adding a sporty touch to your outfit.",
     "size": "M",
-    "color": "Dark blue",
-    "fabric": "Cotton (100%)",
+    "color": "Dark Blue",
+    "fabric": "Synthetic",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -121,7 +121,7 @@
     "description": "Cozy cotton fleece sweatshirt. Stylish and comfortable, ideal for layering on chilly days.",
     "size": "M",
     "color": "Black",
-    "fabric": "Cotton (100%)",
+    "fabric": "Wool",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -139,7 +139,7 @@
     "description": "Classic denim jeans with a modern slim fit. Durable and comfortable for everyday casual wear.",
     "size": "M",
     "color": "Light Blue",
-    "fabric": "Cotton (100%)",
+    "fabric": "Cotton",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -163,7 +163,7 @@
     "description": "Trendy sneakers made for comfort and style. Breathable fabric and supportive sole, perfect for everyday use.",
     "size": " ",
     "color": "White",
-    "fabric": " ",
+    "fabric": "Leather",
     "customerReviews": [
       {
         "username": "@juan23",

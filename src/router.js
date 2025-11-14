@@ -110,7 +110,10 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
 
     await clothing_shop.addGarment(garment);
 
-    res.render('saved_garment', garment);
+    res.render('confirmation', {
+        header: 'Element created',
+        message: `Element: "${garment.title}" has been succesfully created.`
+    });
 });
 
 router.get('/garment/:id', async (req, res) => {
@@ -132,7 +135,10 @@ router.get('/garment/:id/delete', async (req, res) => {
         await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
     }
 
-    res.render('deleted_garment', garment);
+    res.render('confirmation', {
+        header: 'Element deleted',
+        message: `Element: "${garment.title}" has been succesfully deleted.`
+    });
 });
 
 router.get('/garment/:id/image', async (req, res) => {
@@ -210,6 +216,8 @@ router.get('/edit/:id', async (req, res) => {
 
     garment.isWhite = garment.color === 'White';
     garment.isBlue = garment.color === 'Blue';
+    garment.isDarkBlue = garment.color === 'Dark Blue';
+    garment.isLightBlue = garment.color === 'Light Blue';
     garment.isBlack = garment.color === 'Black';
     garment.isOrange = garment.color === 'Orange';
     garment.isYellow = garment.color === 'Yellow';
@@ -223,17 +231,28 @@ router.get('/edit/:id', async (req, res) => {
     res.render('edit', {garment});
 });
 
-/*router.get('/garments/:id/edit', upload(imageFilename), async (req, res) => {
-    
-    const garm= { title, description, size, color, fabric, price };
+router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
+    const id = req.params.id; 
 
-    if (updateResult.matchedCount == 0) {
-        console.log(`No document found with id ${id}`);
-    } else {
-        if (updateResult.modifiedCount == 0) {
-            console.log(`No document modified`);
-        } else {
-            console.log(`Document updated`);
-        }
+    const { title, description, size, color, fabirc, price } = req.body;
+    
+    const updatedData = {
+        title,
+        description,
+        size,
+        color, 
+        fabirc, 
+        price
+    };
+
+    if (req.file) {
+        updatedData.imageFilename = req.file.filename;
     }
-})  */
+
+    await clothing_shop.updateGarment(id, updatedData);
+
+    res.render('confirmation', {
+        header: 'Element updated',
+        message: `Element: "${updatedData.title}" has been succesfully updated.`
+    });
+});

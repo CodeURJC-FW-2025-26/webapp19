@@ -38,8 +38,8 @@ export async function getGarment(id){
 
 export async function updateGarment(id, updatedFields){
     
-    result = await garments.updateOne(
-        { _id : ObjectId(id) },
+    const result = await garments.updateOne(
+        { _id : new ObjectId(id) },
         { $set: updatedFields }
     )
     return result; 
