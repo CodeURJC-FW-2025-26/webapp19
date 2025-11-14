@@ -116,7 +116,7 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
     });
 });
 
-router.get('/garment/:id', async (req, res) => {
+/*router.get('/garment/:id', async (req, res) => {
   const garment = await clothing_shop.getGarment(req.params.id);
   console.log(garment);
 
@@ -125,7 +125,7 @@ router.get('/garment/:id', async (req, res) => {
   }
 
   res.render('detail', { garment });
-});
+}); */
 
 router.get('/garment/:id/delete', async (req, res) => {
 
