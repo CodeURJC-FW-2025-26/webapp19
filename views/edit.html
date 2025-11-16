@@ -33,7 +33,7 @@
         <div class="col-md-6 col-sm-6">
           <div class="mb-3"> <!--Name-->
             <label for="title" class="form-label">Name of item</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{garment.title}}" required>
+            <input type="text" class="form-control" id="title" name="title" value="{{garment.title}}" required pattern="[A-Z].*">
           </div>
 
           <div class="mb-3"><!--Description-->

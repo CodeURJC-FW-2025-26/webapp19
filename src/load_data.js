@@ -41,14 +41,7 @@ try {
 }
 
 if (!dataImagesExist) {
-    try {
-        // Create or replace data/images with contents from public/images
-        await fs.rm(dataImagesFolder, { recursive: true, force: true });
-        await fs.cp(publicImagesFolder, dataImagesFolder, { recursive: true });
-        console.log('Copied example images from public/images to data/images');
-    } catch (err) {
-        console.warn('Could not copy images from public/images to data/images:', err.message);
-    }
+    throw new Error("no images on " + dataImagesFolder);
 }
 
 // Finally copy the (now-canonical) data/images into uploads
