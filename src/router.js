@@ -108,12 +108,22 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
         customerReviews: []
     };
 
+<<<<<<< HEAD
     await clothing_shop.addGarment(garment);
 
     res.render('confirmation', {
         header: 'Element created',
         message: `Element: "${garment.title}" has been succesfully created.`
     });
+=======
+    try { 
+        clothing_shop.addGarment(garment);
+        res.render('saved_garment', garment);
+    }
+    catch {
+        return res.redirect('/error?message=Error%20al%20subir%20elemento&redirect=/form');
+    }
+>>>>>>> 1d22563 (minor changes)
 });
 
 /*router.get('/garment/:id', async (req, res) => {
