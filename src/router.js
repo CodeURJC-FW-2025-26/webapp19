@@ -124,30 +124,54 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
     const { title, price, description, size, color, fabric} = req.body;
 
     if (!title || !price || !description || !size || !color || !fabric) {
-        return res.redirect('/error?message=Empty%20fields&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Empty fields`,
+            redirect: '/form'
+            });
     }
 
     if (!("A"<= title[0] && title[0]<="Z")) {
-        return res.redirect('/error?message=Title%20must%20start%20with%20a%20capital%20letter&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Title must start with a capital letter`,
+            redirect: '/form'
+            });
     }
 
     if (isNaN(price) || Number(price) <= 0) {
-        return res.redirect('/error?message=Invalid%20price&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Invalid price`,
+            redirect: '/form'
+            });
     }
 
     if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
-        return res.redirect('/error?message=Description%20length%20invalid&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Description length invalid`,
+            redirect: '/form'
+            });
     }
 
     const allGarments = await clothing_shop.getgarments();
     const exists = allGarments.some(g => g.title === title);
 
     if (exists) {
-        return res.redirect('/error?message=Duplicate%20title&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Title already exists`,
+            redirect: '/form'
+            });
     }
 
     if (!req.file) {
-        return res.redirect('/error?message=You%20must%20upload%20an%20image&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: You must upload an image`,
+            redirect: '/form'
+            });
     }
    
     let garment = {
@@ -163,14 +187,18 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
 
     try { 
         clothing_shop.addGarment(garment);
-        res.render('confirmation', {
+        return res.render('message', {
             header: 'Element created',
             message: `Element: "${garment.title}" has been succesfully created.`,
             redirect: '/detail/' + garment._id.toString()
             });
     }
     catch {
-        return res.redirect('/error?message=Error%20al%20subir%20elemento&redirect=/form');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: problem uploading the element to database`,
+            redirect: '/form'
+            });
     }
 });
 
@@ -179,7 +207,11 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
   console.log(garment);
 
   if (!garment) {
-    return res.redirect('/error?message=Product%20not%20found');
+    return res.render('message', {
+        header: 'Error',
+        message: `Error: Product not found`,
+        redirect: '/'
+        });
   }
 
   res.render('detail', { garment });
@@ -193,7 +225,7 @@ router.get('/garment/:id/delete', async (req, res) => {
         await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
     }
 
-    res.render('confirmation', {
+    return res.render('message', {
         header: 'Element deleted',
         message: `Element: "${garment.title}" has been succesfully deleted.`,
         redirect: "/"
@@ -208,13 +240,6 @@ router.get('/garment/:id/image', async (req, res) => {
 
 });
 
-router.get('/error', (req, res) => {
-    const message = req.query.message || "Unknown error";
-    const redirectUrl = req.query.redirect || "/";
-
-    res.render('error', { message, redirectUrl });
-});
-
 router.get('/search', async (req, res) => {
     const query = req.query['product-search'];
     if (!query) {
@@ -225,7 +250,11 @@ router.get('/search', async (req, res) => {
     const garment = garments.find(g => g.title.toLowerCase() === query.toLowerCase());
 
     if (!garment) {
-        return res.redirect('/error?message=Product%20not%20found');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Product not found`,
+            redirect: '/'
+            });
     }
 
     res.redirect(`/detail/${garment._id}`);
@@ -246,7 +275,11 @@ router.get('/search-category', async (req, res) => {
     });
 
     if (filteredGarments.length === 0) {
-        return res.redirect('/error?message=No%20products%20found');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: No products found`,
+            redirect: '/'
+            });
     }
 
     res.render('index', {
@@ -262,7 +295,11 @@ router.get('/search-category', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
     const garment = await clothing_shop.getGarment(req.params.id);
     if (!garment) {
-        return res.redirect('/error?message=No%20products%20found');
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: No products found`,
+            redirect: '/'
+            });
     }
 
     garment.id = garment.id.toString();
@@ -310,7 +347,7 @@ router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
 
     await clothing_shop.updateGarment(id, updatedData);
 
-    res.render('confirmation', {
+    return res.render('message', {
         header: 'Element updated',
         message: `Element: "${updatedData.title}" has been succesfully updated.`,
         redirect: '/detail/id'
@@ -323,12 +360,20 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
     const { username, reviewDate, reviewText, rating } = req.body;
 
     if (!username || !reviewDate || !reviewText || !rating ) {
-        return res.redirect('/error?message=Empty%20fields&redirect=/detail/' + id);
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Empty fields`,
+            redirect: '/detail/' + id
+        });
     }
 
     
     if (reviewText.length < DESCRIPTION_MIN_LENGTH || reviewText.length > DESCRIPTION_MAX_LENGTH) {
-        return res.redirect('/error?message=Description%20length%20invalid&redirect=/detail/' + id);
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Description length invalid`,
+            redirect: '/detail/' + id
+            });
     }
 
     const [year, month, day] = reviewDate.split("-");
@@ -346,12 +391,16 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
         const exists = allGarments.some(g => g.customerReviews.some(review => review.username === username));
 
         if (exists) {
-            return res.redirect('/error?message=Duplicate%20title&redirect=/form');
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: Title already exists`,
+                redirect: '/form'
+                });
         }
 
         await clothing_shop.pushReview(id, newReview);
 
-        res.render('confirmation', {
+        return res.render('message', {
             header: 'Review added',
             message: 'Review was added to the element',
             redirect: '/detail/' + id
@@ -360,7 +409,7 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
     else {
         await clothing_shop.updateReview(id, reviewId, newReview);
 
-        res.render('confirmation', {
+        return res.render('message', {
             header: 'Review updated',
             message: 'Review was updated',
             redirect: '/detail/' + id
@@ -371,7 +420,7 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
 router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => {
     const { id, reviewId } = req.params;
     await clothing_shop.deleteReview(id, reviewId);
-    res.render('confirmation', {
+    return res.render('message', {
         header: 'Review deleted',
         message: 'Review was succesfully deleted',
         redirect: '/detail/' + id
