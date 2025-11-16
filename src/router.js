@@ -28,6 +28,28 @@ function addSelectedRating(renderInfo, rating) {
     renderInfo.is5 = 5 === rating;
 }
 
+function addGarmentTypesInfo(renderInfo, garment) {
+    renderInfo.isXS = garment.size === 'XS';
+    renderInfo.isS = garment.size === 'S';
+    renderInfo.isM = garment.size === 'M';
+    renderInfo.isL = garment.size === 'L';
+    renderInfo.isXL = garment.size === 'XL';
+
+    renderInfo.isWhite = garment.color === 'White';
+    renderInfo.isBlue = garment.color === 'Blue';
+    renderInfo.isDarkBlue = garment.color === 'Dark Blue';
+    renderInfo.isLightBlue = garment.color === 'Light Blue';
+    renderInfo.isBlack = garment.color === 'Black';
+    renderInfo.isOrange = garment.color === 'Orange';
+    renderInfo.isYellow = garment.color === 'Yellow';
+
+    renderInfo.isCotton = garment.fabric === 'Cotton';
+    renderInfo.isWool = garment.fabric === 'Wool';
+    renderInfo.isLeather = garment.fabric === 'Leather';
+    renderInfo.isSilk = garment.fabric === 'Silk';
+    renderInfo.isSynthetic = garment.fabric === 'Synthetic';
+}
+
 router.get('/', async (req, res) => {
 
     let garments = await clothing_shop.getgarments();
@@ -61,8 +83,44 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get('/form', (req, res) => {
-    res.render('form');
+router.get(['/form', '/form/:id'], async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+        const renderInfo = {
+            garment: {
+                title: "",
+                imageFilename: "",
+                description: "",
+                size: "",
+                color: "",
+                fabric: "",
+                price: ""
+            },
+            edit: false
+        }
+        addGarmentTypesInfo(renderInfo.garment, renderInfo.garment);
+        return res.render('edit', renderInfo);
+    }
+    else {
+        const garment = await clothing_shop.getGarment(id);
+        if (!garment) {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: No products found`,
+                redirect: '/'
+            });
+        }
+
+        garment.id = garment._id.toString();
+
+
+        addGarmentTypesInfo(garment, garment);
+
+        return res.render('edit', {
+            garment,
+            edit: true
+        });
+    }
 });
 
 router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
@@ -120,14 +178,20 @@ router.get(['/detail.html/:id/:reviewId', '/detail/:id/:reviewId'], async (req, 
     res.render('detail', renderInfo);
 });
 
-router.post('/garment/new', upload.single('image'), async (req, res) => {
+router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), async (req, res) => {
+    const { id } = req.params;
+    let redirect = '/form';
+    if (id) {
+        redirect = '/form/' + id;
+    }
     const { title, price, description, size, color, fabric} = req.body;
+
 
     if (!title || !price || !description || !size || !color || !fabric) {
         return res.render('message', {
             header: 'Error',
             message: `Error: Empty fields`,
-            redirect: '/form'
+            redirect
             });
     }
 
@@ -135,7 +199,7 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
         return res.render('message', {
             header: 'Error',
             message: `Error: Title must start with a capital letter`,
-            redirect: '/form'
+            redirect
             });
     }
 
@@ -143,7 +207,7 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
         return res.render('message', {
             header: 'Error',
             message: `Error: Invalid price`,
-            redirect: '/form'
+            redirect
             });
     }
 
@@ -151,54 +215,78 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
         return res.render('message', {
             header: 'Error',
             message: `Error: Description length invalid`,
-            redirect: '/form'
+            redirect
             });
     }
 
-    const allGarments = await clothing_shop.getgarments();
-    const exists = allGarments.some(g => g.title === title);
+    if (!id) {
+        const allGarments = await clothing_shop.getgarments();
+        const exists = allGarments.some(g => g.title === title);
 
-    if (exists) {
-        return res.render('message', {
-            header: 'Error',
-            message: `Error: Title already exists`,
-            redirect: '/form'
-            });
-    }
+        if (exists) {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: Title already exists`,
+                redirect: '/form'
+                });
+        }
 
-    if (!req.file) {
-        return res.render('message', {
-            header: 'Error',
-            message: `Error: You must upload an image`,
-            redirect: '/form'
-            });
-    }
-   
-    let garment = {
-        title,
-        price: Number(price),
-        imageFilename: req.file?.filename,
-        description,
-        size,
-        color,
-        fabric,
-        customerReviews: []
-    };
+        if (!req.file) {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: You must upload an image`,
+                redirect: '/form'
+                });
+        }
+    
+        let garment = {
+            title,
+            price: Number(price),
+            imageFilename: req.file?.filename,
+            description,
+            size,
+            color,
+            fabric,
+            customerReviews: []
+        };
 
-    try { 
-        clothing_shop.addGarment(garment);
-        return res.render('message', {
-            header: 'Element created',
-            message: `Element: "${garment.title}" has been succesfully created.`,
-            redirect: '/detail/' + garment._id.toString()
-            });
+        try { 
+            clothing_shop.addGarment(garment);
+            return res.render('message', {
+                header: 'Element created',
+                message: `Element: "${garment.title}" has been succesfully created.`,
+                redirect: '/detail/' + garment._id.toString()
+                });
+        }
+        catch {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: problem uploading the element to database`,
+                redirect: '/form'
+                });
+        }
     }
-    catch {
+    else {
+        const updatedData = {
+            title,
+            description,
+            size,
+            color, 
+            fabric, 
+            price
+        };
+
+        if (req.file) {
+            updatedData.imageFilename = req.file.filename;
+        }
+
+        await clothing_shop.updateGarment(id, updatedData);
+
         return res.render('message', {
-            header: 'Error',
-            message: `Error: problem uploading the element to database`,
-            redirect: '/form'
-            });
+            header: 'Element updated',
+            message: `Element: "${updatedData.title}" has been succesfully updated.`,
+            redirect: '/detail/' + id
+        });
     }
 });
 
@@ -292,42 +380,8 @@ router.get('/search-category', async (req, res) => {
     });
 });
 
-router.get('/edit/:id', async (req, res) => {
-    const garment = await clothing_shop.getGarment(req.params.id);
-    if (!garment) {
-        return res.render('message', {
-            header: 'Error',
-            message: `Error: No products found`,
-            redirect: '/'
-            });
-    }
 
-    garment.id = garment.id.toString();
-
-    garment.isXS = garment.size === 'XS';
-    garment.isS = garment.size === 'S';
-    garment.isM = garment.size === 'M';
-    garment.isL = garment.size === 'L';
-    garment.isXL = garment.size === 'XL';
-
-    garment.isWhite = garment.color === 'White';
-    garment.isBlue = garment.color === 'Blue';
-    garment.isDarkBlue = garment.color === 'Dark Blue';
-    garment.isLightBlue = garment.color === 'Light Blue';
-    garment.isBlack = garment.color === 'Black';
-    garment.isOrange = garment.color === 'Orange';
-    garment.isYellow = garment.color === 'Yellow';
-
-    garment.isCotton = garment.fabric === 'Cotton';
-    garment.isWool = garment.fabric === 'Wool';
-    garment.isLeather = garment.fabric === 'Leather';
-    garment.isSilk = garment.fabric === 'Silk';
-    garment.isSynthetic = garment.fabric === 'Synthetic';
-
-    res.render('edit', {garment});
-});
-
-router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
+/*router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
     const id = req.params.id; 
 
     const { title, description, size, color, fabirc, price } = req.body;
@@ -350,9 +404,10 @@ router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
     return res.render('message', {
         header: 'Element updated',
         message: `Element: "${updatedData.title}" has been succesfully updated.`,
-        redirect: '/detail/id'
+        redirect: '/detail/' + id
     });
 });
+*/
 
 router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/new/:reviewId'], async (req, res) => {
     const { id, reviewId } = req.params;
