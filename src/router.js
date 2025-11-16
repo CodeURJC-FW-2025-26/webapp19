@@ -68,7 +68,6 @@ router.get('/form', (req, res) => {
 router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
     const { id } = req.params;
     const garment = await clothing_shop.getGarment(req.params.id);
-    console.log(id);
 
     const renderInfo = JSON.parse(JSON.stringify(garment));
     renderInfo.garmentId = id;
@@ -118,7 +117,6 @@ router.get(['/detail.html/:id/:reviewId', '/detail/:id/:reviewId'], async (req, 
         rating: editedElement.rating
     }
     addSelectedRating(renderInfo.newReview, renderInfo.newReview.rating);
-    console.log(renderInfo);
     res.render('detail', renderInfo);
 });
 
