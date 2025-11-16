@@ -55,9 +55,11 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
     garment._id= garment._id.toString();
 
     //converting rating into boolean array for mustache use
-    const renderInfo = structuredClone(garment);
+    const renderInfo = JSON.parse(JSON.stringify(garment));
     for (let i = 0; i<renderInfo.customerReviews.length; i++) {
-        const currentReview = renderInfo.customerReviews[i];
+        let currentReview = renderInfo.customerReviews[i];
+        currentReview.reviewId = currentReview._id.toString();
+        delete currentReview._id;
         const rating = [];
         for (let j = 0; j<5; j++) {
             rating.push(j<currentReview.rating);
@@ -280,4 +282,13 @@ router.post('/garment/:id/customerReviews/new', async (req, res) => {
         header: 'Review added',
         message: 'Review was added to the element'
     });
-})
+});
+
+router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => {
+    const { id, reviewId } = req.params;
+    await clothing_shop.deleteReview(id, reviewId);
+    res.render('confirmation', {
+        header: 'Review deleted',
+        message: 'Review was succesfully deleted'
+    });
+});

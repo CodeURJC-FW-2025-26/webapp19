@@ -43,8 +43,8 @@
         </div>
         <p>{{review}}</p>
         <p>Date: {{date}}</p>
-        <button class="btn btn-standard btn-sm" id="deleteButton">Delete</button>    
-        <button class="btn btn-standard btn-sm" id="editButton">Edit</button>  
+        <a class="btn btn-standard" id="deleteReviewButton" href="/garment/{{_id}}/customerReviews/{{reviewId}}/delete">Delete</a>    
+        <button class="btn btn-standard" id="editReviewButton">Edit</button>  
       </div>
       {{/customerReviews}}
     </div>

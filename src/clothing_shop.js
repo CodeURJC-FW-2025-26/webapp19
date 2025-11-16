@@ -55,3 +55,11 @@ export async function pushReview(id, review) {
     );
     return result;
 }
+
+export async function deleteReview(id, reviewId) {
+    const result = await garments.updateOne(
+        { _id: new ObjectId(id) },
+        { $pull: { customerReviews: { _id: new ObjectId(reviewId) } } }
+    );
+    return result;
+}
