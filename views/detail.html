@@ -49,11 +49,12 @@
       {{/customerReviews}}
     </div>
     <div class="row mt-4">
-      <h1>Add a new review</h1>
       {{#edit}}
+      <h1>Edit the review:</h1>
       <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new/{{newReview.id}}" method="POST">
       {{/edit}}
       {{^edit}}
+      <h1>Add a review:</h1>
       <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST">
       {{/edit}}
 
