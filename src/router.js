@@ -260,3 +260,24 @@ router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
         message: `Element: "${updatedData.title}" has been succesfully updated.`
     });
 });
+
+router.post('/garment/:id/customerReviews/new', async (req, res) => {
+    const id = req.params.id;
+
+    const { username, reviewDate, reviewText, rating } = req.body;
+
+    const [year, month, day] = reviewDate.split("-");
+    const formattedDate = `${day}-${month}-${year}`;
+
+    await clothing_shop.pushReview(id, {
+        username,
+        rating,
+        review: reviewText,
+        date: formattedDate
+    });
+
+    res.render('confirmation', {
+        header: 'Review added',
+        message: 'Review was added to the element'
+    });
+})

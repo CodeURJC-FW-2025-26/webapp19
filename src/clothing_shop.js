@@ -12,7 +12,9 @@ const garments = db.collection('garments');
 export const UPLOADS_FOLDER = 'uploads/';
 
 export async function addGarment(garment) {
-
+    for (let review of garment.customerReviews) {
+        review._id = new ObjectId();
+    }
     return await garments.insertOne(garment);
 }
 
@@ -43,4 +45,13 @@ export async function updateGarment(id, updatedFields){
         { $set: updatedFields }
     )
     return result; 
+}
+
+export async function pushReview(id, review) {
+    review._id = new ObjectId();
+    const result = await garments.updateOne(
+        { _id : new ObjectId(id) },
+        { $push : {customerReviews: review }}
+    );
+    return result;
 }
