@@ -63,3 +63,12 @@ export async function deleteReview(id, reviewId) {
     );
     return result;
 }
+
+export async function updateReview(id, reviewId, newReview) {
+    newReview._id = new ObjectId(reviewId);
+    const result = await garments.updateOne(
+        { _id: new ObjectId(id), "customerReviews._id": new ObjectId(reviewId) },
+        { $set: { "customerReviews.$": newReview }}
+    );
+    return result;
+}

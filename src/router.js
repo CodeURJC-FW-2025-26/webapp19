@@ -12,6 +12,22 @@ export default router;
 
 const upload = multer({ dest: clothing_shop.UPLOADS_FOLDER })
 
+function ratingToArray(rating) {
+    const ratingArray = [];
+    for (let j = 0; j<5; j++) {
+        ratingArray.push(j<rating);
+    }
+    return ratingArray;
+}
+
+function addSelectedRating(renderInfo, rating) {
+    renderInfo.is1 = 1 === rating;
+    renderInfo.is2 = 2 === rating;
+    renderInfo.is3 = 3 === rating;
+    renderInfo.is4 = 4 === rating;
+    renderInfo.is5 = 5 === rating;
+}
+
 router.get('/', async (req, res) => {
 
     let garments = await clothing_shop.getgarments();
@@ -50,22 +66,59 @@ router.get('/form', (req, res) => {
 });
 
 router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
-
+    const { id } = req.params;
     const garment = await clothing_shop.getGarment(req.params.id);
-    garment._id= garment._id.toString();
+    console.log(id);
 
-    //converting rating into boolean array for mustache use
     const renderInfo = JSON.parse(JSON.stringify(garment));
+    renderInfo.garmentId = id;
     for (let i = 0; i<renderInfo.customerReviews.length; i++) {
         let currentReview = renderInfo.customerReviews[i];
+        currentReview.arrayRating = ratingToArray(currentReview.rating);
         currentReview.reviewId = currentReview._id.toString();
         delete currentReview._id;
-        const rating = [];
-        for (let j = 0; j<5; j++) {
-            rating.push(j<currentReview.rating);
-        }
-        currentReview.rating = rating;
     }
+    renderInfo.edit = false;
+    renderInfo.newReview={
+        username: "",
+        reviewDate: "",
+        reviewText: "",
+        rating: 0
+    }
+    addSelectedRating(renderInfo.newReview, renderInfo.newReview.rating);
+    res.render('detail', renderInfo);
+});
+
+router.get(['/detail.html/:id/:reviewId', '/detail/:id/:reviewId'], async (req, res) => {
+    function formatDate(date) {
+        const [day, month, year] = date.split("-");
+        return `${year}-${month}-${day}`;
+    }
+    const { id, reviewId } = req.params;
+    const garment = await clothing_shop.getGarment(id);
+    garment._id= garment._id.toString();
+    let editedElement = undefined;
+    const renderInfo = JSON.parse(JSON.stringify(garment));
+    renderInfo.garmentId = garment._id;
+    for (let i = 0; i<renderInfo.customerReviews.length; i++) {
+        let currentReview = renderInfo.customerReviews[i];
+        currentReview.arrayRating = ratingToArray(currentReview.rating);
+        currentReview.reviewId = currentReview._id.toString();
+        delete currentReview._id;
+        if (currentReview.reviewId === reviewId) {
+            editedElement = currentReview;
+        }
+    }
+    renderInfo.edit = true;
+    renderInfo.newReview = {
+        id: reviewId,
+        username: editedElement.username,
+        reviewDate: formatDate(editedElement.date),
+        reviewText: editedElement.review,
+        rating: editedElement.rating
+    }
+    addSelectedRating(renderInfo.newReview, renderInfo.newReview.rating);
+    console.log(renderInfo);
     res.render('detail', renderInfo);
 });
 
@@ -114,7 +167,8 @@ router.post('/garment/new', upload.single('image'), async (req, res) => {
         clothing_shop.addGarment(garment);
         res.render('confirmation', {
             header: 'Element created',
-            message: `Element: "${garment.title}" has been succesfully created.`
+            message: `Element: "${garment.title}" has been succesfully created.`,
+            redirect: '/detail/' + garment._id.toString()
             });
     }
     catch {
@@ -143,7 +197,8 @@ router.get('/garment/:id/delete', async (req, res) => {
 
     res.render('confirmation', {
         header: 'Element deleted',
-        message: `Element: "${garment.title}" has been succesfully deleted.`
+        message: `Element: "${garment.title}" has been succesfully deleted.`,
+        redirect: "/"
     });
 });
 
@@ -259,29 +314,60 @@ router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
 
     res.render('confirmation', {
         header: 'Element updated',
-        message: `Element: "${updatedData.title}" has been succesfully updated.`
+        message: `Element: "${updatedData.title}" has been succesfully updated.`,
+        redirect: '/detail/id'
     });
 });
 
-router.post('/garment/:id/customerReviews/new', async (req, res) => {
-    const id = req.params.id;
+router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/new/:reviewId'], async (req, res) => {
+    const { id, reviewId } = req.params;
 
     const { username, reviewDate, reviewText, rating } = req.body;
+
+    if (!username || !reviewDate || !reviewText || !rating ) {
+        return res.redirect('/error?message=Empty%20fields&redirect=/detail/' + id);
+    }
+
+    
+    if (reviewText.length < DESCRIPTION_MIN_LENGTH || reviewText.length > DESCRIPTION_MAX_LENGTH) {
+        return res.redirect('/error?message=Description%20length%20invalid&redirect=/detail/' + id);
+    }
 
     const [year, month, day] = reviewDate.split("-");
     const formattedDate = `${day}-${month}-${year}`;
 
-    await clothing_shop.pushReview(id, {
+    const newReview = {
         username,
-        rating,
+        rating: Number(rating),
         review: reviewText,
         date: formattedDate
-    });
+    };
 
-    res.render('confirmation', {
-        header: 'Review added',
-        message: 'Review was added to the element'
-    });
+    if (!reviewId) {
+        const allGarments = await clothing_shop.getgarments();
+        const exists = allGarments.some(g => g.customerReviews.some(review => review.username === username));
+
+        if (exists) {
+            return res.redirect('/error?message=Duplicate%20title&redirect=/form');
+        }
+
+        await clothing_shop.pushReview(id, newReview);
+
+        res.render('confirmation', {
+            header: 'Review added',
+            message: 'Review was added to the element',
+            redirect: '/detail/' + id
+        });
+    }
+    else {
+        await clothing_shop.updateReview(id, reviewId, newReview);
+
+        res.render('confirmation', {
+            header: 'Review updated',
+            message: 'Review was updated',
+            redirect: '/detail/' + id
+        })
+    }
 });
 
 router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => {
@@ -289,6 +375,8 @@ router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => 
     await clothing_shop.deleteReview(id, reviewId);
     res.render('confirmation', {
         header: 'Review deleted',
-        message: 'Review was succesfully deleted'
+        message: 'Review was succesfully deleted',
+        redirect: '/detail/' + id
     });
 });
+

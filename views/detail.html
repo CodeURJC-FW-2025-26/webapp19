@@ -4,7 +4,7 @@
     <!--Product image-->
     <div class="row align-items-center">
         <div class="col-md-5 text-center mb-4">
-            <img src="/garment/{{_id}}/image" alt="{{title}}" class="img-fluid rounded shadow">
+            <img src="/garment/{{garmentId}}/image" alt="{{title}}" class="img-fluid rounded shadow">
         </div>
         <div class="col-md-7">
             <h2>{{title}}</h2>
@@ -20,8 +20,8 @@
             <div class="mt-4">
             <a href="/" class="btn btn-standard" id="backButton">Back</a>
 
-            <a href="/garment/{{_id}}/delete" class="btn btn-standard" id="deleteButton">Delete</a>
-            <a href="/edit/{{_id}}" class="btn btn-standard" id="editButton">Edit</a>   
+            <a href="/garment/{{garmentId}}/delete" class="btn btn-standard" id="deleteButton">Delete</a>
+            <a href="/edit/{{garmentId}}" class="btn btn-standard" id="editButton">Edit</a>   
             
            </div>
         </div>
@@ -32,57 +32,62 @@
       <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4">
         <h4>{{username}}</h4>
         <div class="rating">
-          {{#rating}}
+          {{#arrayRating}}
             {{#.}}
-              <i class="fa-solid fa-star"></i>
+              <i class="bi bi-star-fill text-warning"></i>
             {{/.}}
             {{^.}}
-              <i class="fa-regular fa-star"></i>
+              <i class="bi bi-star text-warning"></i>
             {{/.}}
-          {{/rating}}
+          {{/arrayRating}}
         </div>
         <p>{{review}}</p>
         <p>Date: {{date}}</p>
-        <a class="btn btn-standard" id="deleteReviewButton" href="/garment/{{_id}}/customerReviews/{{reviewId}}/delete">Delete</a>    
-        <button class="btn btn-standard" id="editReviewButton">Edit</button>  
+        <a class="btn btn-standard" id="deleteReviewButton" href="/garment/{{garmentId}}/customerReviews/{{reviewId}}/delete">Delete</a>    
+        <a class="btn btn-standard" id="editReviewButton" href="/detail/{{garmentId}}/{{reviewId}}">Edit</a>  
       </div>
       {{/customerReviews}}
     </div>
     <div class="row mt-4">
       <h1>Add a new review</h1>
-      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{_id}}/customerReviews/new" method="POST">
+      {{#edit}}
+      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new/{{newReview.id}}" method="POST">
+      {{/edit}}
+      {{^edit}}
+      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST">
+      {{/edit}}
 
         <div class="form-group mb-3">
           <label for="username" class="form-label"><strong>Username: </strong></label>
-          <input class="form-control" id="" rows="1" placeholder="Write your username here..." name="username" required></input>
+          <input class="form-control" id="" rows="1" placeholder="Write your username here..." name="username" required value="{{newReview.username}}">
         </div>
 
         <div class="form-group mb-3">
           <label for="reviewDate" class="form-label"><strong>Date: </strong></label>
-          <input type="date" class="form-control" id="reviewDate" rows="1" placeholder="Write your username here..." name="reviewDate" required></textarea>
+          <input type="date" class="form-control" id="reviewDate" rows="1" placeholder="Introduce your date" name="reviewDate" required value="{{newReview.reviewDate}}">
         </div>
 
         <div class="form-group mb-3">
           <label for="reviewText" class="form-label"><strong>Review: </strong></label>
-          <textarea class="form-control" id="reviewText" rows="5" placeholder="Write your review here..." name="reviewText" required></textarea>
+          <textarea class="form-control" id="reviewText" rows="5" placeholder="Write your review here..." name="reviewText" required minlength="2" maxlength="100">{{newReview.reviewText}}</textarea>
         </div>
 
         <div class="form-group mb-3">
           <label class="form-label"><strong>Rating:</strong></label>
           <div class="rating">
-            <input type="radio" id="star5" name="rating" value="1" required>
+            <input type="radio" id="star5" name="rating" value="1" {{#newReview.is1}}checked{{/newReview.is1}} required>
             <label for="star5">1★</label>
 
-            <input type="radio" id="star4" name="rating" value="2">
+            <input type="radio" id="star4" name="rating" value="2" {{#newReview.is2}}checked{{/newReview.is2}}>
             <label for="star4">2★</label>
 
-            <input type="radio" id="star3" name="rating" value="3">
+            <input type="radio" id="star3" name="rating" value="3" {{#newReview.is3}}checked{{/newReview.is3}}>
             <label for="star3">3★</label>
 
-            <input type="radio" id="star2" name="rating" value="4">
+            <input type="radio" id="star2" name="rating" value="4" {{#newReview.is4}}checked{{/newReview.is4}}>
             <label for="star2">4★</label>
 
-            <input type="radio" id="star1" name="rating" value="5">
+            <input type="radio" id="star1" name="rating" value="5" {{#newReview.is5}}checked{{/newReview.is5}}>
             <label for="star1">5★</label>
           </div>
         </div>
