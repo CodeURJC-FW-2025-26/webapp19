@@ -189,15 +189,16 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     }
 
     if (!id) {
-    const exists = await clothing_shop.getGarmentByTitle((title || '').trim());
+        const exists = await clothing_shop.getGarmentByTitle(title);
+        console.log(exists);
 
-    if (exists) {
-        return res.render('message', {
-            header: 'Error',
-            message: `Error: Title already exists`,
-            redirect: '/form'
-        });
-    }
+        if (exists) {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: Title already exists`,
+                redirect: '/form'
+            });
+        }
         if (!req.file) {
             return res.render('message', {
                 header: 'Error',
@@ -248,12 +249,16 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         if (req.file) {
             updatedData.imageFilename = req.file.filename;
         }
+        else {
+            const saved_garment = await clothing_shop.getGarment(id);
+            updatedData.imageFilename = saved_garment.imageFilename;
+        }
 
-        const garment = { title, price: Number(price), imageFilename: req.file.filename, description, size, color, fabric, type, customerReviews: [] };
+        const garment = { title, price: Number(price), imageFilename: updatedData.imageFilename, description, size, color, fabric, type, customerReviews: [] };
         try {
             const result = await clothing_shop.addGarment(garment);
             const newId = result.insertedId?.toString() || garment._id?.toString();
-            return res.render('message', { header: 'Element created', message: `Element: "${garment.title}" has been successfully created.`, redirect: '/detail/' + newId });
+            return res.render('message', { header: 'Element created', message: `Element: "${garment.title}" has been successfully edited.`, redirect: '/detail/' + newId });
         } catch {
             return res.render('message', { header: 'Error', message: `Error: problem uploading the element to database`, redirect });
         }
