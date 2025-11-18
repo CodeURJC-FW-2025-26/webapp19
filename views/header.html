@@ -41,20 +41,20 @@
             Clothing
           </a>
           <ul class="dropdown-menu" aria-labelledby="clothingDropdown">
-            <li><a class="dropdown-item" href="/search-category?category=T-Shirt">T-Shirts</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Jeans">Jeans</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Trousers">Trousers</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Socks">Socks</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Cap">Caps</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Sweatshirt">Sweatshirts</a></li>
-            <li><a class="dropdown-item" href="/search-category?category=Sneakers">Sneakers</a></li>
+            <li><a class="dropdown-item" href="/?text=T-Shirt">T-Shirts</a></li>
+            <li><a class="dropdown-item" href="/?text=Jeans">Jeans</a></li>
+            <li><a class="dropdown-item" href="/?text=Trousers">Trousers</a></li>
+            <li><a class="dropdown-item" href="/?text=Socks">Socks</a></li>
+            <li><a class="dropdown-item" href="/?text=Cap">Caps</a></li>
+            <li><a class="dropdown-item" href="/?text=Sweatshirt">Sweatshirts</a></li>
+            <li><a class="dropdown-item" href="/?text=Sneakers">Sneakers</a></li>
           </ul>
         </li>
       </ul>
     </div>
 
-    <form class="d-flex align-items-center" role="search" action="/search" method="get" autocomplete="off">
-      <input list="products-list" id="product-chooser" name="product-search" class="form-control me-2"
+    <form class="d-flex align-items-center" role="search" action="/" autocomplete="off">
+      <input list="products-list" id="product-chooser" name="text" class="form-control me-2"
              type="search" placeholder="Search products" aria-label="Search products">
       <button class="btn btn-outline-light" type="submit">Search</button>
       <datalist id="products-list">

@@ -35,26 +35,44 @@ function addGarmentTypesInfo(renderInfo, garment) {
 }
 
 router.get('/', async (req, res) => {
-    const garments = await clothing_shop.getgarments();
-    const page = parseInt(req.query.page) || 1;
+    
+    const { text } = req.query;
+
+    console.log(text);
+
+    let garments;
+
+    if (!text) {
+        garments = await clothing_shop.getgarments();
+    }
+    else {
+        garments = await clothing_shop.searchByTitle(text);
+    }
+
+    const page = parseInt(req.query.page) || 1;  
     const perPage = 6;
     const totalPages = Math.ceil(garments.length / perPage);
 
     const garmentsPage = garments.slice((page - 1) * perPage, page * perPage);
 
-    const pages = Array.from({ length: totalPages }, (_, i) => ({
-        number: i + 1,
-        url: '/?page=' + (i + 1),
-        isCurrent: i + 1 === page
-    }));
+    const baseQuery = text ? `/?text=${encodeURIComponent(text)}&` : '/?';
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pages.push({
+            number: i,
+            url: baseQuery+ 'page=' + i,
+            isCurrent: i === page
+        });
+    }
 
     res.render('index', {
         garments: garmentsPage,
         pages,
         hasPrev: page > 1,
         hasNext: page < totalPages,
-        prevUrl: '/?page=' + (page - 1),
-        nextUrl: '/?page=' + (page + 1)
+        prevUrl: baseQuery + 'page=' + (page - 1),
+        nextUrl: baseQuery + 'page=' + (page + 1)
     });
 });
 
@@ -164,12 +182,63 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     }
 
     if (!id) {
-        const allGarments = await clothing_shop.getgarments();
-        if (allGarments.some(g => g.title === title)) {
-            return res.render('message', { header: 'Error', message: `Error: Title already exists`, redirect });
-        }
+    const exists = await clothing_shop.getGarmentByTitle((title || '').trim());
+
+    if (exists) {
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Title already exists`,
+            redirect: '/form'
+        });
+    }
         if (!req.file) {
-            return res.render('message', { header: 'Error', message: `Error: You must upload an image`, redirect });
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: You must upload an image`,
+                redirect: '/form'
+                });
+        }
+    
+        let garment = {
+            title,
+            price: Number(price),
+            imageFilename: req.file?.filename,
+            description,
+            size,
+            color,
+            fabric,
+            customerReviews: []
+        };
+
+        try { 
+            const result = await clothing_shop.addGarment(garment); // wait for DB
+            const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
+            return res.render('message', {
+                header: 'Element created',
+                message: `Element: "${garment.title}" has been succesfully created.`,
+                redirect: '/detail/' + newId,
+                });
+        }
+        catch {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: problem uploading the element to database`,
+                redirect: '/form'
+                });
+        }
+    }
+    else {
+        const updatedData = {
+            title,
+            description,
+            size,
+            color, 
+            fabric, 
+            price
+        };
+
+        if (req.file) {
+            updatedData.imageFilename = req.file.filename;
         }
 
         const garment = { title, price: Number(price), imageFilename: req.file.filename, description, size, color, fabric, type, customerReviews: [] };
@@ -180,11 +249,6 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         } catch {
             return res.render('message', { header: 'Error', message: `Error: problem uploading the element to database`, redirect });
         }
-    } else {
-        const updatedData = { title, description, size, color, fabric, price, type };
-        if (req.file) updatedData.imageFilename = req.file.filename;
-        await clothing_shop.updateGarment(id, updatedData);
-        return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully updated.`, redirect: '/detail/' + id, detail: '/detail/' + id });
     }
 });
 
@@ -204,8 +268,16 @@ router.get('/search', async (req, res) => {
     const query = req.query['product-search'];
     if (!query) return res.redirect('/');
     const garments = await clothing_shop.getgarments();
-    const garment = garments.find(g => g.title.toLowerCase() === query.toLowerCase());
-    if (!garment) return res.render('message', { header: 'Error', message: `Error: Product not found`, redirect: '/' });
+    const garment = garments.filter(g => g.title.toLowerCase() === query.toLowerCase());
+
+    if (!garment) {
+        return res.render('message', {
+            header: 'Error',
+            message: `Error: Product not found`,
+            redirect: '/'
+            });
+    }
+
     res.redirect(`/detail/${garment._id}`);
 });
 
@@ -230,9 +302,15 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
     const newReview = { username, rating: Number(rating), review: reviewText, date: formattedDate };
 
     if (!reviewId) {
-        const allGarments = await clothing_shop.getgarments();
-        if (allGarments.some(g => g.customerReviews.some(r => r.username === username))) {
-            return res.render('message', { header: 'Error', message: `Error: Title already exists`, redirect: '/form' });
+        const garment = await clothing_shop.getGarment(id);
+        const exists = garment.customerReviews.some(review => review.username === username);
+
+        if (exists) {
+            return res.render('message', {
+                header: 'Error',
+                message: `Error: Title already exists`,
+                redirect: '/form'
+                });
         }
         await clothing_shop.pushReview(id, newReview);
         return res.render('message', { header: 'Review added', message: 'Review was added to the element', redirect: '/detail/' + id });
