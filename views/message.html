@@ -9,7 +9,11 @@
             <p class="fs-4 text-success">{{message}}</p>
         {{/message}}
 
-        <a href="{{redirect}}" class="btn btn-standard mt-4">Go</a>
+        {{#detail}}
+            <a href="{{detail}}" class="btn btn-standard mt-4">Go to New Element</a>
+        {{/detail}}
+        <a href="/" class="btn btn-standard mt-4 ms-2">Go Home</a>
+
     </section>
 
 </main>
