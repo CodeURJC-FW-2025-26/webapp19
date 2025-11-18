@@ -42,7 +42,9 @@ export async function getGarment(id){
 }
 
 export async function getGarmentByTitle(title) {
-    return await garments.findOne({ title: title});
+    if (!title) return null;
+    const escaped = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return await garments.findOne({ title: { $regex: `^${escaped}$`, $options: 'i' } });
 }
 
 export async function searchByTitle(title) {
