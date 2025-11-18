@@ -36,17 +36,24 @@ function addGarmentTypesInfo(renderInfo, garment) {
 
 router.get('/', async (req, res) => {
     
-    const { text } = req.query;
+    const { text, category } = req.query;
 
     console.log(text);
 
     let garments;
+    let baseQuery;
 
-    if (!text) {
+    if (!text & !category) {
         garments = await clothing_shop.getgarments();
+        baseQuery='/?';
+    }
+    else if (category) {
+        garments = await clothing_shop.searchByCategory(category);
+        baseQuery='/?category='+encodeURIComponent(category)+'&';
     }
     else {
         garments = await clothing_shop.searchByTitle(text);
+        baseQuery= `/?text=${encodeURIComponent(text)}&`;
     }
 
     const page = parseInt(req.query.page) || 1;  
@@ -54,8 +61,6 @@ router.get('/', async (req, res) => {
     const totalPages = Math.ceil(garments.length / perPage);
 
     const garmentsPage = garments.slice((page - 1) * perPage, page * perPage);
-
-    const baseQuery = text ? `/?text=${encodeURIComponent(text)}&` : '/?';
 
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -68,6 +73,7 @@ router.get('/', async (req, res) => {
 
     res.render('index', {
         text,
+        category,
         garments: garmentsPage,
         pages,
         hasPrev: page > 1,

@@ -51,6 +51,10 @@ export async function searchByTitle(title) {
     return await garments.find({ $text:  { $search: title }}).sort({ score: { $meta: "textScore"}}).toArray();
 }
 
+export async function searchByCategory(category) {
+    return await garments.find({ category: category }).toArray();
+}
+
 export async function updateGarment(id, updatedFields){
     
     const result = await garments.updateOne(
