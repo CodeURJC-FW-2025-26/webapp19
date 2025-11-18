@@ -256,7 +256,8 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             return res.render('message', {
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
-                redirect: '/detail/' + newId
+                redirect: '/detail/' + newId,
+                detail: '/detail/' + newId
             });
         }
         catch {
