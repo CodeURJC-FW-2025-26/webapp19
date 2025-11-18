@@ -207,6 +207,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             size,
             color,
             fabric,
+            category: type,
             customerReviews: []
         };
 
