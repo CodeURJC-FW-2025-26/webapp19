@@ -8,6 +8,9 @@ const client = new MongoClient('mongodb://localhost:27017');
 
 const db = client.db('clothing_shop');
 const garments = db.collection('garments');
+garments.createIndex({
+    title: "text"
+});
 
 export const UPLOADS_FOLDER = 'uploads/';
 
@@ -36,6 +39,14 @@ export async function getgarments(){
 export async function getGarment(id){
 
     return await garments.findOne({ _id: new ObjectId(id) });
+}
+
+export async function getGarmentByTitle(title) {
+    return await garments.findOne({ title: title});
+}
+
+export async function searchByTitle(title) {
+    return await garments.find({ $text:  { $search: title }}).sort({ score: { $meta: "textScore"}}).toArray();
 }
 
 export async function updateGarment(id, updatedFields){

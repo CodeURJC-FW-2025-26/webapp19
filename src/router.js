@@ -53,8 +53,19 @@ function addGarmentTypesInfo(renderInfo, garment) {
 }
 
 router.get('/', async (req, res) => {
+    
+    const { text } = req.query;
 
-    let garments = await clothing_shop.getgarments();
+    console.log(text);
+
+    let garments;
+
+    if (!text) {
+        garments = await clothing_shop.getgarments();
+    }
+    else {
+        garments = await clothing_shop.searchByTitle(text);
+    }
 
     const page = parseInt(req.query.page) || 1;  
     const perPage = 6;
@@ -66,11 +77,13 @@ router.get('/', async (req, res) => {
 
     const garmentsPage = garments.slice(start, end);
 
+    const baseQuery = text ? `/?text=${encodeURIComponent(text)}&` : '/?';
+
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
         pages.push({
             number: i,
-            url: '/?page=' + i,
+            url: baseQuery+ 'page=' + i,
             isCurrent: i === page
         });
     }
@@ -80,8 +93,8 @@ router.get('/', async (req, res) => {
         pages: pages,
         hasPrev: page > 1,
         hasNext: page < totalPages,
-        prevUrl: '/?page=' + (page - 1),
-        nextUrl: '/?page=' + (page + 1)
+        prevUrl: baseQuery + 'page=' + (page - 1),
+        nextUrl: baseQuery + 'page=' + (page + 1)
     });
 });
 
@@ -230,8 +243,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     }
 
     if (!id) {
-        const allGarments = await clothing_shop.getgarments();
-        const exists = allGarments.some(g => g.title === title);
+        const exists = clothing_shop.getGarmentByTitle(title);
 
         if (exists) {
             return res.render('message', {
@@ -267,7 +279,6 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
                 redirect: '/detail/' + newId,
-                detail: '/detail/' + newId
                 });
         }
         catch {
@@ -297,8 +308,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         return res.render('message', {
             header: 'Element updated',
             message: `Element: "${updatedData.title}" has been succesfully updated.`,
-            redirect: '/detail/' + id,
-            detail: '/detail/' + id
+            redirect: '/detail/' + id
         });
     }
 });
@@ -336,7 +346,7 @@ router.get('/search', async (req, res) => {
     }
 
     const garments = await clothing_shop.getgarments();
-    const garment = garments.find(g => g.title.toLowerCase() === query.toLowerCase());
+    const garment = garments.filter(g => g.title.toLowerCase() === query.toLowerCase());
 
     if (!garment) {
         return res.render('message', {
@@ -416,8 +426,8 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
     };
 
     if (!reviewId) {
-        const allGarments = await clothing_shop.getgarments();
-        const exists = allGarments.some(g => g.customerReviews.some(review => review.username === username));
+        const garment = await clothing_shop.getGarment(id);
+        const exists = garment.customerReviews.some(review => review.username === username);
 
         if (exists) {
             return res.render('message', {
