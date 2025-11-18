@@ -267,6 +267,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
                 redirect: '/detail/' + newId,
+                detail: '/detail/' + newId
                 });
         }
         catch {
@@ -296,7 +297,8 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         return res.render('message', {
             header: 'Element updated',
             message: `Element: "${updatedData.title}" has been succesfully updated.`,
-            redirect: '/detail/' + id
+            redirect: '/detail/' + id,
+            detail: '/detail/' + id
         });
     }
 });
