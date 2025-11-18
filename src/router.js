@@ -7,6 +7,8 @@ import * as clothing_shop from './clothing_shop.js';
 const DESCRIPTION_MAX_LENGTH=100;
 const DESCRIPTION_MIN_LENGTH=2;
 
+const CATERGORIES = ["T-Shirt", "Jeans", "Trousers", "Socks", "Caps", "Sweatshirts", "Sneakers"];
+
 const router = express.Router();
 export default router;
 
@@ -203,6 +205,14 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             });
     }
 
+    if (!CATERGORIES.some( category => title.includes(category))) {
+        return res.render('message', {
+            header: 'Error',
+            message: 'Error: Element title does not include any of the known categories',
+            redirect
+        });
+    }
+
     if (isNaN(price) || Number(price) <= 0) {
         return res.render('message', {
             header: 'Error',
@@ -251,14 +261,12 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         };
 
         try { 
-            const result = await clothing_shop.addGarment(garment); // wait for DB
-            const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
+            clothing_shop.addGarment(garment);
             return res.render('message', {
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
-                redirect: '/detail/' + newId,
-                detail: '/detail/' + newId
-            });
+                redirect: '/detail/' + garment._id.toString()
+                });
         }
         catch {
             return res.render('message', {
@@ -292,25 +300,11 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     }
 });
 
-/*router.get('/garment/:id', async (req, res) => {
-  const garment = await clothing_shop.getGarment(req.params.id);
-  console.log(garment);
 
-  if (!garment) {
-    return res.render('message', {
-        header: 'Error',
-        message: `Error: Product not found`,
-        redirect: '/'
-        });
-  }
-
-  res.render('detail', { garment });
-}); */
 
 router.get('/garment/:id/delete', async (req, res) => {
 
-    let result = await clothing_shop.deleteGarment(req.params.id);
-    let garment = result && result.value ? result.value : result;
+    let garment = await clothing_shop.deleteGarment(req.params.id);
 
     if (garment && garment.imageFilename) {
         await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
@@ -384,33 +378,6 @@ router.get('/search-category', async (req, res) => {
 });
 
 
-/*router.post('/garment/:id/update', upload.single('image'), async (req, res) => {
-    const id = req.params.id; 
-
-    const { title, description, size, color, fabirc, price } = req.body;
-    
-    const updatedData = {
-        title,
-        description,
-        size,
-        color, 
-        fabirc, 
-        price
-    };
-
-    if (req.file) {
-        updatedData.imageFilename = req.file.filename;
-    }
-
-    await clothing_shop.updateGarment(id, updatedData);
-
-    return res.render('message', {
-        header: 'Element updated',
-        message: `Element: "${updatedData.title}" has been succesfully updated.`,
-        redirect: '/detail/' + id
-    });
-});
-*/
 
 router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/new/:reviewId'], async (req, res) => {
     const { id, reviewId } = req.params;
