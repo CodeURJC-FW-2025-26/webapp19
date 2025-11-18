@@ -307,7 +307,8 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
 
 router.get('/garment/:id/delete', async (req, res) => {
 
-    let garment = await clothing_shop.deleteGarment(req.params.id);
+    let result = await clothing_shop.deleteGarment(req.params.id);
+    let garment = result && result.value ? result.value : result;
 
     if (garment && garment.imageFilename) {
         await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
