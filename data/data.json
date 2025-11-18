@@ -8,6 +8,7 @@
     "size": "M",
     "color": "Black",
     "fabric": "Cotton",
+    "category": "Socks",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -26,6 +27,7 @@
     "size": "M",
     "color": "White",
     "fabric": "Cotton",
+    "category": "Socks",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -44,6 +46,7 @@
     "size": "M",
     "color": "White",
     "fabric": "Cotton",
+    "category": "T-Shirt",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -62,6 +65,7 @@
     "size": "M",
     "color": "Black",
     "fabric": "Cotton",
+    "category": "T-Shirt",
     "customerReviews": [
       {
         "username": "@roki23",
@@ -80,6 +84,7 @@
     "size": "M",
     "color": "Black",
     "fabric": "Cotton",
+    "category": "Trousers",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -104,6 +109,7 @@
     "size": "M",
     "color": "Dark Blue",
     "fabric": "Synthetic",
+    "category": "Cap",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -122,6 +128,7 @@
     "size": "M",
     "color": "Black",
     "fabric": "Wool",
+    "category": "Sweatshirt",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -140,6 +147,7 @@
     "size": "M",
     "color": "Light Blue",
     "fabric": "Cotton",
+    "category": "Jeans",
     "customerReviews": [
       {
         "username": "@juan23",
@@ -164,6 +172,7 @@
     "size": " ",
     "color": "White",
     "fabric": "Leather",
+    "category": "Sneakers",
     "customerReviews": [
       {
         "username": "@juan23",
