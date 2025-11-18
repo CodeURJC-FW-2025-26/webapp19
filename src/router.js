@@ -253,7 +253,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         try {
             const result = await clothing_shop.addGarment(garment);
             const newId = result.insertedId?.toString() || garment._id?.toString();
-            return res.render('message', { header: 'Element created', message: `Element: "${garment.title}" has been successfully created.`, redirect: '/detail/' + newId, detail: '/detail/' + newId });
+            return res.render('message', { header: 'Element created', message: `Element: "${garment.title}" has been successfully created.`, redirect: '/detail/' + newId });
         } catch {
             return res.render('message', { header: 'Error', message: `Error: problem uploading the element to database`, redirect });
         }
@@ -264,7 +264,7 @@ router.get('/garment/:id/delete', async (req, res) => {
     const result = await clothing_shop.deleteGarment(req.params.id);
     const garment = result?.value || result;
     if (garment?.imageFilename) await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
-    return res.render('message', { header: 'Element deleted', message: `Element: "${garment.title}" has been successfully deleted.`, redirect: "/" });
+    return res.render('message', { header: 'Element deleted', message: `Element: "${garment.title}" has been successfully deleted.` });
 });
 
 router.get('/garment/:id/image', async (req, res) => {
@@ -281,8 +281,7 @@ router.get('/search', async (req, res) => {
     if (!garment) {
         return res.render('message', {
             header: 'Error',
-            message: `Error: Product not found`,
-            redirect: '/'
+            message: `Error: Product not found`
             });
     }
 
@@ -294,7 +293,7 @@ router.get('/search-category', async (req, res) => {
     if (!category) return res.redirect('/');
     const garments = await clothing_shop.getgarments();
     const filteredGarments = garments.filter(g => g.title?.trim().toLowerCase().includes(category.trim().toLowerCase()));
-    if (!filteredGarments.length) return res.render('message', { header: 'Error', message: `Error: No products found`, redirect: '/' });
+    if (!filteredGarments.length) return res.render('message', { header: 'Error', message: `Error: No products found` });
     res.render('index', { garments: filteredGarments, pages: [], hasPrev: false, hasNext: false, prevUrl: '', nextUrl: '' });
 });
 
