@@ -9,6 +9,8 @@ let dataFile = 'data.json';
 
 // Load data.json and try to populate the database. Protect DB operations so failures
 // (e.g., MongoDB not running) don't stop the rest of the initialization (images copy).
+
+const CATERGORIES = ["T-Shirt", "Jeans", "Trousers", "Socks", "Cap", "Sweatshirt", "Sneakers"];
 let garments = [];
 try {
     const dataString = await fs.readFile(DATA_FOLDER + '/' + dataFile, 'utf8');
@@ -16,6 +18,11 @@ try {
 
     await clothing_shop.deletegarments();
     for (let garment of garments) {
+        if (!garment.type || garment.type.trim() === '') {
+            const titleLower = (garment.title || '').toLowerCase();
+            const found = CATERGORIES.find(cat => titleLower.includes(cat.toLowerCase()));
+            garment.type = found || "";
+        }
         await clothing_shop.addGarment(garment);
     }
     console.log('Demo data inserted into database');

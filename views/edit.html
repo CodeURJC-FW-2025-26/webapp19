@@ -43,6 +43,20 @@
             <textarea class="form-control" id="description" name="description" rows="2" required minlength="2" maxlength="100">{{garment.description}}</textarea>
           </div>
 
+          <div class="mb-3"><!--Type-->
+            <label for="type">Select type / Category</label>
+            <select class="form-select" id="type" name="type" required>
+              <option value="" disabled selected>Select type</option>
+              <option value="T-Shirt" {{#garment.isTypeTShirt}}selected{{/garment.isTypeTShirt}}>T-Shirt</option>
+              <option value="Jeans" {{#garment.isTypeJeans}}selected{{/garment.isTypeJeans}}>Jeans</option>
+              <option value="Trousers" {{#garment.isTypeTrousers}}selected{{/garment.isTypeTrousers}}>Trousers</option>
+              <option value="Socks" {{#garment.isTypeSocks}}selected{{/garment.isTypeSocks}}>Socks</option>
+              <option value="Cap" {{#garment.isTypeCap}}selected{{/garment.isTypeCap}}>Cap</option>
+              <option value="Sweatshirt" {{#garment.isTypeSweatshirt}}selected{{/garment.isTypeSweatshirt}}>Sweatshirt</option>
+              <option value="Sneakers" {{#garment.isTypeSneakers}}selected{{/garment.isTypeSneakers}}>Sneakers</option>
+            </select>
+          </div>
+
           <div class="mb-3"><!--Size-->
             <label for="size">Select size</label>
             <select class="form-select" id="size" name="size" aria-label="Select size" required>
