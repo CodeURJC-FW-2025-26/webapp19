@@ -67,6 +67,7 @@ router.get('/', async (req, res) => {
     }
 
     res.render('index', {
+        text,
         garments: garmentsPage,
         pages,
         hasPrev: page > 1,
