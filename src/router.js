@@ -261,11 +261,13 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         };
 
         try { 
-            clothing_shop.addGarment(garment);
+            const result = await clothing_shop.addGarment(garment); // wait for DB
+            const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
             return res.render('message', {
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
-                redirect: '/detail/' + garment._id.toString()
+                redirect: '/detail/' + newId,
+                detail: '/detail/' + newId
                 });
         }
         catch {
@@ -304,7 +306,8 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
 
 router.get('/garment/:id/delete', async (req, res) => {
 
-    let garment = await clothing_shop.deleteGarment(req.params.id);
+    let result = await clothing_shop.deleteGarment(req.params.id);
+    let garment = result && result.value ? result.value : result;
 
     if (garment && garment.imageFilename) {
         await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
