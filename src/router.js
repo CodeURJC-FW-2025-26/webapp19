@@ -54,6 +54,14 @@ router.get('/', async (req, res) => {
     else {
         garments = await clothing_shop.searchByTitle(text);
         baseQuery= `/?text=${encodeURIComponent(text)}&`;
+
+        if (!garments || garments.length === 0) {
+            return res.render('message', {
+                header: 'Error',
+                message: 'Item not found',
+                redirect: '/'
+            });
+        }
     }
 
     const page = parseInt(req.query.page) || 1;  
