@@ -7,7 +7,7 @@ import * as clothing_shop from './clothing_shop.js';
 const DESCRIPTION_MAX_LENGTH=100;
 const DESCRIPTION_MIN_LENGTH=2;
 
-const CATERGORIES = ["T-Shirt", "Jeans", "Trousers", "Socks", "Caps", "Sweatshirts", "Sneakers"];
+const CATERGORIES = ["T-Shirt", "Jeans", "Trousers", "Socks", "Cap", "Sweatshirt", "Sneakers"];
 
 const router = express.Router();
 export default router;
@@ -266,8 +266,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             return res.render('message', {
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
-                redirect: '/',
-                detail: '/detail/' + newId
+                redirect: '/detail/' + newId,
                 });
         }
         catch {
