@@ -251,21 +251,21 @@ I have worked on implementing the new requirements for the home page.
 
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             | |
-| #2             |  |
-| #3             |  |
-| #4             | |
-| #5             | |
+| #1             | [Edit page finished, generic confirmation page and some data fixes](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/322f90812bf0636bc5762e2e097e7df4ea5a5efd)  | 
+| #2             | [Edit page progress](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/eaee8867547b3208470e98a581e0456ae3795b11)  |  
+| #3             | [Headers and footers on all pages](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/da93deb99c24d02cb2156b8be8961ca3efa38ee0)  | 
+| #4             | [Edit page start](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/d6fccd7a5058c8044282ae9b29cb2a09b90b21d5)  |  
+| #5             | [sticky footer in message and new image disposition in form](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/07d7caad29fc918879ff38b92b03f641c963b72c) |  
 
 #### The 5 files I have modified the most
 
 | File Number | File                                                                                                                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |   |
-| #2             |        |
-| #3             |         |
-| #4             |               |
-| #5             |  
+| #1             |  [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html) |
+| #2             |   [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)     |
+| #3             |    [message.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/message.html)      |
+| #4             |  [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)             |
+| #5             |  [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js)  |
 ----
 #### Alejandro Martín Carrera:
 
