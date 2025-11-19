@@ -1,4 +1,5 @@
 # 👕 GROUP 19 · Fundamentos de la web  
+# Práctica 1
 ## 🛍️ Project: Online Clothing Store  
 
 This repository contains the development of a web application that simulates an online clothing store.  
@@ -157,6 +158,137 @@ Form page, fixing images bug.
 | #3             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/css/styles.css)          |
 | #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
 | #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
+
+
+# Práctica 2
+## 🛠 Execution instructions
+To run the application, you need the following minimun requeriments:
+- **Node.js** (version 18.x or higher)
+- **MongoDB** (version5.x or higher)
+
+First, you must clone the repository, the default port will be 3000 and the default port for MongoDB will be 27017.
+
+git clone https://github.com/CodeURJC-FW-2025-26/webapp19.git
+
+cd webapp19
+
+Then you must install the dependencies (npm install) and set up the project (npm start or npm run watch).
+
+Finally, you have to open the URL in the browser: start http://localhost:3000/
+
+## 📁 File description
+- data
+  - **images**: default product images.
+  - **data.json**: JSON file initial data used to load the data base at startup.
+- public
+  - **styles.css**: CSS styles for the application.
+  - **images**: public and static images.
+- src
+  - **app.js**: application entry point. Configures Express, the template engine (mustache-express), middelware and assembles the route. Listen on port 3000.
+  - **clothing_shop.js**: data access layer. Connects to MongoDB, defines the main entity collection, and exports functions for CRUD and operations on the secondary entity.
+  - **load_data.js**: loads the initial data into the database in case it is empty.
+  - **router.js**: Defines the HTTP routes for the web application. Manages form validation, pagination, file uploads, and view rendering with the appropriate information.
+- uploads
+  - **images**: store uploaded images.
+- views
+  - **detail.html**: detailed view of a garment, showing complete information and reviews, form for adding/editing reviews.
+  - **edit.html**: form to create/edit a garment.
+  - **footer.html**: reusable fragments for footer
+  - **header.html**: reusable fragments for header. 
+  - **index.html**: main view showing the list of garments, a search engine and a filter
+  - **message.html**: intermediate page to display confirmation or error messages
+
+## 📹 Video
+
+## 👩‍🎨 Individual Contributions  
+- **Laura Pineda Ballesteros**: .
+
+#### My 5 most significant commits
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |  |
+| #2             |
+| #3             | |
+| #4             | |
+| #5             |  |
+
+#### The 5 files I have modified the most
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | 
+| #1             |                                                                                                                                                                                |
+| #2             |                                                                                                                                                                                    |
+| #3             |                                                                                                                                                                                    |
+| #4             |                                                                                                                                                                                    |
+| #5             |                                                                                                                                                                                |
+
+#### Adrián Esteban Martín: 
+I have worked on implementing the new requirements for the home page.
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [Delete unused images and minor adjustments](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/694572646e3376c306a511b6c59966fca10589e2#diff-330c82c60ddd0d2d2515dc2de3826bb7435f2b4bb877396e84138f76e913caac)    |
+| #2             | [Implement pagination and navigation links](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/3125e1c46c5c5dd09dd98f9b4fcfa065e15c351c)      |
+| #3             | [Add error page and correct redirections](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/3b4810d2c5a639875bd199871408b48c8e998eb4#diff-c72a907ac323cd2f334ed0e2bd07d15ab62581c4753660c8a0d1c681b30be4b6)             |
+| #4             | [Add functionality to the search engine](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/93f83872af132550e334b7382d5494390e034a61#diff-16bf5e6f6409ae313abd87700718e0cc3b01fefdff7042adcd7f77f022ae9b93)               |
+| #5             | [Add search by category](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/ac9610ea1882925a1e4db843f4864abbca304768)                                                                         |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
+| #2             | [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)      |
+| #3             | [header.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/header.html)             |
+| #4             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/index.html)               |
+| #5             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js) 
+----
+#### Sergio González Gútiez: 
+
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | |
+| #2             |  |
+| #3             |  |
+| #4             | |
+| #5             | |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   |
+| #2             |        |
+| #3             |         |
+| #4             |               |
+| #5             |  
+----
+#### Alejandro Martín Carrera:
+
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | |
+| #2             | |
+| #3             | |
+| #4             |  |
+| #5             | |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   |
+| #2             |        |
+| #3             |           |
+| #4             |              |
+| #5             | 
 
 ----
 💻 *Developed by Group 19 · FashionHub*
