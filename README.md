@@ -166,7 +166,7 @@ To run the application, you need the following minimun requeriments:
 - **Node.js** (version 18.x or higher)
 - **MongoDB** (version5.x or higher)
 
-### 📹 Video demonstration: https://youtu.be/RIVjfoUEc8o
+
 
 First, you must clone the repository, the default port will be 3000 and the default port for MongoDB will be 27017.
 
@@ -200,7 +200,7 @@ Finally, you have to open the URL in the browser: start http://localhost:3000/
   - **index.html**: main view showing the list of garments, a search engine and a filter
   - **message.html**: intermediate page to display confirmation or error messages
 
-## 📹 Video
+## 📹 Video demonstration: https://youtu.be/RIVjfoUEc8o
 
 ## 👩‍🎨 Individual Contributions  
 - **Laura Pineda Ballesteros**: .
