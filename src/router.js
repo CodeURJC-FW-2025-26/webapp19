@@ -54,14 +54,6 @@ router.get('/', async (req, res) => {
     else {
         garments = await clothing_shop.searchByTitle(text);
         baseQuery= `/?text=${encodeURIComponent(text)}&`;
-
-        if (!garments || garments.length === 0) {
-            return res.render('message', {
-                header: 'Error',
-                message: 'Item not found',
-                redirect: '/'
-            });
-        }
     }
 
     const page = parseInt(req.query.page) || 1;  
@@ -182,10 +174,6 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
 
     if (!("A" <= title[0] && title[0] <= "Z")) {
         return res.render('message', { header: 'Error', message: `Error: Title must start with a capital letter`, redirect });
-    }
-
-    if (!CATERGORIES.some(cat => title.includes(cat))) {
-        return res.render('message', { header: 'Error', message: 'Error: Element title does not include any known category', redirect });
     }
 
     if (isNaN(price) || Number(price) <= 0) {
