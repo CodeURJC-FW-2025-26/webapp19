@@ -166,6 +166,8 @@ To run the application, you need the following minimun requeriments:
 - **Node.js** (version 18.x or higher)
 - **MongoDB** (version5.x or higher)
 
+### 📹 Video demonstration: https://youtu.be/RIVjfoUEc8o
+
 First, you must clone the repository, the default port will be 3000 and the default port for MongoDB will be 27017.
 
 git clone https://github.com/CodeURJC-FW-2025-26/webapp19.git
@@ -206,20 +208,20 @@ Finally, you have to open the URL in the browser: start http://localhost:3000/
 #### My 5 most significant commits
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |  |
-| #2             |
-| #3             | |
-| #4             | |
-| #5             |  |
+| #1             | [Delete document from DB + confirm page render](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/ca243bc9a8accfb776c17e7719637eccc1201552)
+| #2             | [Migrated to express](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/9128ff95d081cac06b165a7a040f7328b94ffa91)
+| #3             | [Fix in adding garments](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/c180db52cf3f46514a989d2a388d836fdf34d5b8)
+| #4             | [Adding 'category'](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/263be272259f3f473b1335bf4c04725e7e130066)
+| #5             | [Update clothing_shop to create items](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/51952ed1d922e10ceb1269de60c85bba133ed75b)
 
 #### The 5 files I have modified the most
 | File Number | File                                                                                                                                                                                   |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | 
-| #1             |                                                                                                                                                                                |
-| #2             |                                                                                                                                                                                    |
-| #3             |                                                                                                                                                                                    |
-| #4             |                                                                                                                                                                                    |
-| #5             |                                                                                                                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
+| #2             | [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)      |
+| #3             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js)          |
+| #4             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/index.html)               |
+| #5             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js)                                                                                                                                                                     |
 
 #### Adrián Esteban Martín: 
 I have worked on implementing the new requirements for the home page.
@@ -240,8 +242,8 @@ I have worked on implementing the new requirements for the home page.
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | #1             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
 | #2             | [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)      |
-| #3             | [header.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/header.html)             |
-| #4             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/index.html)               |
+| #3             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html) |
+| #4             | [app.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/app.js)               |
 | #5             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js) 
 ----
 #### Sergio González Gútiez: 
