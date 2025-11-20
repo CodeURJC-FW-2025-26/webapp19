@@ -237,9 +237,9 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             title,
             description,
             size,
-            color, 
-            fabric, 
-            price
+            color,
+            fabric,
+            price: Number(price)
         };
 
         if (req.file) {
@@ -250,13 +250,14 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             updatedData.imageFilename = saved_garment.imageFilename;
         }
 
-        const garment = { title, price: Number(price), imageFilename: updatedData.imageFilename, description, size, color, fabric, type, customerReviews: [] };
+        // keep category in sync with form 'type' field
+        updatedData.category = type;
+
         try {
-            const result = await clothing_shop.addGarment(garment);
-            const newId = result.insertedId?.toString() || garment._id?.toString();
-            return res.render('message', { header: 'Element created', message: `Element: "${garment.title}" has been successfully edited.`, redirect: '/detail/' + newId });
+            await clothing_shop.updateGarment(id, updatedData);
+            return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully edited.`, redirect: '/detail/' + id });
         } catch {
-            return res.render('message', { header: 'Error', message: `Error: problem uploading the element to database`, redirect });
+            return res.render('message', { header: 'Error', message: `Error: problem updating the element in database`, redirect });
         }
     }
 });
