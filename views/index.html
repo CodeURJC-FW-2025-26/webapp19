@@ -14,7 +14,7 @@
             <div class="d-flex justify-content-end mb-3">
               <a href="/form" class="btn btn-standard">New item</a>
             </div>
-            <div class="row">
+            <div class="row" id="products-container">
                 {{#garments}}
                     <div class="col-12 col-md-6 col-lg-4 mb-4">
                         <div class="card">
@@ -29,35 +29,106 @@
                 {{/garments}}
             </div>
 
-            <nav aria-label="Page navigation" class="mt-4">
-                <ul class="pagination justify-content-center">
+            <div id="loading-indicator" class="text-center my-4" style="display: none;">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
 
-                    {{#hasPrev}}
-                    <li class="page-item">
-                        <a class="page-link btn btn-standard mx-1" href="{{prevUrl}}">Previous</a>
-                    </li>
-                    {{/hasPrev}}
-
-                    {{#pages}}
-                        <li class="page-item">
-                            <a class="page-link btn btn-standard mx-1 {{#isCurrent}}active-page{{/isCurrent}}" href="{{url}}">
-                                {{number}}
-                            </a>
-                        </li>
-                    {{/pages}}
-
-                    {{#hasNext}}
-                    <li class="page-item">
-                        <a class="page-link btn btn-standard mx-1" href="{{nextUrl}}">Next</a>
-                    </li>
-                    {{/hasNext}}
-
-                </ul>
-            </nav>
         </section>
     </main>
 
 {{>footer}}
+
+<script>
+    // Scroll infinito
+    let currentPage = 1;
+    let isLoading = false;
+    let hasMore = true;
+    const queryText = '{{text}}';
+    const queryCategory = '{{category}}';
+
+    function buildQueryString() {
+        let query = '';
+        if (queryText) {
+            query += 'text=' + encodeURIComponent(queryText);
+        }
+        if (queryCategory) {
+            if (query) query += '&';
+            query += 'category=' + encodeURIComponent(queryCategory);
+        }
+        return query;
+    }
+
+    function createGarmentCard(garment) {
+        const card = document.createElement('div');
+        card.className = 'col-12 col-md-6 col-lg-4 mb-4';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease-in-out, transform 0.5s ease-in-out';
+        card.innerHTML = `
+            <div class="card">
+                <img src="/garment/${garment._id}/image" class="card-img-top" alt="${garment.title}">
+                <div class="card-body">
+                    <h5 class="card-title">${garment.title}</h5>
+                    <p class="card-text">${garment.price}€</p>
+                    <a href="/detail/${garment._id}" class="btn btn-standard">More info</a>
+                </div>
+            </div>
+        `;
+        
+        // Trigger reflow para que la animación funcione
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 10);
+        
+        return card;
+    }
+
+    async function loadMoreGarments() {
+        if (isLoading || !hasMore) return;
+
+        isLoading = true;
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.display = 'block';
+
+        try {
+            const queryString = buildQueryString();
+            let url = `/api/garments?page=${currentPage + 1}`;
+            if (queryString) {
+                url = `/api/garments?${queryString}&page=${currentPage + 1}`;
+            }
+            
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.garments.length > 0) {
+                const container = document.getElementById('products-container');
+                data.garments.forEach(garment => {
+                    container.appendChild(createGarmentCard(garment));
+                });
+
+                currentPage = data.page;
+                hasMore = data.hasMore;
+            } else {
+                hasMore = false;
+            }
+        } catch (error) {
+            console.error('Error loading garments:', error);
+        } finally {
+            isLoading = false;
+            loadingIndicator.style.display = 'none';
+        }
+    }
+
+    // Detect when the user reaches the bottom of the page
+    window.addEventListener('scroll', () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
+            loadMoreGarments();
+        }
+    });
+</script>
 
 
 

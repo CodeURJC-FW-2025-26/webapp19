@@ -41,45 +41,62 @@ router.get('/', async (req, res) => {
     console.log(text);
 
     let garments;
-    let baseQuery;
 
     if (!text & !category) {
         garments = await clothing_shop.getgarments();
-        baseQuery='/?';
     }
     else if (category) {
         garments = await clothing_shop.searchByCategory(category);
-        baseQuery='/?category='+encodeURIComponent(category)+'&';
     }
     else {
         garments = await clothing_shop.searchByTitle(text);
-        baseQuery= `/?text=${encodeURIComponent(text)}&`;
     }
 
-    const page = parseInt(req.query.page) || 1;  
     const perPage = 6;
-    const totalPages = Math.ceil(garments.length / perPage);
-
-    const garmentsPage = garments.slice((page - 1) * perPage, page * perPage);
-
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push({
-            number: i,
-            url: baseQuery+ 'page=' + i,
-            isCurrent: i === page
-        });
-    }
+    const garmentsPage = garments.slice(0, perPage);
 
     res.render('index', {
         text,
         category,
         garments: garmentsPage,
-        pages,
-        hasPrev: page > 1,
-        hasNext: page < totalPages,
-        prevUrl: baseQuery + 'page=' + (page - 1),
-        nextUrl: baseQuery + 'page=' + (page + 1)
+        totalGarments: garments.length,
+        perPage: perPage
+    });
+});
+
+// API endpoint for infinite scroll
+router.get('/api/garments', async (req, res) => {
+    
+    const { text, category, page = 1 } = req.query;
+    const pageNum = parseInt(page) || 1;
+
+    let garments;
+
+    if (!text && !category) {
+        garments = await clothing_shop.getgarments();
+    }
+    else if (category) {
+        garments = await clothing_shop.searchByCategory(category);
+    }
+    else {
+        garments = await clothing_shop.searchByTitle(text);
+    }
+
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    const perPage = 6;
+    const totalPages = Math.ceil(garments.length / perPage);
+    const startIndex = (pageNum - 1) * perPage;
+    const endIndex = startIndex + perPage;
+    const garmentsPage = garments.slice(startIndex, endIndex);
+
+    res.json({
+        garments: garmentsPage,
+        page: pageNum,
+        totalPages: totalPages,
+        hasMore: pageNum < totalPages,
+        totalGarments: garments.length
     });
 });
 
