@@ -13,6 +13,17 @@ export default router;
 
 const upload = multer({ dest: clothing_shop.UPLOADS_FOLDER });
 
+function buildMessageUrl(header, message, redirect) {
+    const h = encodeURIComponent(header || '');
+    const m = encodeURIComponent(message || '');
+    const r = encodeURIComponent(redirect || '');
+    return `/message?header=${h}&message=${m}&redirect=${r}`;
+}
+
+router.get('/message', (req, res) => {
+    const { header = '', message = '', redirect = '/' } = req.query;
+    return res.render('message', { header, message, redirect });
+});
 function ratingToArray(rating) {
     return Array.from({ length: 5 }, (_, i) => i < rating);
 }
@@ -184,21 +195,38 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     const { id } = req.params;
     const redirect = id ? '/form/' + id : '/form';
     const { title, price, description, size, color, fabric, type } = req.body;
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
 
     if (!title || !price || !description || !size || !color || !fabric || !type) {
-        return res.render('message', { header: 'Error', message: `Error: Empty fields`, redirect });
+        const errorMsg = 'Error: Empty fields';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
 
     if (!("A" <= title[0] && title[0] <= "Z")) {
-        return res.render('message', { header: 'Error', message: `Error: Title must start with a capital letter`, redirect });
+        const errorMsg = 'Error: Title must start with a capital letter';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
 
     if (isNaN(price) || Number(price) <= 0) {
-        return res.render('message', { header: 'Error', message: `Error: Invalid price`, redirect });
+        const errorMsg = 'Error: Invalid price';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
 
     if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
-        return res.render('message', { header: 'Error', message: `Error: Description length invalid`, redirect });
+        const errorMsg = 'Error: Description length invalid';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
 
     if (!id) {
@@ -206,16 +234,24 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         console.log(exists);
 
         if (exists) {
+            const errorMsg = 'Error: Title already exists';
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+            }
             return res.render('message', {
                 header: 'Error',
-                message: `Error: Title already exists`,
+                message: errorMsg,
                 redirect: '/form'
             });
         }
         if (!req.file) {
+            const errorMsg = 'Error: You must upload an image';
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+            }
             return res.render('message', {
                 header: 'Error',
-                message: `Error: You must upload an image`,
+                message: errorMsg,
                 redirect: '/form'
                 });
         }
@@ -235,6 +271,9 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         try { 
             const result = await clothing_shop.addGarment(garment); // wait for DB
             const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Element created', `Element: "${garment.title}" has been succesfully created.`, '/detail/' + newId) });
+            }
             return res.render('message', {
                 header: 'Element created',
                 message: `Element: "${garment.title}" has been succesfully created.`,
@@ -242,9 +281,13 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
                 });
         }
         catch {
+            const errorMsg = 'Error: problem uploading the element to database';
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+            }
             return res.render('message', {
                 header: 'Error',
-                message: `Error: problem uploading the element to database`,
+                message: errorMsg,
                 redirect: '/form'
                 });
         }
@@ -272,8 +315,14 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
 
         try {
             await clothing_shop.updateGarment(id, updatedData);
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Element updated', `Element: "${updatedData.title}" has been successfully edited.`, '/detail/' + id) });
+            }
             return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully edited.`, redirect: '/detail/' + id });
         } catch {
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
+            }
             return res.render('message', { header: 'Error', message: `Error: problem updating the element in database`, redirect });
         }
     }
