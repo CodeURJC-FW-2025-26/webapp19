@@ -2,8 +2,10 @@
     let currentPage = 1;
     let isLoading = false;
     let hasMore = true;
-    const queryText = '{{text}}';
-    const queryCategory = '{{category}}';
+    // Leer valores de consulta desde el DOM (renderizados por el servidor)
+    const productsContainer = document.getElementById('products-container');
+    const queryText = productsContainer?.dataset?.text || '';
+    const queryCategory = productsContainer?.dataset?.category || '';
 
     function buildQueryString() {
         let query = '';
