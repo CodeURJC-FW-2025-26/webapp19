@@ -53,7 +53,7 @@ router.get('/', async (req, res) => {
 
     let garments;
 
-    if (!text & !category) {
+    if (!text && !category) {
         garments = await clothing_shop.getgarments();
     }
     else if (category) {
