@@ -35,7 +35,7 @@ function addSelectedRating(renderInfo, rating) {
 }
 
 function addGarmentTypesInfo(renderInfo, garment) {
-    const attributes = ['type', 'size', 'color', 'fabric'];
+    const attributes = ['category', 'size', 'color', 'fabric'];
     attributes.forEach(attr => {
         const value = garment[attr];
         if (value) {
@@ -155,6 +155,7 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
     renderInfo.newReview = { username: "", reviewDate: "", reviewText: "", rating: 0 };
     addSelectedRating(renderInfo.newReview, renderInfo.newReview.rating);
     addGarmentTypesInfo(renderInfo, garment);
+    console.log(renderInfo);
     res.render('detail', renderInfo);
 });
 
@@ -299,7 +300,8 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             size,
             color,
             fabric,
-            price: Number(price)
+            price: Number(price),
+            category: type
         };
 
         if (req.file) {
@@ -308,10 +310,9 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         else {
             const saved_garment = await clothing_shop.getGarment(id);
             updatedData.imageFilename = saved_garment.imageFilename;
+            updatedData.customerReviews = saved_garment.customerReviews;
         }
 
-        // keep category in sync with form 'type' field
-        updatedData.category = type;
 
         try {
             await clothing_shop.updateGarment(id, updatedData);
