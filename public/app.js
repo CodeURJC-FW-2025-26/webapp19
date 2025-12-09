@@ -85,3 +85,15 @@
             loadMoreGarments();
         }
     });
+
+    async function checkUsername(){
+
+        const title = document.getElementById("title").value;
+        //const response = await fetch(`/checkUserName?username=${title}`);
+        const response = await fetch(`/checkUsername?username=${encodeURIComponent(title)}`);
+
+        const userNameChecked = await response.json();
+        const confirmation = document.getElementById("confirmation");
+
+        confirmation.innerHTML = userNameChecked.message; 
+    }
