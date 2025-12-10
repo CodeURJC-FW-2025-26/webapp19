@@ -88,6 +88,18 @@
         }
     });
 
+    function showError(input, message){
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid");
+        input.nextElementSibling.textContent = message;
+    }
+
+    function showSucces(input, message) {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+        input.nextElementSibling.textContent = message;
+    }
+
     async function checkTitle(){
 
         const title = document.getElementById("title");
@@ -97,29 +109,36 @@
             title.classList.remove("is-invalid", "is-valid");
             return;
         }
+
+        if (titleValue[0] !== titleValue[0].toUpperCase()) {
+            showError(title, "El nombre de la prenda debe empezar por Mayúsucla.");
+            return false;
+        }
+
         //const response = await fetch(`/checkUserName?username=${title}`);
         const response = await fetch(`/checkTitle?title=${encodeURIComponent(titleValue)}`);
         const userNameChecked = await response.json();
 
         const errorDiv = document.getElementById("title-error");
 
-        if (titleValue[0] !== titleValue[0].toUpperCase()) {
-            title.classList.add("is-invalid");
-            title.classList.remove("is-valid");
-
-            errorDiv.textContent = "El nombre de la prenda debe empezar por mayúscula.";
-            return;
-        }
-
         if (userNameChecked.valid === false) {
-            title.classList.add("is-invalid");
-            title.classList.remove("is-valid");
-
-            errorDiv.textContent = userNameChecked.message; 
+            showError(title, userNameChecked.message);
+            return false; 
         } else {
-            title.classList.remove("is-invalid");
-            title.classList.add("is-valid");
+            showSucces(title, userNameChecked.message);
+            return true; 
+        }
+    }
 
-            errorDiv.textContent = "";
+    function checkDescription() {
+        const description = document.getElementById("description");
+        const descriptionValue = description.value;
+
+        if (descriptionValue.length < 2 || descriptionValue.length > 100) {
+            showError(description, "Longitud inválida de descripción");
+            return false; 
+        } else {
+            showSucces(description, "");
+            return true;
         }
     }

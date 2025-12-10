@@ -44,7 +44,7 @@
 
           <div class="mb-3"><!--Description-->
             <label for="description" class="form-label">Description of item</label>
-            <textarea class="form-control" id="description" name="description" rows="2" required minlength="2" maxlength="100">{{garment.description}}</textarea>
+            <textarea class="form-control" id="description" name="description" rows="2" required minlength="2" maxlength="102" oninput="checkDescription()">{{garment.description}}</textarea>
           </div>
 
           <div class="mb-3"><!--Type-->
