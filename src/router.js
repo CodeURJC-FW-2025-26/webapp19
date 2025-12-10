@@ -94,7 +94,7 @@ router.get('/api/garments', async (req, res) => {
     }
 
     // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await setTimeout(1500);
 
     const perPage = 6;
     const totalPages = Math.ceil(garments.length / perPage);
