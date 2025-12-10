@@ -88,14 +88,38 @@
         }
     });
 
-    async function checkUsername(){
+    async function checkTitle(){
 
-        const title = document.getElementById("title").value;
+        const title = document.getElementById("title");
+        const titleValue = title.value;
+
+        if (!titleValue){
+            title.classList.remove("is-invalid", "is-valid");
+            return;
+        }
         //const response = await fetch(`/checkUserName?username=${title}`);
-        const response = await fetch(`/checkUsername?username=${encodeURIComponent(title)}`);
-
+        const response = await fetch(`/checkTitle?title=${encodeURIComponent(titleValue)}`);
         const userNameChecked = await response.json();
-        const confirmation = document.getElementById("confirmation");
 
-        confirmation.innerHTML = userNameChecked.message; 
+        const errorDiv = document.getElementById("title-error");
+
+        if (titleValue[0] !== titleValue[0].toUpperCase()) {
+            title.classList.add("is-invalid");
+            title.classList.remove("is-valid");
+
+            errorDiv.textContent = "El nombre de la prenda debe empezar por mayúscula.";
+            return;
+        }
+
+        if (userNameChecked.valid === false) {
+            title.classList.add("is-invalid");
+            title.classList.remove("is-valid");
+
+            errorDiv.textContent = userNameChecked.message; 
+        } else {
+            title.classList.remove("is-invalid");
+            title.classList.add("is-valid");
+
+            errorDiv.textContent = "";
+        }
     }

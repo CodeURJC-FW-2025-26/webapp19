@@ -402,20 +402,19 @@ router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => 
     return res.render('message', { header: 'Review deleted', message: 'Review was successfully deleted', redirect: '/detail/' + id });
 });
 
-router.get("/checkUsername", async (req,res) => {
-    const title = req.query.username; 
+router.get("/checkTitle", async (req,res) => {
+    const title = req.query.title; 
 
-    const garment = await clothing_shop.getGarmentByTitle(title); 
+    const existingGarment = await clothing_shop.getGarmentByTitle(title); 
 
-    if (garment){
+    if (existingGarment){
         res.json({
             valid: false,
             message: "Nombre de prenda no válido (ya existe)"
         })
     } else {
         res.json({
-            valid: true,
-            message: "Nombre de prenda válido"
+            valid: true
         })
     }
 })

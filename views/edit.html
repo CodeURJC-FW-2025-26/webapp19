@@ -38,8 +38,8 @@
         <div class="col-md-6 col-sm-6">
           <div class="mb-3"> <!--Name-->
             <label for="title" class="form-label">Name of item</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{garment.title}}" required pattern="[A-Z].*" oninput="checkUsername()">
-            <div id="confirmation"></div>
+            <input type="text" class="form-control" id="title" name="title" value="{{garment.title}}" required pattern="[A-Z].*" oninput="checkTitle()">
+            <div class="invalid-feedback" id="title-error"></div>
           </div>
 
           <div class="mb-3"><!--Description-->
