@@ -93,22 +93,21 @@ router.get('/api/garments', async (req, res) => {
         garments = await clothing_shop.searchByTitle(text);
     }
 
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
     const perPage = 6;
     const totalPages = Math.ceil(garments.length / perPage);
     const startIndex = (pageNum - 1) * perPage;
     const endIndex = startIndex + perPage;
     const garmentsPage = garments.slice(startIndex, endIndex);
 
-    res.json({
-        garments: garmentsPage,
-        page: pageNum,
-        totalPages: totalPages,
-        hasMore: pageNum < totalPages,
-        totalGarments: garments.length
-    });
+    setTimeout(() => {
+        res.json({
+            garments: garmentsPage,
+            page: pageNum,
+            totalPages: totalPages,
+            hasMore: pageNum < totalPages,
+            totalGarments: garments.length
+        });
+    }, 1500);
 });
 
 router.get(['/form', '/form/:id'], async (req, res) => {
@@ -410,7 +409,7 @@ router.get("/checkTitle", async (req,res) => {
     if (existingGarment){
         res.json({
             valid: false,
-            message: "Nombre de prenda no válido (ya existe)"
+            message: "Invalid garment name (already exists)"
         })
     } else {
         res.json({

@@ -1,14 +1,14 @@
-// Scroll infinito
+// Infinite scroll
     let currentPage = 1;
     let isLoading = false;
     let hasMore = true;
-    // Leer valores de consulta desde el DOM (renderizados por el servidor)
+    // Reading query values from the DOM (rendered by the server)
     const productsContainer = document.getElementById('products-container');
     const queryText = productsContainer?.dataset?.text || '';
     const queryCategory = productsContainer?.dataset?.category || '';
 
     const errorMessages = {
-        'description': 'Invalid description length',
+        'description': 'Invalid description length (must be 2-100 characters)',
         'review' : 'Invalid review length'
     };
 
@@ -116,7 +116,7 @@
         }
 
         if (titleValue[0] !== titleValue[0].toUpperCase()) {
-            showError(title, "El nombre de la prenda debe empezar por Mayúsucla.");
+            showError(title, "The garment name must start with a capital letter.");
             return false;
         }
 
@@ -144,6 +144,9 @@
         if (value.length < 2 || value.length > 100) {
             showError(input, message);
             return false;
+        } else {
+            showSucces(input, "");
+            return true;
         }
     }
 
@@ -154,7 +157,7 @@
         console.log(priceValue);
 
         if (priceValue <= 0) {
-            showError(price, "El precio no puede ser negativo o cero.");
+            showError(price, "The price cannot be negative or zero.");
             return false; 
         } else {
             showSucces(price, "");
