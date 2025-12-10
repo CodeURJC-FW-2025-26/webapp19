@@ -8,8 +8,8 @@
     const queryCategory = productsContainer?.dataset?.category || '';
 
     const errorMessages = {
-        'description': 'invalid description length',
-        'review' : 'invalid review length'
+        'description': 'Invalid description length',
+        'review' : 'Invalid review length'
     };
 
     function buildQueryString() {
@@ -136,16 +136,16 @@
     }
 
     function checkTextField(inputId, fieldName, errorMessages) {
-    const input = document.getElementById(inputId);
-    const value = input.value.trim();
+        const input = document.getElementById(inputId);
+        const value = input.value.trim();
 
-    const message = errorMessages[fieldName] || "Invalid length";
+        const message = errorMessages[fieldName] || "Invalid length";
 
-    if (value.length < 2 || value.length > 100) {
-        showError(input, message);
-        return false;
+        if (value.length < 2 || value.length > 100) {
+            showError(input, message);
+            return false;
+        }
+
+        showSucces(input, "");
+        return true;
     }
-
-    showSucces(input, "");
-    return true;
-}
