@@ -7,6 +7,11 @@
     const queryText = productsContainer?.dataset?.text || '';
     const queryCategory = productsContainer?.dataset?.category || '';
 
+    const errorMessages = {
+        'description': 'invalid description length',
+        'review' : 'invalid review length'
+    };
+
     function buildQueryString() {
         let query = '';
         if (queryText) {
@@ -130,15 +135,17 @@
         }
     }
 
-    function checkDescription() {
-        const description = document.getElementById("description");
-        const descriptionValue = description.value;
+    function checkTextField(inputId, fieldName, errorMessages) {
+    const input = document.getElementById(inputId);
+    const value = input.value.trim();
 
-        if (descriptionValue.length < 2 || descriptionValue.length > 100) {
-            showError(description, "Longitud inválida de descripción");
-            return false; 
-        } else {
-            showSucces(description, "");
-            return true;
-        }
+    const message = errorMessages[fieldName] || "Invalid length";
+
+    if (value.length < 2 || value.length > 100) {
+        showError(input, message);
+        return false;
     }
+
+    showSucces(input, "");
+    return true;
+}

@@ -71,7 +71,7 @@
 
         <div class="form-group mb-3">
           <label for="reviewText" class="form-label"><strong>Review: </strong></label>
-          <textarea class="form-control" id="reviewText" rows="5" placeholder="Write your review here..." name="reviewText" required minlength="2" maxlength="100">{{newReview.reviewText}}</textarea>
+          <textarea class="form-control" id="reviewText" rows="5" placeholder="Write your review here..." name="reviewText" required minlength="2" maxlength="100" oninput="checkTextField('reviewText', 'review', errorMessages)">{{newReview.reviewText}}</textarea>
         </div>
 
         <div class="form-group mb-3">
