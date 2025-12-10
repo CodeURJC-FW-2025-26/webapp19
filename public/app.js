@@ -142,3 +142,19 @@
             return true;
         }
     }
+
+    function checkPrice() {
+        const price = document.getElementById("price");
+        const priceValue = parseFloat(price.value); 
+
+        console.log(priceValue);
+
+        if (priceValue <= 0) {
+            showError(price, "El precio no puede ser negativo o cero.");
+            return false; 
+        } else {
+            showSucces(price, "");
+            return true; 
+        }
+
+    }
