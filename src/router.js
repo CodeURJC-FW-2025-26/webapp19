@@ -333,9 +333,20 @@ router.get('/garment/:id/delete', async (req, res) => {
 });
 
 router.get('/garment/:id/image', async (req, res) => {
-    const garment = await clothing_shop.getGarment(req.params.id);
-    res.download(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
+    try {
+        const garment = await clothing_shop.getGarment(req.params.id);
+        res.download(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
+    }
+    catch {
+        res.sendStatus(404);
+    }
 });
+
+router.get('/drop_image/:id', async (req,res) => {
+    const id = req.params.id
+    const result = clothing_shop.dropImage(id);
+    res.json({valid: true, result})
+})
 
 router.get('/image', async (req,res) => {
     const filename = req.query.filename;

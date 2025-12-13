@@ -89,3 +89,11 @@ export async function updateReview(id, reviewId, newReview) {
     );
     return result;
 }
+
+export async function dropImage(id) {
+    const result = await garments.updateOne(
+        { _id: new ObjectId(id) },
+        { $unset: { imageFilename: "" } } 
+    );
+    return result
+}

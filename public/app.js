@@ -226,9 +226,7 @@
     });
 
     async function uploadImage(event) {
-        console.log("upload image front")
 
-        console.log(event)
         const formData = new FormData();
         formData.append("image", event.target.files?.[0], event.target.files?.[0].filename);
         const response = await fetch(`/upload_image`, {
@@ -237,7 +235,6 @@
         });
 
         const result = await response.json();
-        console.log(result);
 
         if (result.valid) {
             alert(result.message);
@@ -252,14 +249,17 @@
     }
 
     async function removeImage(event) {
-        console.log("remove")
         document.getElementById("imageFilename").value="";
         const previewImage = document.getElementById("previewImage")
         previewImage.style.display = "none";
         previewImage.src = "";
     }
     async function removeImageEdit(event) {
-        document.getElementById("imageFilename").value="";
+        const id = window.location.pathname.split('/').pop();
         const previewImage = document.getElementById("previewImage")
-        previewImage.src = defaulImgSrc;
+        if (previewImage.src === "http://localhost:3000/garment/"+id+"/image") {
+            await fetch('/drop_image/' + id);
+        }
+        document.getElementById("imageFilename").value="";
+        previewImage.src = "" ;
     }
