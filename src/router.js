@@ -269,7 +269,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             const result = await clothing_shop.addGarment(garment); // wait for DB
             const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
             if (isAjax) {
-                return res.json({ valid: true, location: buildMessageUrl('Element created', `Element: "${garment.title}" has been succesfully created.`, '/detail/' + newId) });
+                return res.json({ valid: true, location: '/detail/' + newId });
             }
             return res.render('message', {
                 header: 'Element created',
@@ -313,12 +313,12 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         try {
             await clothing_shop.updateGarment(id, updatedData);
             if (isAjax) {
-                return res.json({ valid: true, location: buildMessageUrl('Element updated', `Element: "${updatedData.title}" has been successfully edited.`, '/detail/' + id) });
+                return res.json({ valid: true, location: '/detail/' + id });
             }
             return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully edited.`, redirect: '/detail/' + id });
         } catch {
             if (isAjax) {
-                return res.json({ valid: true, location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
+                return res.json({ valid: false, location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
             }
             return res.render('message', { header: 'Error', message: `Error: problem updating the element in database`, redirect });
         }
