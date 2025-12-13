@@ -129,6 +129,21 @@
 
     </form>
 
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body" id="errorModalBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
     
 <script>
@@ -150,18 +165,28 @@
         body: formData,
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       });
-
       const data = await response.json();
 
       if (data && data.location) {
-        window.location.href = data.location;
-        return;
+        if (data.valid) {
+          window.location.href = data.location;
+          return;
+        }
+        else {
+          document.getElementById("errorModalBody").textContent = "Error processing element: " + data.message;
+          const modal = new bootstrap.Modal(document.getElementById("errorModal"));
+          modal.show();
+        }
       }
 
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
     } catch (error) {
-      console.error('Error sending form:', error);
+      document.getElementById("errorModalBody").textContent = "Error sending request";
+      const modal = new bootstrap.Modal(document.getElementById("errorModal"));
+      modal.show();
+
+
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
     }

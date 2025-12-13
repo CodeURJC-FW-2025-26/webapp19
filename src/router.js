@@ -49,7 +49,6 @@ router.get('/', async (req, res) => {
     
     const { text, category } = req.query;
 
-    console.log(text);
 
     let garments;
 
@@ -154,7 +153,6 @@ router.get(['/detail.html/:id', '/detail/:id'], async (req, res) => {
     renderInfo.newReview = { username: "", reviewDate: "", reviewText: "", rating: 0 };
     addSelectedRating(renderInfo.newReview, renderInfo.newReview.rating);
     addGarmentTypesInfo(renderInfo, garment);
-    console.log(renderInfo);
     res.render('detail', renderInfo);
 });
 
@@ -200,7 +198,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (!title || !price || !description || !size || !color || !fabric || !type) {
         const errorMsg = 'Error: Empty fields';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -208,7 +206,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (!("A" <= title[0] && title[0] <= "Z")) {
         const errorMsg = 'Error: Title must start with a capital letter';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -216,7 +214,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (isNaN(price) || Number(price) <= 0) {
         const errorMsg = 'Error: Invalid price';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -224,19 +222,18 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
         const errorMsg = 'Error: Description length invalid';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
 
     if (!id) {
         const exists = await clothing_shop.getGarmentByTitle(title);
-        console.log(exists);
 
         if (exists) {
             const errorMsg = 'Error: Title already exists';
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+                return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, '/form') });
             }
             return res.render('message', {
                 header: 'Error',
@@ -247,7 +244,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         if (!req.file) {
             const errorMsg = 'Error: You must upload an image';
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+                return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, '/form') });
             }
             return res.render('message', {
                 header: 'Error',
@@ -272,7 +269,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             const result = await clothing_shop.addGarment(garment); // wait for DB
             const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Element created', `Element: "${garment.title}" has been succesfully created.`, '/detail/' + newId) });
+                return res.json({ valid: true, location: buildMessageUrl('Element created', `Element: "${garment.title}" has been succesfully created.`, '/detail/' + newId) });
             }
             return res.render('message', {
                 header: 'Element created',
@@ -283,7 +280,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         catch {
             const errorMsg = 'Error: problem uploading the element to database';
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Error', errorMsg, '/form') });
+                return res.json({ valid: false, location: buildMessageUrl('Error', errorMsg, '/form'), message: errorMsg });
             }
             return res.render('message', {
                 header: 'Error',
@@ -426,10 +423,7 @@ router.get("/checkTitle", async (req,res) => {
 router.post("/upload_image", upload.single("image"), (req, res) => {
   let response = { valid: false, message: "" };
 
-  console.log("back");
   if (req.file) {
-    console.log("exists");
-    console.log(req.file);
     response.filename = req.file.filename;
 
     response.valid = true;
