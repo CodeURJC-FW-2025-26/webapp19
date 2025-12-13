@@ -12,6 +12,8 @@
         'review' : 'Invalid review length'
     };
 
+    const defaultImageSrc = "";
+
     function buildQueryString() {
         let query = '';
         if (queryText) {
@@ -210,12 +212,18 @@
         const reviewDateInput = document.getElementById('reviewDate');
         const reviewForm = document.querySelector('form[action*="/customerReviews/new"]');
 
+        const editImage = document.getElementById("previewImage");
+
         if (reviewDateInput) {
             reviewDateInput.addEventListener('change', () => checkDate('reviewDate'));
         }
 
         if (reviewForm) {
             reviewForm.addEventListener('submit', validateReviewForm);
+        }
+
+        if (editImage) {
+            defaulImgSrc=editImage.src;
         }
     });
 
@@ -243,4 +251,17 @@
         } else {
             alert(`Error: ${result.message}`);
         }
+    }
+
+    async function removeImage(event) {
+        console.log("remove")
+        document.getElementById("imageFilename").value="";
+        const previewImage = document.getElementById("previewImage")
+        previewImage.style.display = "none";
+        previewImage.src = "";
+    }
+    async function removeImageEdit(event) {
+        document.getElementById("imageFilename").value="";
+        const previewImage = document.getElementById("previewImage")
+        previewImage.src = defaulImgSrc;
     }

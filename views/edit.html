@@ -28,6 +28,13 @@
               <img {{#edit}} src="/garment/{{garment._id}}/image" {{/edit}} {{^edit}} src="" style="display:none" {{/edit}} class="img-fluid rounded shadow-sm" style="max-height: 250px;" id="previewImage">
             </div>
           </div>
+        {{^edit}}
+          <a class="btn btn-primary" onclick="removeImage(event)">X</a>
+        {{/edit}}
+        {{#edit}}
+          <a class="btn btn-primary" onclick="removeImageEdit(event)">X</a>
+        {{/edit}}
+
 
       </div>
 
