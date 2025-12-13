@@ -165,3 +165,56 @@
         }
 
     }
+
+    function checkDate(inputId) {
+        const input = document.getElementById(inputId);
+        const value = input.value.trim(); 
+
+        if (!value) {
+            showError(input, "The date cannot be empty.");
+            return false;
+        }
+
+        const selectedDate = new Date(value);
+        const today = new Date();
+        selectedDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0); 
+        
+        if (selectedDate > today) {
+            showError(input, "The date cannot be in the future.");
+            return false;
+        }
+
+        if (selectedDate.getFullYear() < 2000) {
+            showError(input, "The year must be 2000 or later.");
+            return false;
+        }
+
+        showSucces(input, "");
+        return true;
+    }
+
+    function validateReviewForm(event) {
+        const isReviewTextValid = checkTextField('reviewText', 'review', errorMessages);
+        const isDateValid = checkDate('reviewDate'); 
+        
+        if (!isReviewTextValid || !isDateValid) {
+            event.preventDefault(); 
+            return false;
+        }
+
+        return true;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const reviewDateInput = document.getElementById('reviewDate');
+        const reviewForm = document.querySelector('form[action*="/customerReviews/new"]');
+
+        if (reviewDateInput) {
+            reviewDateInput.addEventListener('change', () => checkDate('reviewDate'));
+        }
+
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', validateReviewForm);
+        }
+    });

@@ -66,7 +66,8 @@
 
         <div class="form-group mb-3">
           <label for="reviewDate" class="form-label"><strong>Date: </strong></label>
-          <input type="date" class="form-control" id="reviewDate" rows="1" placeholder="Introduce your date" name="reviewDate" required value="{{newReview.reviewDate}}">
+          <input type="date" class="form-control" id="reviewDate" rows="1" placeholder="Introduce your date" name="reviewDate" required value="{{newReview.reviewDate}}"onchange="checkDate('reviewDate')">
+          <div class="invalid-feedback" id="reviewDate-error">The date cannot be empty.</div>
         </div>
 
         <div class="form-group mb-3">
