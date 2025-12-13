@@ -199,3 +199,11 @@ html {
 .pagination .page-link {
     transition: all 0.2s ease;
 }
+
+.d-inline {
+    display: inline
+}
+
+.d-none {
+    display: none
+}

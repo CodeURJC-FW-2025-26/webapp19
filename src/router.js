@@ -340,6 +340,11 @@ router.get('/garment/:id/image', async (req, res) => {
     res.download(clothing_shop.UPLOADS_FOLDER + '/' + garment.imageFilename);
 });
 
+router.get('/image', async (req,res) => {
+    const filename = req.query.filename;
+    res.download(clothing_shop.UPLOADS_FOLDER + '/' + filename);
+})
+
 router.get('/search', async (req, res) => {
     const query = req.query['product-search'];
     if (!query) return res.redirect('/');
@@ -417,3 +422,22 @@ router.get("/checkTitle", async (req,res) => {
         })
     }
 })
+
+router.post("/upload_image", upload.single("image"), (req, res) => {
+  let response = { valid: false, message: "" };
+
+  console.log("back");
+  if (req.file) {
+    console.log("exists");
+    console.log(req.file);
+    response.filename = req.file.filename;
+
+    response.valid = true;
+    response.message = `The image has been uploaded`;
+  } else {
+    response.message = "File not found!";
+    response.valid = false;
+  }
+
+  res.json(response);
+});

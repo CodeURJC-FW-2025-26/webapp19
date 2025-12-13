@@ -218,3 +218,29 @@
             reviewForm.addEventListener('submit', validateReviewForm);
         }
     });
+
+    async function uploadImage(event) {
+        console.log("upload image front")
+
+        console.log(event)
+        const formData = new FormData();
+        formData.append("image", event.target.files?.[0], event.target.files?.[0].filename);
+        const response = await fetch(`/upload_image`, {
+            method: "POST",
+            body: formData,
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        if (result.valid) {
+            alert(result.message);
+            const previewImage = document.getElementById("previewImage");
+            if (previewImage.style.display === 'none') {
+                previewImage.style.display = 'block';
+            }
+            previewImage.src = "/image?filename=" + result.filename;
+        } else {
+            alert(`Error: ${result.message}`);
+        }
+    }
