@@ -237,7 +237,6 @@
         const result = await response.json();
 
         if (result.valid) {
-            alert(result.message);
             const previewImage = document.getElementById("previewImage");
             if (previewImage.style.display === 'none') {
                 previewImage.style.display = 'block';
