@@ -198,7 +198,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (!title || !price || !description || !size || !color || !fabric || !type) {
         const errorMsg = 'Error: Empty fields';
         if (isAjax) {
-            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -206,7 +206,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (!("A" <= title[0] && title[0] <= "Z")) {
         const errorMsg = 'Error: Title must start with a capital letter';
         if (isAjax) {
-            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -214,7 +214,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (isNaN(price) || Number(price) <= 0) {
         const errorMsg = 'Error: Invalid price';
         if (isAjax) {
-            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -222,7 +222,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
     if (description.length < DESCRIPTION_MIN_LENGTH || description.length > DESCRIPTION_MAX_LENGTH) {
         const errorMsg = 'Error: Description length invalid';
         if (isAjax) {
-            return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, redirect) });
+            return res.json({ valid: false, message: errorMsg });
         }
         return res.render('message', { header: 'Error', message: errorMsg, redirect });
     }
@@ -233,7 +233,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         if (exists) {
             const errorMsg = 'Error: Title already exists';
             if (isAjax) {
-                return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, '/form') });
+                return res.json({ valid: false, message: errorMsg });
             }
             return res.render('message', {
                 header: 'Error',
@@ -244,7 +244,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         if (!req.file) {
             const errorMsg = 'Error: You must upload an image';
             if (isAjax) {
-                return res.json({ valid: false, message: errorMsg, location: buildMessageUrl('Error', errorMsg, '/form') });
+                return res.json({ valid: false, message: errorMsg });
             }
             return res.render('message', {
                 header: 'Error',
@@ -280,7 +280,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         catch {
             const errorMsg = 'Error: problem uploading the element to database';
             if (isAjax) {
-                return res.json({ valid: false, location: buildMessageUrl('Error', errorMsg, '/form'), message: errorMsg });
+                return res.json({ valid: false, message: errorMsg });
             }
             return res.render('message', {
                 header: 'Error',
@@ -318,7 +318,7 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
             return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully edited.`, redirect: '/detail/' + id });
         } catch {
             if (isAjax) {
-                return res.json({ valid: false, location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
+                return res.json({ valid: false, message: "Error: proble updating the element in database" });
             }
             return res.render('message', { header: 'Error', message: `Error: problem updating the element in database`, redirect });
         }
