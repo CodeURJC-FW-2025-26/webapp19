@@ -313,12 +313,12 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         try {
             await clothing_shop.updateGarment(id, updatedData);
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Element updated', `Element: "${updatedData.title}" has been successfully edited.`, '/detail/' + id) });
+                return res.json({ valid: true, location: buildMessageUrl('Element updated', `Element: "${updatedData.title}" has been successfully edited.`, '/detail/' + id) });
             }
             return res.render('message', { header: 'Element updated', message: `Element: "${updatedData.title}" has been successfully edited.`, redirect: '/detail/' + id });
         } catch {
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
+                return res.json({ valid: true, location: buildMessageUrl('Error', `Error: problem updating the element in database`, redirect) });
             }
             return res.render('message', { header: 'Error', message: `Error: problem updating the element in database`, redirect });
         }
