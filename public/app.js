@@ -14,6 +14,10 @@
 
     const defaultImageSrc = "";
 
+    function ratingToArray(rating) {
+        return Array.from({ length: 5 }, (_, i) => i < rating);
+    }
+
     function buildQueryString() {
         let query = '';
         if (queryText) {
@@ -239,6 +243,31 @@
         return true;
     }
 
+    async function addReview(reviewsList, review, garmentId) {
+        const arrayRating = ratingToArray(review.rating);
+        let htmlRating = ""
+        for (let i = 0; i<arrayRating.length; i++) {
+            if (arrayRating[i])  {
+                htmlRating+= `<i class="bi bi-star-fill text-warning"></i>`
+            }
+            else {
+                htmlRating+= `<i class="bi bi-star text-warning"></i>`
+            }
+        }
+        reviewsList.innerHTML+= `
+        <div class='col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4' data-review-id="${review._id.toString()}">
+            <h4>${review.username}</h4>
+            <div class="rating">
+            ${htmlRating}
+            </div>
+            <p>${review.review}</p>
+            <p>Date: ${review.date}</p>
+            <a class="btn btn-standard delete-review" href="/garment/${garmentId}/customerReviews/${review._id.toString()}/delete" data-review-id="${review._id.toString()}">Delete</a>    
+            <a class="btn btn-standard" id="editReviewButton" href="/detail/${garmentId}/${review._id.toString()}">Edit</a>  
+      </div>
+      `
+    }
+
     async function validateReviewForm(event) {
         event.preventDefault();
 
@@ -276,12 +305,18 @@
                 }
             });
 
-            const contentType = response.headers.get('content-type') || '';
+            const garmentId = reviewForm.action.split("/")[2];
 
-            if (contentType.includes('application/json')) {
-                const data = await response.json();
+            const data = await response.json();
+            if (data.valid) {
                 if (data && data.location) {
-                    window.location.href = data.location;
+                    const reviewsList = document.getElementById("reviewsList")
+                    if (data.edit) {
+                        const wrapper = reviewsList.querySelector(`[data-review-id="${data.review._id.toString()}"]`);
+                        if (wrapper) wrapper.remove();
+                    }
+                    addReview(reviewsList, data.review, garmentId);
+                    reviewForm.reset()
                     return;
                 }
             } else {

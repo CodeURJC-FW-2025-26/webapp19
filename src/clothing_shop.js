@@ -70,7 +70,7 @@ export async function pushReview(id, review) {
         { _id : new ObjectId(id) },
         { $push : {customerReviews: review }}
     );
-    return result;
+    return review;
 }
 
 export async function deleteReview(id, reviewId) {
@@ -87,7 +87,7 @@ export async function updateReview(id, reviewId, newReview) {
         { _id: new ObjectId(id), "customerReviews._id": new ObjectId(reviewId) },
         { $set: { "customerReviews.$": newReview }}
     );
-    return result;
+    return newReview;
 }
 
 export async function dropImage(id) {

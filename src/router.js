@@ -409,7 +409,7 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
         if (exists) {
             const errorMsg = 'Error: Username already exists for this product';
             if (isAjax) {
-                return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+                return res.json({ valid: false, location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
             }
             return res.render('message', {
                 header: 'Error',
@@ -420,14 +420,14 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
         await clothing_shop.pushReview(id, newReview);
         const successMsg = 'Review was added to the element';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Review added', successMsg, '/detail/' + id) });
+            return res.json({ valid: true, location: buildMessageUrl('Review added', successMsg, '/detail/' + id), review: newReview });
         }
         return res.render('message', { header: 'Review added', message: successMsg, redirect: '/detail/' + id });
     } else {
         await clothing_shop.updateReview(id, reviewId, newReview);
         const successMsg = 'Review was updated';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Review updated', successMsg, '/detail/' + id) });
+            return res.json({ valid: true, location: buildMessageUrl('Review updated', successMsg, '/detail/' + id), review: newReview, edit: true});
         }
         return res.render('message', { header: 'Review updated', message: successMsg, redirect: '/detail/' + id });
     }
