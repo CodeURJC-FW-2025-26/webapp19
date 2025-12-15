@@ -30,7 +30,7 @@
     <div class="row mt-4" id="reviewsList">
       <h1>Customer reviews</h1>
       {{#customerReviews}}
-      <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4">
+      <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4" data-review-id="{{reviewId}}">
         <h4>{{username}}</h4>
         <div class="rating">
           {{#arrayRating}}
@@ -44,7 +44,7 @@
         </div>
         <p>{{review}}</p>
         <p>Date: {{date}}</p>
-        <a class="btn btn-standard" id="deleteReviewButton" href="/garment/{{garmentId}}/customerReviews/{{reviewId}}/delete">Delete</a>    
+        <a class="btn btn-standard delete-review" href="/garment/{{garmentId}}/customerReviews/{{reviewId}}/delete" data-review-id="{{reviewId}}">Delete</a>    
         <a class="btn btn-standard" id="editReviewButton" href="/detail/{{garmentId}}/{{reviewId}}">Edit</a>  
       </div>
       {{/customerReviews}}

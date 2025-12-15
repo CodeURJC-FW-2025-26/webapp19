@@ -435,8 +435,15 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
 
 router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => {
     const { id, reviewId } = req.params;
-    await clothing_shop.deleteReview(id, reviewId);
-    return res.render('message', { header: 'Review deleted', message: 'Review was successfully deleted', redirect: '/detail/' + id });
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
+    try {
+        await clothing_shop.deleteReview(id, reviewId);
+        if (isAjax) return res.json({ ok: true, reviewId });
+        return res.render('message', { header: 'Review deleted', message: 'Review was successfully deleted', redirect: '/detail/' + id });
+    } catch (e) {
+        if (isAjax) return res.status(500).json({ ok: false, errors: ['Error deleting review'] });
+        return res.render('message', { header: 'Error', message: 'Error deleting review', redirect: '/detail/' + id });
+    }
 });
 
 router.get("/checkTitle", async (req,res) => {

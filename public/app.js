@@ -261,6 +261,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         const reviewDateInput = document.getElementById('reviewDate');
         const reviewForm = document.querySelector('form[action*="/customerReviews/new"]');
+        const reviewsList = document.getElementById('reviewsList');
 
         const editImage = document.getElementById("previewImage");
 
@@ -270,6 +271,45 @@
 
         if (reviewForm) {
             reviewForm.addEventListener('submit', validateReviewForm);
+        }
+
+        // Delegate delete clicks for reviews to avoid re-binding
+        if (reviewsList) {
+            reviewsList.addEventListener('click', async (ev) => {
+                const btn = ev.target.closest && ev.target.closest('.delete-review');
+                if (!btn) return;
+                ev.preventDefault();
+                const reviewId = btn.dataset.reviewId;
+                const href = btn.getAttribute('href');
+                if (!confirm('Are you sure you want to delete this review?')) return;
+                try {
+                    const resp = await fetch(href, { method: 'GET', headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    const contentType = resp.headers.get('content-type') || '';
+                    if (contentType.includes('application/json')) {
+                        const data = await resp.json();
+                        if (data && data.ok) {
+                            // remove from DOM
+                            const wrapper = reviewsList.querySelector(`[data-review-id="${reviewId}"]`);
+                            if (wrapper) wrapper.remove();
+                        } else {
+                            const list = document.getElementById('review-error-list');
+                            if (list) {
+                                list.innerHTML = (data.errors || ['Error deleting review']).map(e => `<li>${e}</li>`).join('');
+                                const modalEl = document.getElementById('reviewErrorModal');
+                                if (modalEl && typeof bootstrap !== 'undefined') new bootstrap.Modal(modalEl).show();
+                                else alert((data.errors || ['Error deleting review']).join('\n'));
+                            }
+                        }
+                    } else {
+                        // fallback: reload page if server sent HTML
+                        const text = await resp.text();
+                        document.open(); document.write(text); document.close();
+                    }
+                } catch (err) {
+                    console.error('Error deleting review', err);
+                    alert('Error deleting review');
+                }
+            });
         }
 
         if (editImage) {
