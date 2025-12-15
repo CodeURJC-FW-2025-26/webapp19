@@ -166,13 +166,15 @@
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       });
       const data = await response.json();
+      console.log(data)
 
-      if (data && data.location) {
+      if (data) {
         if (data.valid) {
           window.location.href = data.location;
           return;
         }
         else {
+          console.log(data);
           document.getElementById("errorModalBody").textContent = "Error processing element: " + data.message;
           const modal = new bootstrap.Modal(document.getElementById("errorModal"));
           modal.show();
