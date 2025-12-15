@@ -113,8 +113,8 @@
         const titleValue = title.value;
 
         if (!titleValue){
-            title.classList.remove("is-invalid", "is-valid");
-            return;
+            showError(title, "Title value is required");
+            return false;
         }
 
         if (titleValue[0] !== titleValue[0].toUpperCase()) {
@@ -156,6 +156,11 @@
         const price = document.getElementById("price");
         const priceValue = parseFloat(price.value); 
 
+        if(isNaN(priceValue)) {
+            showError(price, "Price is required");
+            return false;
+        }
+
         if (priceValue <= 0) {
             showError(price, "The price cannot be negative or zero.");
             return false; 
@@ -165,6 +170,36 @@
         }
 
     }
+
+    function checkSingleSelect(input){
+        if (input.value === ""){
+                showError(input, "Please select an option");
+                return false;  
+            } else {
+                showSucces(input, "");
+                return true; 
+            }
+    }
+
+    function checkSelects(){
+        let fields = ['type', 'size', 'color', 'fabric'];
+        let isAllValid = true; 
+
+        for (let field of fields){
+            let input = document.getElementById(field);
+            if(checkSingleSelect(input) === false){
+                isAllValid = false; 
+            }
+        }
+
+        return isAllValid; 
+    }
+
+    function checkImage(){
+        const imageInput = document.getElementById("imageFilename");
+        const previewImage = document.getElementById("previewImage");
+    }
+
 
     function checkDate(inputId) {
         const input = document.getElementById(inputId);

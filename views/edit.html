@@ -54,7 +54,7 @@
 
           <div class="mb-3"><!--Type-->
             <label for="type">Select type / Category</label>
-            <select class="form-select" id="type" name="type" required>
+            <select class="form-select" id="type" name="type" onchange="checkSingleSelect(this)" required>
               <option value="" disabled selected>Select type</option>
               <option value="T-Shirt" {{#garment.isT-Shirt}}selected{{/garment.isT-Shirt}}>T-Shirt</option>
               <option value="Jeans" {{#garment.isJeans}}selected{{/garment.isJeans}}>Jeans</option>
@@ -68,7 +68,7 @@
 
           <div class="mb-3"><!--Size-->
             <label for="size">Select size</label>
-            <select class="form-select" id="size" name="size" aria-label="Select size" required>
+            <select class="form-select" id="size" name="size" aria-label="Select size" onchange="checkSingleSelect(this)" required>
               <option value="" disabled selected>Select size</option>
               <option value="XS" {{#garment.isXS}}selected{{/garment.isXS}}>XS</option>
               <option value="S" {{#garment.isS}}selected{{/garment.isS}}>S</option>
@@ -80,7 +80,7 @@
 
           <div class="mb-3"><!--Color-->
             <label for="color">Select color of item</label>
-            <select class="form-select" id="color" name="color" required>
+            <select class="form-select" id="color" name="color" onchange="checkSingleSelect(this)" required>
               <option value="" disabled selected>Select color</option>
               <option value="White" {{#garment.isWhite}}selected{{/garment.isWhite}}>White</option>
               <option value="Blue" {{#garment.isBlue}}selected{{/garment.isBlue}}>Blue</option>
@@ -94,7 +94,7 @@
 
           <div class="mb-3"><!--Fabric-->
             <label for="fabric">Select fabric of item</label>
-            <select class="form-select" id="fabric" name="fabric" required>
+            <select class="form-select" id="fabric" name="fabric" onchange="checkSingleSelect(this)" required>
               <option value="" disabled selected>Select fabric</option>
               <option value="Cotton" {{#garment.isCotton}}selected{{/garment.isCotton}}>Cotton</option>
               <option value="Wool" {{#garment.isWool}}selected{{/garment.isWool}}>Wool</option>
