@@ -198,6 +198,16 @@
     function checkImage(){
         const imageInput = document.getElementById("imageFilename");
         const previewImage = document.getElementById("previewImage");
+    
+        const isVisible = previewImage && previewImage.style.display !== 'none' && previewImage.src !== "" && !previewImage.src.endsWith(window.location.host + "/");
+    
+        if(imageInput.files.length === 0 && !isVisible) {
+            showError(imageInput, "Image is required");
+            return false; 
+        } else {
+            showSucces(imageInput, "");
+            return true; 
+        }
     }
 
 
@@ -369,6 +379,7 @@
                 previewImage.style.display = 'block';
             }
             previewImage.src = "/image?filename=" + result.filename;
+            checkImage();
         } else {
             alert(`Error: ${result.message}`);
         }
@@ -379,6 +390,8 @@
         const previewImage = document.getElementById("previewImage")
         previewImage.style.display = "none";
         previewImage.src = "";
+
+        checkImage();
     }
     async function removeImageEdit(event) {
         const id = window.location.pathname.split('/').pop();
@@ -388,4 +401,6 @@
         }
         document.getElementById("imageFilename").value="";
         previewImage.src = "" ;
+
+        checkImage();
     }
