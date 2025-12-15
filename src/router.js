@@ -381,9 +381,22 @@ router.get('/search-category', async (req, res) => {
 router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/new/:reviewId'], async (req, res) => {
     const { id, reviewId } = req.params;
     const { username, reviewDate, reviewText, rating } = req.body;
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
 
-    if (!username || !reviewDate || !reviewText || !rating) return res.render('message', { header: 'Error', message: `Error: Empty fields`, redirect: '/detail/' + id });
-    if (reviewText.length < DESCRIPTION_MIN_LENGTH || reviewText.length > DESCRIPTION_MAX_LENGTH) return res.render('message', { header: 'Error', message: `Error: Description length invalid`, redirect: '/detail/' + id });
+    if (!username || !reviewDate || !reviewText || !rating) {
+        const errorMsg = 'Error: Empty fields';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect: '/detail/' + id });
+    }
+    if (reviewText.length < DESCRIPTION_MIN_LENGTH || reviewText.length > DESCRIPTION_MAX_LENGTH) {
+        const errorMsg = 'Error: Description length invalid';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+        }
+        return res.render('message', { header: 'Error', message: errorMsg, redirect: '/detail/' + id });
+    }
 
     const [year, month, day] = reviewDate.split("-");
     const formattedDate = `${day}-${month}-${year}`;
@@ -394,17 +407,29 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
         const exists = garment.customerReviews.some(review => review.username === username);
 
         if (exists) {
+            const errorMsg = 'Error: Username already exists for this product';
+            if (isAjax) {
+                return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+            }
             return res.render('message', {
                 header: 'Error',
-                message: `Error: Title already exists`,
-                redirect: '/form'
+                message: errorMsg,
+                redirect: '/detail/' + id
                 });
         }
         await clothing_shop.pushReview(id, newReview);
-        return res.render('message', { header: 'Review added', message: 'Review was added to the element', redirect: '/detail/' + id });
+        const successMsg = 'Review was added to the element';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Review added', successMsg, '/detail/' + id) });
+        }
+        return res.render('message', { header: 'Review added', message: successMsg, redirect: '/detail/' + id });
     } else {
         await clothing_shop.updateReview(id, reviewId, newReview);
-        return res.render('message', { header: 'Review updated', message: 'Review was updated', redirect: '/detail/' + id });
+        const successMsg = 'Review was updated';
+        if (isAjax) {
+            return res.json({ location: buildMessageUrl('Review updated', successMsg, '/detail/' + id) });
+        }
+        return res.render('message', { header: 'Review updated', message: successMsg, redirect: '/detail/' + id });
     }
 });
 

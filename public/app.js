@@ -9,7 +9,7 @@
 
     const errorMessages = {
         'description': 'Invalid description length (must be 2-100 characters)',
-        'review' : 'Invalid review length'
+        'review' : 'Invalid review length (minimum 2 characters)'
     };
 
     const defaultImageSrc = "";
@@ -194,16 +194,68 @@
         return true;
     }
 
-    function validateReviewForm(event) {
+    async function validateReviewForm(event) {
+        event.preventDefault();
+
+        console.log('Submitting review form (AJAX)');
+
         const isReviewTextValid = checkTextField('reviewText', 'review', errorMessages);
         const isDateValid = checkDate('reviewDate'); 
-        
+
         if (!isReviewTextValid || !isDateValid) {
-            event.preventDefault(); 
+            console.log('Review validation failed');
             return false;
         }
 
-        return true;
+        const reviewForm = event.target;
+        const submitBtn = reviewForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.textContent : '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+        }
+
+        const formData = new FormData(reviewForm);
+        const urlEncoded = new URLSearchParams();
+        for (const [key, value] of formData.entries()) {
+            urlEncoded.append(key, value);
+        }
+
+        try {
+            const response = await fetch(reviewForm.action, {
+                method: 'POST',
+                body: urlEncoded.toString(),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            const contentType = response.headers.get('content-type') || '';
+
+            if (contentType.includes('application/json')) {
+                const data = await response.json();
+                if (data && data.location) {
+                    window.location.href = data.location;
+                    return;
+                }
+            } else {
+                // server returned HTML (fallback) - replace document
+                const text = await response.text();
+                document.open();
+                document.write(text);
+                document.close();
+                return;
+            }
+        } catch (error) {
+            console.error('Error sending review:', error);
+            alert('Error sending review. Check console for details.');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
