@@ -386,16 +386,16 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
     if (!username || !reviewDate || !reviewText || !rating) {
         const errorMsg = 'Error: Empty fields';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+            return res.json({ valid: false, errors: [errorMsg] });
         }
-        return res.render('message', { header: 'Error', message: errorMsg, redirect: '/detail/' + id });
+        return res.render('message', { header: 'Error', message: `Error: ${errorMsg}`, redirect: '/detail/' + id });
     }
     if (reviewText.length < DESCRIPTION_MIN_LENGTH || reviewText.length > DESCRIPTION_MAX_LENGTH) {
         const errorMsg = 'Error: Description length invalid';
         if (isAjax) {
-            return res.json({ location: buildMessageUrl('Error', errorMsg, '/detail/' + id) });
+            return res.json({ valid: false, errors: [errorMsg] });
         }
-        return res.render('message', { header: 'Error', message: errorMsg, redirect: '/detail/' + id });
+        return res.render('message', { header: 'Error', message: `Error: ${errorMsg}`, redirect: '/detail/' + id });
     }
 
     const [year, month, day] = reviewDate.split("-");

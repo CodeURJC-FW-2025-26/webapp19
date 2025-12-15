@@ -27,7 +27,7 @@
            </div>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4" id="reviewsList">
       <h1>Customer reviews</h1>
       {{#customerReviews}}
       <div class="col-12 p-3 border rounded shadow-sm bg-light mb-4 mt-4">
@@ -61,7 +61,8 @@
 
         <div class="form-group mb-3">
           <label for="username" class="form-label"><strong>Username: </strong></label>
-          <input class="form-control" id="" rows="1" placeholder="Write your username here..." name="username" required value="{{newReview.username}}">
+          <input class="form-control" id="username" rows="1" placeholder="Write your username here..." name="username" required value="{{newReview.username}}">
+          <div class="invalid-feedback" id="username-error"></div>
         </div>
 
         <div class="form-group mb-3">
@@ -99,6 +100,24 @@
         <button type="submit" class="btn btn-standard">Send</button>
       </form>
 
+    </div>
+    <!-- Review error modal -->
+    <div class="modal fade" id="reviewErrorModal" tabindex="-1" aria-labelledby="reviewErrorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="reviewErrorModalLabel">Form errors</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>The following errors occurred:</p>
+            <ul id="review-error-list" class="mb-0"></ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
     
 </main>
