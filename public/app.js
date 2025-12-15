@@ -398,7 +398,12 @@
     });
 
     async function uploadImage(event) {
-
+        const input = event.target; 
+        if (input.files && input.files.length > 0) {
+            input.classList.remove("is-invalid"); 
+        } else {
+            return; 
+        }
         const formData = new FormData();
         formData.append("image", event.target.files?.[0], event.target.files?.[0].filename);
         const response = await fetch(`/upload_image`, {
