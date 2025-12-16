@@ -114,7 +114,7 @@
     async function checkTitle(){
 
         const title = document.getElementById("title");
-        const titleValue = title.value;
+        const titleValue = title.value.trim();
 
         if (!titleValue){
             showError(title, "Title value is required");
@@ -125,9 +125,11 @@
             showError(title, "The garment name must start with a capital letter.");
             return false;
         }
+        const form = document.getElementById("productForm");
+        const excludeId = form.dataset.id;
 
         //const response = await fetch(`/checkUserName?username=${title}`);
-        const response = await fetch(`/checkTitle?title=${encodeURIComponent(titleValue)}`);
+        const response = await fetch(`/checkTitle?title=${encodeURIComponent(titleValue)}&id=${excludeId}`);
         const userNameChecked = await response.json();
 
         const errorDiv = document.getElementById("title-error");
@@ -444,3 +446,58 @@
 
         checkImage();
     }
+
+        /*async function submitForm(event) {
+            event.preventDefault();
+
+            //console.log("Hace algo???");
+
+                const isTitleOk = await checkTitle(); 
+                const isDescriptionOk = checkTextField('description', 'description', errorMessages);
+                const isPriceOk = checkPrice();
+                const isSelectsOk = checkSelects();
+                const isImageOk = checkImage();
+
+                console.log("Estado validación:", { isTitleOk, isDescriptionOk, isPriceOk, isSelectsOk, isImageOk });
+
+                if(isTitleOk && isDescriptionOk && isPriceOk && isSelectsOk && isImageOk){
+                    
+                    const submitBtn = document.getElementById('submitBtn');
+                    const originalText = submitBtn.textContent;
+
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Saving...';
+
+                    try{
+                        const formData = new FormData(event.target);
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                        });
+                        const data = await response.json();
+
+                        if(data.valid){
+                            window.location.href = data.location;
+                            return;
+                        } else {
+                            document.getElementById("errorModalBody").textContent = "Error processing element: " + data.message;
+                            const modal = new bootstrap.Modal(document.getElementById("errorModal"));
+                            modal.show();
+                        }
+
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+
+                    } catch(error) {
+                        document.getElementById("errorModalBody").textContent = "Error sending request";
+                        const modal = new bootstrap.Modal(document.getElementById("errorModal"));
+                        modal.show();
+
+                    }
+                
+                }
+        }*/
+        
+    
+

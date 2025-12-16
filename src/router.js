@@ -448,10 +448,11 @@ router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => 
 
 router.get("/checkTitle", async (req,res) => {
     const title = req.query.title; 
+    const excludeId = req.query.id;
 
     const existingGarment = await clothing_shop.getGarmentByTitle(title); 
 
-    if (existingGarment){
+    if (existingGarment && existingGarment._id.toString() !== excludeId){
         res.json({
             valid: false,
             message: "Invalid garment name (already exists)"
