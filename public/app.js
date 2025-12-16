@@ -394,6 +394,23 @@
             });
         }
 
+        // Confirm before deleting main garment
+        const deleteBtn = document.getElementById('deleteButton');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', async (ev) => {
+                ev.preventDefault();
+                const href = deleteBtn.getAttribute('href');
+                if (!confirm('Are you sure you want to delete this item?')) return;
+                try {
+                    await fetch(href, { method: 'GET', headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    window.location.href = '/';
+                } catch (err) {
+                    console.error('Error deleting item', err);
+                    alert('Error deleting item');
+                }
+            });
+        }
+
         if (editImage) {
             defaulImgSrc=editImage.src;
         }
