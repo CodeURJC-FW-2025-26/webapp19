@@ -325,7 +325,7 @@
                 }
             });
 
-            const garmentId = reviewForm.action.split("/")[2];
+            const garmentId = reviewForm.action.split("/")[4];
 
             const data = await response.json();
             if (data.valid) {
