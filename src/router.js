@@ -385,6 +385,7 @@ router.get('/search-category', async (req, res) => {
 router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/new/:reviewId'], async (req, res) => {
     const { id, reviewId } = req.params;
     const { username, reviewDate, reviewText, rating } = req.body;
+    console.log(req.body);
     const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
 
     if (!username || !reviewDate || !reviewText || !rating) {
@@ -431,7 +432,8 @@ router.post(['/garment/:id/customerReviews/new/', '/garment/:id/customerReviews/
         }, 1500);
         
     } else {
-        await clothing_shop.updateReview(id, reviewId, newReview);
+        const result = await clothing_shop.updateReview(id, reviewId, newReview);
+        console.log(result);
         const successMsg = 'Review was updated';
         if (isAjax) {
             return res.json({ valid: true, location: buildMessageUrl('Review updated', successMsg, '/detail/' + id), review: newReview, edit: true});
@@ -486,3 +488,9 @@ router.post("/upload_image", upload.single("image"), (req, res) => {
 
   res.json(response);
 });
+
+router.get("/garment/:id", async (req, res) => {
+    const id = req.params.id;
+    const result = await clothing_shop.getGarment(id);
+    res.json(result);
+})

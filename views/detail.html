@@ -45,19 +45,13 @@
         <p>{{review}}</p>
         <p>Date: {{date}}</p>
         <a class="btn btn-standard delete-review" href="/garment/{{garmentId}}/customerReviews/{{reviewId}}/delete" data-review-id="{{reviewId}}">Delete</a>    
-        <a class="btn btn-standard" id="editReviewButton" href="/detail/{{garmentId}}/{{reviewId}}">Edit</a>  
+        <a class="btn btn-standard" id="editReviewButton" onclick="editReviewHandler(event)">Edit</a>  
       </div>
       {{/customerReviews}}
     </div>
     <div class="row mt-4">
-      {{#edit}}
-      <h1>Edit the review:</h1>
-      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new/{{newReview.id}}" method="POST" novalidate>
-      {{/edit}}
-      {{^edit}}
       <h1>Add a review:</h1>
-      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST" novalidate>
-      {{/edit}}
+      <form id="newReviewForm" role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST" novalidate>
 
         <div class="form-group mb-3">
           <label for="username" class="form-label"><strong>Username: </strong></label>
