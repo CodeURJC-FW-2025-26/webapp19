@@ -245,6 +245,19 @@
         return true;
     }
 
+    function checkUserName() {
+        const userName = document.getElementById("username");
+        const userNameValue = userName.value;
+
+        if(!userNameValue){
+            showError(userName, "User name is required");
+            return false; 
+        } else {
+            showSucces(userName, "");
+            return true; 
+        }
+    }
+
     async function addReview(reviewsList, review, garmentId) {
         const arrayRating = ratingToArray(review.rating);
         let htmlRating = ""
@@ -277,8 +290,9 @@
 
         const isReviewTextValid = checkTextField('reviewText', 'review', errorMessages);
         const isDateValid = checkDate('reviewDate'); 
+        const isUserNameValid = checkUserName();
 
-        if (!isReviewTextValid || !isDateValid) {
+        if (!isReviewTextValid || !isDateValid || !isUserNameValid) {
             console.log('Review validation failed');
             return false;
         }
@@ -290,6 +304,10 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
         }
+
+        const reviewSpinner = document.getElementById('review-spinner');
+        if(reviewSpinner) reviewSpinner.style.display = 'block';
+        submitBtn.disabled = true;
 
         const formData = new FormData(reviewForm);
         const urlEncoded = new URLSearchParams();
@@ -337,6 +355,7 @@
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }
+            if(reviewSpinner) reviewSpinner.style.display = 'none';
         }
     }
 
@@ -485,7 +504,7 @@
 
                 const submitBtn = document.getElementById('submitBtn');
                 const formSpinner = document.getElementById('spinner-form')
-                const originalText = submitBtn.textContent;
+
                 if(formSpinner) formSpinner.style.display = 'block';
                 submitBtn.disabled = true;
 
