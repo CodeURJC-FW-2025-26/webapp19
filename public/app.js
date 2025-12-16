@@ -484,9 +484,10 @@
                 }
 
                 const submitBtn = document.getElementById('submitBtn');
+                const formSpinner = document.getElementById('spinner-form')
                 const originalText = submitBtn.textContent;
+                if(formSpinner) formSpinner.style.display = 'block';
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Saving...'; 
 
                 try {
                     const formData = new FormData(form);
@@ -510,8 +511,9 @@
                     console.error(error);
                     alert("Error de conexión");
                 } finally {
+                    if (formSpinner) formSpinner.style.display = 'none';
                     submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
+                   
                 }
             });
         }
