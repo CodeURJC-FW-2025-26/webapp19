@@ -412,6 +412,11 @@
                     }
                     addReview(reviewsList, data.review, garmentId);
                     reviewForm.reset()
+                    const inputs = reviewForm.querySelectorAll('input, textarea, select');
+                    inputs.forEach(input => {
+                        input.classList.remove('is-valid');
+                        input.classList.remove('is-invalid');
+                    });
                     return;
                 }
             } else {
