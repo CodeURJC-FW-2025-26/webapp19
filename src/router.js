@@ -268,14 +268,18 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
         try { 
             const result = await clothing_shop.addGarment(garment); // wait for DB
             const newId = result.insertedId ? result.insertedId.toString() : (garment._id ? garment._id.toString() : null);
-            if (isAjax) {
+            
+            setTimeout(() => {
+                if (isAjax) {
                 return res.json({ valid: true, location: '/detail/' + newId });
-            }
-            return res.render('message', {
-                header: 'Element created',
-                message: `Element: "${garment.title}" has been succesfully created.`,
-                redirect: '/detail/' + newId,
-                });
+                }
+                return res.render('message', {
+                    header: 'Element created',
+                    message: `Element: "${garment.title}" has been succesfully created.`,
+                    redirect: '/detail/' + newId,
+                    });
+            }, 1500)
+
         }
         catch {
             const errorMsg = 'Error: problem uploading the element to database';
