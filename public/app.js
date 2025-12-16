@@ -496,8 +496,21 @@
                 const href = deleteBtn.getAttribute('href');
                 if (!confirm('Are you sure you want to delete this item?')) return;
                 try {
-                    await fetch(href, { method: 'GET', headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-                    window.location.href = '/';
+                    const resp = await fetch(href, { method: 'GET', headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    const contentType = resp.headers.get('content-type') || '';
+                    if (contentType.includes('application/json')) {
+                        const data = await resp.json();
+                        if (data && (data.ok || data.valid)) {
+                            window.location.href = '/';
+                        } else {
+                            const msg = (data && (data.errors || data.message)) || 'Error deleting item';
+                            if (Array.isArray(msg)) alert(msg.join('\n')); else alert(msg);
+                        }
+                    } else {
+                        // fallback: server returned HTML (page or message)
+                        const text = await resp.text();
+                        document.open(); document.write(text); document.close();
+                    }
                 } catch (err) {
                     console.error('Error deleting item', err);
                     alert('Error deleting item');

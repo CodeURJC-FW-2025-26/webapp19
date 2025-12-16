@@ -330,10 +330,30 @@ router.post(['/garment/new', '/garment/:id/update'], upload.single('image'), asy
 });
 
 router.get('/garment/:id/delete', async (req, res) => {
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
     const result = await clothing_shop.deleteGarment(req.params.id);
     const garment = result?.value || result;
-    if (garment?.imageFilename) await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
-    return res.render('message', { header: 'Element deleted', message: `Element: "${garment.title}" has been successfully deleted.` });
+
+    // If the garment was not found, return a proper error
+    if (!garment) {
+        if (isAjax) {
+            return res.status(404).json({ ok: false, errors: ['Error: Product not found'] });
+        }
+        return res.render('message', { header: 'Error', message: `Error: Product not found`, redirect: '/' });
+    }
+
+    if (garment.imageFilename) {
+        try {
+            await fs.rm(clothing_shop.UPLOADS_FOLDER + garment.imageFilename);
+        } catch (e) {
+            // ignore errors when removing image
+        }
+    }
+
+    if (isAjax) {
+        return res.json({ ok: true, id: garment._id?.toString?.() || null });
+    }
+        return res.render('message', { header: 'Element deleted', message: `Element: "${garment.title}" has been successfully deleted.` });
 });
 
 router.get('/garment/:id/image', async (req, res) => {
@@ -446,7 +466,13 @@ router.get('/garment/:id/customerReviews/:reviewId/delete', async (req, res) => 
     const { id, reviewId } = req.params;
     const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
     try {
-        await clothing_shop.deleteReview(id, reviewId);
+        const result = await clothing_shop.deleteReview(id, reviewId);
+        // result is an UpdateResult; if no document was modified, the review was not found
+        const modified = result?.modifiedCount || 0;
+        if (modified === 0) {
+            if (isAjax) return res.status(404).json({ ok: false, errors: ['Error: Review not found'] });
+            return res.render('message', { header: 'Error', message: 'Error: Review not found', redirect: '/detail/' + id });
+        }
         if (isAjax) return res.json({ ok: true, reviewId });
         return res.render('message', { header: 'Review deleted', message: 'Review was successfully deleted', redirect: '/detail/' + id });
     } catch (e) {
