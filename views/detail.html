@@ -52,11 +52,11 @@
     <div class="row mt-4">
       {{#edit}}
       <h1>Edit the review:</h1>
-      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new/{{newReview.id}}" method="POST">
+      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new/{{newReview.id}}" method="POST" novalidate>
       {{/edit}}
       {{^edit}}
       <h1>Add a review:</h1>
-      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST">
+      <form role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/{{garmentId}}/customerReviews/new" method="POST" novalidate>
       {{/edit}}
 
         <div class="form-group mb-3">
