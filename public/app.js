@@ -279,7 +279,7 @@
         <form id="dinamicEditForm" role="form" class="p-3 border rounded shadow-sm bg-light mb-4" action="/garment/${garmentId}/customerReviews/new/${review._id.toString()}" method="POST">
             <div class="form-group mb-3">
             <label for="username" class="form-label"><strong>Username: </strong></label>
-            <input class="form-control" id="username" rows="1" placeholder="Write your username here..." name="username" required value="${review.username}">
+            <input class="form-control" id="username" rows="1" placeholder="Write your username here..." name="username" required value="${review.username}" oninput="checkUserName()">
             <div class="invalid-feedback" id="username-error"></div>
             </div>
 
