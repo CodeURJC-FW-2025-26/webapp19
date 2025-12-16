@@ -8,12 +8,14 @@
         <h2 class="text-center">Edit Item</h2>
       </div>
       <form id="productForm" action="/garment/{{garment.id}}/update" method="POST" enctype="multipart/form-data" data-id="{{garment.id}}" onsubmit="submitForm(event)">
+      <div class="invalid-feedback" id="image-error"></div>
     {{/edit}}
     {{^edit}}
       <div class="row my-4">
         <h2 class="text-center">Create Item</h2>
       </div>
-      <form id="productForm" action="/garment/new" method="POST" enctype="multipart/form-data" onsubmit="submitForm(event)">
+      <form id="productForm" action="/garment/new" method="POST" enctype="multipart/form-data" novalidate>
+      <div class="invalid-feedback" id="image-error"></div>
     {{/edit}}
 
       <div class="row">
@@ -92,6 +94,7 @@
               <option value="Orange" {{#garment.isOrange}}selected{{/garment.isOrange}}>Orange</option>
               <option value="Yellow" {{#garment.isYellow}}selected{{/garment.isYellow}}>Yellow</option>
             </select>
+            <div class="invalid-feedback" id="color-error"></div>
           </div>
 
           <div class="mb-3"><!--Fabric-->

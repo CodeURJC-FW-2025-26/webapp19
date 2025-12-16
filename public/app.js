@@ -447,10 +447,14 @@
         checkImage();
     }
 
-        /*async function submitForm(event) {
-            event.preventDefault();
+    document.addEventListener('DOMContentLoaded', () => {
 
-            //console.log("Hace algo???");
+        const form = document.getElementById("productForm");
+
+        if (form) {
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault(); 
+                console.log("Submit interceptado por JS");
 
                 const isTitleOk = await checkTitle(); 
                 const isDescriptionOk = checkTextField('description', 'description', errorMessages);
@@ -458,46 +462,41 @@
                 const isSelectsOk = checkSelects();
                 const isImageOk = checkImage();
 
-                console.log("Estado validación:", { isTitleOk, isDescriptionOk, isPriceOk, isSelectsOk, isImageOk });
+                if (!(isTitleOk && isDescriptionOk && isPriceOk && isSelectsOk && isImageOk)) {
+                    return; 
+                }
 
-                if(isTitleOk && isDescriptionOk && isPriceOk && isSelectsOk && isImageOk){
-                    
-                    const submitBtn = document.getElementById('submitBtn');
-                    const originalText = submitBtn.textContent;
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Saving...'; 
 
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Saving...';
+                try {
+                    const formData = new FormData(form);
 
-                    try{
-                        const formData = new FormData(event.target);
-                        const response = await fetch(form.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                        });
-                        const data = await response.json();
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' } 
+                    });
 
-                        if(data.valid){
-                            window.location.href = data.location;
-                            return;
-                        } else {
-                            document.getElementById("errorModalBody").textContent = "Error processing element: " + data.message;
-                            const modal = new bootstrap.Modal(document.getElementById("errorModal"));
-                            modal.show();
-                        }
-
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = originalText;
-
-                    } catch(error) {
-                        document.getElementById("errorModalBody").textContent = "Error sending request";
+                    const data = await response.json(); 
+                    if (data.valid) {
+                        window.location.href = data.location;
+                    } else {
+                        document.getElementById("errorModalBody").textContent = "Error: " + data.message;
                         const modal = new bootstrap.Modal(document.getElementById("errorModal"));
                         modal.show();
-
                     }
-                
+
+                } catch (error) {
+                    console.error(error);
+                    alert("Error de conexión");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
                 }
-        }*/
-        
-    
+            });
+        }
+    });
 
