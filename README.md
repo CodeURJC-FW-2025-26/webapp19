@@ -347,20 +347,20 @@ https://youtu.be/yGXQzQz1W_o
 #### My 5 most significant commits
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             | 
-| #2             | 
-| #3             | 
-| #4             | 
-| #5             | 
+| #1             | [Better generic textareas](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/5a6de61ac891d30eb93ad05f39aee1ab4afd72b0)   |
+| #2             | [Generic textarea checker](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/5a6de61ac891d30eb93ad05f39aee1ab4afd72b0)    |
+| #3             | [Reviews backend dialog frame](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/e412dea41db2bf6857ad9c3ee2361a8d5913ed1b)         |
+| #4             | [Validate dates](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/033212f2414598c7dfe1048a2faf1e04e5837556)            |
+| #5             | [Dynamically delete reviews](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/987612506d75c0672171cada5a5768286f34a5db)           
 
 #### The 5 files I have modified the most
 | File Number | File                                                                                                                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |    |
-| #2             |     |
-| #3             |          |
-| #4             |             |
-| #5             |                                                                                                                                                                  |
+| #1             | [app.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/public/app.js)      |
+| #2             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)   |
+| #3             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/detail.html)           |
+| #4             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html)       |
+| #5             | [clothing_shop.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/clothing_shop.html)                                                                                                                                                         |
 
 #### Adrián Esteban Martín: 
 
