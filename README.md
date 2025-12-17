@@ -368,7 +368,7 @@ https://youtu.be/yGXQzQz1W_o
 
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             | [Replacing pagination with infinite scroll(https://github.com/CodeURJC-FW-2025-26/webapp19/commit/658db186ff473f8c038b38da25f8e9dcc5def763)  |
+| #1             | [Replacing pagination with infinite scroll](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/658db186ff473f8c038b38da25f8e9dcc5def763)  |
 | #2             | [Implementation of AJAX to avoid reloading the page](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/121b99d6f9973ca4e39d0879bce28aa7c7c73ffb)     |
 | #3             |  [Implement AJAX review editing](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/ec786ccf4affc1821c76c9db17cee10cfe6c881b)     |
 | #4             |   [Add confirmation when delete a product](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/20336dc5a9aed6bc31ddbd52e3e1dbb795a27a6e)    |
