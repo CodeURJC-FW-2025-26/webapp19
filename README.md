@@ -363,27 +363,26 @@ https://youtu.be/yGXQzQz1W_o
 | #5             |                                                                                                                                                                  |
 
 #### Adrián Esteban Martín: 
-I have worked on implementing the new requirements for the home page.
 
 #### My 5 most significant commits
 
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |   |
-| #2             |      |
-| #3             |       |
-| #4             |       |
-| #5             |                                                                        |
+| #1             | [Replacing pagination with infinite scroll(https://github.com/CodeURJC-FW-2025-26/webapp19/commit/658db186ff473f8c038b38da25f8e9dcc5def763)  |
+| #2             | [Implementation of AJAX to avoid reloading the page](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/121b99d6f9973ca4e39d0879bce28aa7c7c73ffb)     |
+| #3             |  [Implement AJAX review editing](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/ec786ccf4affc1821c76c9db17cee10cfe6c881b)     |
+| #4             |   [Add confirmation when delete a product](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/20336dc5a9aed6bc31ddbd52e3e1dbb795a27a6e)    |
+| #5             |   [Validate deletions](https://github.com/CodeURJC-FW-2025-26/webapp19/commit/690f1f4ee84b7ea850e5bf188081609b1643664a)                                                                     |
 
 #### The 5 files I have modified the most
 
 | File Number | File                                                                                                                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |   |
-| #2             |    |
-| #3             | |
-| #4             |         |
-| #5             |  |
+| #1             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)  |
+| #2             |  [app.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/public/app.js)   |
+| #3             | [index.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/index.html) |
+| #4             |    [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html)      |
+| #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md)  |
 ----
 #### Sergio González Gútiez: 
 
