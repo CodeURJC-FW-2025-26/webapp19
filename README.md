@@ -414,11 +414,11 @@ https://youtu.be/yGXQzQz1W_o
 
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             | | [dinamic editing] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/800897d6ee59f56f8835f06c4772a916dfe9c014)
-| #2             | | [dinamically add and edit reviews] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/9e45e9ff3d451578a99f391c053c5780e270626a)
-| #3             | | [backend errors show dialog frame] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/cee78647401e5934363a97d44119944f26fbc7c4)
-| #4             |  | [preview image] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/aa2109ae05e7276725fedf60701663e5efe3fbc6)
-| #5             | | [delete current image] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/121547f83160a9ff49eed9ece3aefae7dc7e1efc)
+| #1             | [dinamic editing] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/800897d6ee59f56f8835f06c4772a916dfe9c014) |
+| #2             | [dinamically add and edit reviews] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/9e45e9ff3d451578a99f391c053c5780e270626a) |
+| #3             | [backend errors show dialog frame] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/cee78647401e5934363a97d44119944f26fbc7c4) |
+| #4             | [preview image] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/aa2109ae05e7276725fedf60701663e5efe3fbc6) |
+| #5             | [delete current image] (https://github.com/CodeURJC-FW-2025-26/webapp19/commit/121547f83160a9ff49eed9ece3aefae7dc7e1efc) |
 
 #### The 5 files I have modified the most
 
