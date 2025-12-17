@@ -140,7 +140,6 @@
         const form = document.getElementById("productForm");
         const excludeId = form.dataset.id;
 
-        //const response = await fetch(`/checkUserName?username=${title}`);
         const response = await fetch(`/checkTitle?title=${encodeURIComponent(titleValue)}&id=${excludeId}`);
         const userNameChecked = await response.json();
 
