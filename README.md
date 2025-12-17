@@ -398,10 +398,10 @@ I have worked on implementing the new requirements for the home page.
 
 | File Number | File                                                                                                                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |   |
-| #2             |     |
-| #3             |     |
-| #4             |           |
+| #1             | [app.js] (https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/public/app.js)  |
+| #2             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html)    |
+| #3             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
+| #4             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/detail.html)          |
 | #5             | |
 ----
 #### Alejandro Martín Carrera:
