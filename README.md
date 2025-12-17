@@ -158,6 +158,7 @@ Form page, fixing images bug.
 | #3             | [style.css](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/css/styles.css)          |
 | #4             | [form.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/form.html)               |
 | #5             | [README.md](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/README.md) 
+----
 
 
 # Práctica 2
@@ -244,7 +245,7 @@ I have worked on implementing the new requirements for the home page.
 | #2             | [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)      |
 | #3             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html) |
 | #4             | [app.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/app.js)               |
-| #5             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js) 
+| #5             | [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js) |
 ----
 #### Sergio González Gútiez: 
 
@@ -292,4 +293,139 @@ I have worked on implementing the new requirements for the home page.
 | #4             |  [clothing_shop.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/clothing_shop.js)             |
 | #5             |  [load_data.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/load_data.js)  |
 ----
+
+
+# Práctica 3
+## 🛠 Execution instructions
+To run the application, you need the following minimun requeriments:
+- **Node.js** (version 18.x or higher)
+- **MongoDB** (version5.x or higher)
+
+
+
+First, you must clone the repository, the default port will be 3000 and the default port for MongoDB will be 27017.
+
+git clone https://github.com/CodeURJC-FW-2025-26/webapp19.git
+
+cd webapp19
+
+Then you must install the dependencies (npm install) and set up the project (npm start or npm run watch).
+
+Finally, you have to open the URL in the browser: start http://localhost:3000/
+
+## 📁 File description
+- data
+  - **images**: default product images.
+  - **data.json**: JSON file initial data used to load the data base at startup.
+- public
+  - **styles.css**: CSS styles for the application.
+  - **images**: public and static images.
+- src
+  - **app.js**: application entry point. Configures Express, the template engine (mustache-express), middelware and assembles the route. Listen on port 3000.
+  - **clothing_shop.js**: data access layer. Connects to MongoDB, defines the main entity collection, and exports functions for CRUD and operations on the secondary entity.
+  - **load_data.js**: loads the initial data into the database in case it is empty.
+  - **router.js**: Defines the HTTP routes for the web application. Manages form validation, pagination, file uploads, and view rendering with the appropriate information.
+- uploads
+  - **images**: store uploaded images.
+- views
+  - **detail.html**: detailed view of a garment, showing complete information and reviews, form for adding/editing reviews.
+  - **edit.html**: form to create/edit a garment.
+  - **footer.html**: reusable fragments for footer
+  - **header.html**: reusable fragments for header. 
+  - **index.html**: main view showing the list of garments, a search engine and a filter
+  - **message.html**: intermediate page to display confirmation or error messages
+
+## 📹 Video demonstration: 
+
+## 👩‍🎨 Individual Contributions  
+- **Laura Pineda Ballesteros**: .
+
+#### My 5 most significant commits
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | 
+| #2             | 
+| #3             | 
+| #4             | 
+| #5             | 
+
+#### The 5 files I have modified the most
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |    |
+| #2             |     |
+| #3             |          |
+| #4             |             |
+| #5             |                                                                                                                                                                  |
+
+#### Adrián Esteban Martín: 
+I have worked on implementing the new requirements for the home page.
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   |
+| #2             |      |
+| #3             |       |
+| #4             |       |
+| #5             |                                                                        |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   |
+| #2             |    |
+| #3             | |
+| #4             |         |
+| #5             |  |
+----
+#### Sergio González Gútiez: 
+
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   | 
+| #2             | |  
+| #3             | | 
+| #4             |  |  
+| #5             |  |  
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |   |
+| #2             |     |
+| #3             |     |
+| #4             |           |
+| #5             | |
+----
+#### Alejandro Martín Carrera:
+
+
+#### My 5 most significant commits
+
+| Commit Number | Commit                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             | |
+| #2             | |
+| #3             | |
+| #4             |  |
+| #5             | |
+
+#### The 5 files I have modified the most
+
+| File Number | File                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| #1             |  |
+| #2             |      |
+| #3             |       |
+| #4             |            |
+| #5             |   |
+----
+
 💻 *Developed by Group 19 · FashionHub*
