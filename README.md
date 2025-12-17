@@ -320,6 +320,7 @@ Finally, you have to open the URL in the browser: start http://localhost:3000/
 - public
   - **styles.css**: CSS styles for the application.
   - **images**: public and static images.
+  - **app.js**: client side logic. Handles form validation, infinite scroll, and AJAX requests for dynamic interactions.
 - src
   - **app.js**: application entry point. Configures Express, the template engine (mustache-express), middelware and assembles the route. Listen on port 3000.
   - **clothing_shop.js**: data access layer. Connects to MongoDB, defines the main entity collection, and exports functions for CRUD and operations on the secondary entity.
