@@ -395,7 +395,7 @@ https://youtu.be/yGXQzQz1W_o
 | #2             | [Check if username already exists](64e85443f4d7fd82f6893d21c5ba28b6dc28ed7b) |  
 | #3             | [submitForm fixes](5e19e73a6ab037fd7c8de9dc28b55dd24a495981) | 
 | #4             | [Check if title starts with uppercase](97e1a40243cdefe5d43f62a933bfac2cb3a1f4aa) |  
-| #5             | [submitForm fixes](5e19e73a6ab037fd7c8de9dc28b55dd24a495981) |  
+| #5             | [review spinner and username](62115a0a751e927d61a95db6bdb0ea23e5f50964) |  
 
 #### The 5 files I have modified the most
 
@@ -405,7 +405,7 @@ https://youtu.be/yGXQzQz1W_o
 | #2             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html)    |
 | #3             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
 | #4             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/detail.html)          |
-| #5             | |
+| #5             |  |
 ----
 #### Alejandro Martín Carrera:
 
