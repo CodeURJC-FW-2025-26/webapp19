@@ -388,17 +388,17 @@ I have worked on implementing the new requirements for the home page.
 
 | Commit Number | Commit                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             |   | 
-| #2             | |  
-| #3             | | 
-| #4             |  |  
-| #5             |  |  
+| #1             | [submitForm](98d36944b112d52e7984e59885ce7cdace1a81fc)  | 
+| #2             | [Check if username already exists](64e85443f4d7fd82f6893d21c5ba28b6dc28ed7b) |  
+| #3             | [submitForm fixes](5e19e73a6ab037fd7c8de9dc28b55dd24a495981) | 
+| #4             | [Check if title starts with uppercase](97e1a40243cdefe5d43f62a933bfac2cb3a1f4aa) |  
+| #5             | [submitForm fixes](5e19e73a6ab037fd7c8de9dc28b55dd24a495981) |  
 
 #### The 5 files I have modified the most
 
 | File Number | File                                                                                                                                                                                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| #1             | [app.js] (https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/public/app.js)  |
+| #1             | [app.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/public/app.js)  |
 | #2             | [edit.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/edit.html)    |
 | #3             | [router.js](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/src/router.js)    |
 | #4             | [detail.html](https://github.com/CodeURJC-FW-2025-26/webapp19/blob/main/views/detail.html)          |
